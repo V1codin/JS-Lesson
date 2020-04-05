@@ -1,7 +1,7 @@
 var expression = prompt("Что посчитать??");
 
-var num1;
-var num2;
+var firstNum;
+var secondNum;
 
 var indexOfAction;
 
@@ -24,24 +24,24 @@ if (expression.includes("+")) {
   indexOfAction = expression.indexOf("/");
 }
 
-num1 = +expression.slice(0, indexOfAction);
-num2 = +expression.slice(indexOfAction + 1);
+firstNum = +expression.slice(0, indexOfAction);
+secondNum = +expression.slice(indexOfAction + 1);
 
 action = expression.slice(indexOfAction, indexOfAction + 1);
 
 if (action === plus) {
-  result = num1 + num2;
+  result = firstNum + secondNum;
   alert("Ваш результат: " + result);
 } else if (action === minus) {
-  result = num1 - num2;
+  result = firstNum - secondNum;
   alert("Ваш результат: " + result);
 }
 if (action === multiply) {
-  result = num1 * num2;
+  result = firstNum * secondNum;
   alert("Ваш результат: " + result);
 }
 if (action === divide) {
-  result = num1 / num2;
+  result = firstNum / secondNum;
   alert("Ваш результат: " + result);
 }
 
