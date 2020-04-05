@@ -15,7 +15,6 @@ while (checker) {
     var secondNum = +prompt("Введите второе число");
     if (isNaN(secondNum) || secondNum === "" || secondNum == false) {
       alert("Нужно число");
-      secondNum = +prompt("Введите первое число");
     } else {
       var action = prompt("Что с ними делаем?");
       checker = false;
@@ -36,4 +35,6 @@ if (action === plus) {
 } else if (action === divide) {
   result = firstNum / secondNum;
   alert("Ваш результат " + result);
+} else {
+  alert("Ну теперь всё с начала. Поздравляю");
 }
