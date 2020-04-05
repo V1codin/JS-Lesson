@@ -2,6 +2,12 @@ var plus = "+";
 var minus = "-";
 var multiply = "*";
 var divide = "/";
+
+var alternatePlus = "Складываем";
+var alternateMinus = "Отнимаем";
+var alternateMultiply = "Умножаем";
+var alternateDivide = "Делим";
+
 var checker = true;
 var result;
 
@@ -23,16 +29,16 @@ while (checker) {
   }
 }
 
-if (action === plus) {
+if (action === plus || action === alternatePlus) {
   result = firstNum + secondNum;
   alert("Ваш результат " + result);
-} else if (action === minus) {
+} else if (action === minus || action === alternateMinus) {
   result = firstNum - secondNum;
   alert("Ваш результат " + result);
-} else if (action === multiply) {
+} else if (action === multiply || action === alternateMultiply) {
   result = firstNum * secondNum;
   alert("Ваш результат " + result);
-} else if (action === divide) {
+} else if (action === divide || action === alternateDivide) {
   result = firstNum / secondNum;
   alert("Ваш результат " + result);
 } else {
