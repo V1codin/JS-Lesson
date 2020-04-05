@@ -23,7 +23,6 @@ while (checker) {
       alert("Нужно число");
     } else {
       var action = prompt("Что с ними делаем?");
-      checker = false;
       break;
     }
   }
