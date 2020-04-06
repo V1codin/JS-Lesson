@@ -1,45 +1,44 @@
+var expression = prompt("Что посчитать??");
+
+var firstNum;
+var secondNum;
+
 var plus = "+";
 var minus = "-";
 var multiply = "*";
 var divide = "/";
 
-var alternatePlus = "Складываем";
-var alternateMinus = "Отнимаем";
-var alternateMultiply = "Умножаем";
-var alternateDivide = "Делим";
+var action;
 
-var checker = true;
 var result;
 
-var firstNum = +prompt("Введите первое число");
-
-while (checker) {
-  if (isNaN(firstNum) || firstNum === "" || firstNum == false) {
-    alert("Нужно число");
-    firstNum = +prompt("Введите первое число");
-  } else {
-    var secondNum = +prompt("Введите второе число");
-    if (isNaN(secondNum) || secondNum === "" || secondNum == false) {
-      alert("Нужно число");
-    } else {
-      var action = prompt("Что с ними делаем?");
-      break;
-    }
+for (var i = 0; i < expression.length; i++) {
+  if (
+    expression[i] === plus ||
+    expression[i] === minus ||
+    expression[i] === multiply ||
+    expression[i] === divide
+  ) {
+    action = expression[i];
+    firstNum = +expression.slice(0, i);
+    secondNum = +expression.slice(i + 1);
   }
 }
 
-if (action === plus || action === alternatePlus) {
+if (action === plus) {
   result = firstNum + secondNum;
-  alert("Ваш результат " + result);
-} else if (action === minus || action === alternateMinus) {
+  alert("Ваш результат: " + result);
+} else if (action === minus) {
   result = firstNum - secondNum;
-  alert("Ваш результат " + result);
-} else if (action === multiply || action === alternateMultiply) {
-  result = firstNum * secondNum;
-  alert("Ваш результат " + result);
-} else if (action === divide || action === alternateDivide) {
-  result = firstNum / secondNum;
-  alert("Ваш результат " + result);
-} else {
-  alert("Ну теперь всё с начала. Поздравляю");
+  alert("Ваш результат: " + result);
 }
+if (action === multiply) {
+  result = firstNum * secondNum;
+  alert("Ваш результат: " + result);
+}
+if (action === divide) {
+  result = firstNum / secondNum;
+  alert("Ваш результат: " + result);
+}
+
+console.log(expression + " " + "=" + " " + result);
