@@ -1,45 +1,48 @@
+var expression = prompt("Что посчитать??");
+
+var firstNum;
+var secondNum;
+
+var indexOfAction;
+
+var action;
+
+var result;
+
 var plus = "+";
 var minus = "-";
 var multiply = "*";
 var divide = "/";
 
-var alternatePlus = "Складываем";
-var alternateMinus = "Отнимаем";
-var alternateMultiply = "Умножаем";
-var alternateDivide = "Делим";
-
-var checker = true;
-var result;
-
-var firstNum = +prompt("Введите первое число");
-
-while (checker) {
-  if (isNaN(firstNum) || firstNum === "" || firstNum == false) {
-    alert("Нужно число");
-    firstNum = +prompt("Введите первое число");
-  } else {
-    var secondNum = +prompt("Введите второе число");
-    if (isNaN(secondNum) || secondNum === "" || secondNum == false) {
-      alert("Нужно число");
-    } else {
-      var action = prompt("Что с ними делаем?");
-      break;
-    }
-  }
+if (expression.includes("+")) {
+  indexOfAction = expression.indexOf("+");
+} else if (expression.includes("-")) {
+  indexOfAction = expression.indexOf("-");
+} else if (expression.includes("*")) {
+  indexOfAction = expression.indexOf("*");
+} else if (expression.includes("/")) {
+  indexOfAction = expression.indexOf("/");
 }
 
-if (action === plus || action === alternatePlus) {
+firstNum = +expression.slice(0, indexOfAction);
+secondNum = +expression.slice(indexOfAction + 1);
+
+action = expression.slice(indexOfAction, indexOfAction + 1);
+
+if (action === plus) {
   result = firstNum + secondNum;
-  alert("Ваш результат " + result);
-} else if (action === minus || action === alternateMinus) {
+  alert("Ваш результат: " + result);
+} else if (action === minus) {
   result = firstNum - secondNum;
-  alert("Ваш результат " + result);
-} else if (action === multiply || action === alternateMultiply) {
-  result = firstNum * secondNum;
-  alert("Ваш результат " + result);
-} else if (action === divide || action === alternateDivide) {
-  result = firstNum / secondNum;
-  alert("Ваш результат " + result);
-} else {
-  alert("Ну теперь всё с начала. Поздравляю");
+  alert("Ваш результат: " + result);
 }
+if (action === multiply) {
+  result = firstNum * secondNum;
+  alert("Ваш результат: " + result);
+}
+if (action === divide) {
+  result = firstNum / secondNum;
+  alert("Ваш результат: " + result);
+}
+
+console.log(expression + " " + "=" + " " + result);
