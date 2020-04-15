@@ -1,27 +1,27 @@
-var list = document.getElementById("list");
+var out = document.getElementById("out");
 var userText = prompt("Enter your list of words and wrapper pattern");
-// var userText = "Text. Valera. Check.";
 
-function wrapping(str, tag) {
-  var wrappedStr = "";
+function wrappingText(str) {
+  if (str) {
+    var wrappedStr = "";
 
-  for (item of str) {
-    if (item < "a" && item !== "." && item !== " ") {
-      wrappedStr += `<${tag}>`;
+    for (item of str) {
+      if (item >= "A" && item <= "Z" && item !== "." && item !== " ") {
+        wrappedStr += `<p>`;
+      }
+      if (!isNaN(item) && item !== " ") {
+        wrappedStr += `<b style="color:red">${item}</b>`;
+      }
+      if ((item !== "." && isNaN(item)) || item === " ") {
+        wrappedStr += item;
+      } else if (item === ".") {
+        wrappedStr += `.</p> `;
+      }
     }
-    if (item !== ".") {
-      wrappedStr += item;
-    } else if (item === ".") {
-      wrappedStr += `.</${tag}>`;
-    }
+
+    return wrappedStr;
+  } else {
+    alert("You missed to input data");
   }
-  console.log(wrappedStr);
-  return wrappedStr;
 }
-
-wrapping(userText, "p");
-
-// console.log("A" > "a");
-
-// console.log("A".codePointAt(0));
-// console.log("a".codePointAt(0));
+out.innerHTML = wrappingText(userText);
