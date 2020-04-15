@@ -10,17 +10,25 @@ function renderingNames(str) {
     var result = "";
 
     function extractingPattern(str) {
+      var indexOfSlash = "";
+      for (var i = 0; i < str.length; i++) {
+        if (str[i] === "/") {
+          indexOfSlash = i;
+          break;
+        }
+      }
       for (item of str) {
         if (item === "/") {
-          var indexOfWrapperSighn = str.indexOf(item);
-          wrapperPattern += str.slice(indexOfWrapperSighn + 1);
-          namesStr += str.slice(0, indexOfWrapperSighn);
+          wrapperPattern += str.slice(indexOfSlash + 1);
+          namesStr += str.slice(0, indexOfSlash);
           namesStr = namesStr.replace(/\s/g, "");
           names = namesStr.split(",");
           break;
         }
       }
-      if (wrapperPattern.includes(" ")) {
+      if (wrapperPattern.includes("$")) {
+        wrapperPattern = wrapperPattern.replace("$", "");
+      } else if (wrapperPattern.includes(" ")) {
         wrapperPattern = wrapperPattern.replace(/\s/g, "");
       }
       return wrapperPattern;
@@ -30,9 +38,14 @@ function renderingNames(str) {
       var tempStr1 = "";
       var tempStr2 = "";
       var indexOfCloseTagSighn;
+      for (var i = 0; i < wrapperPattern.length; i++) {
+        if (wrapperPattern[i] === "/") {
+          indexOfCloseTagSighn = i;
+          break;
+        }
+      }
       for (char of wrapperPattern) {
         if (char === "/") {
-          indexOfCloseTagSighn = wrapperPattern.indexOf(char);
           tempStr1 = wrapperPattern.slice(0, indexOfCloseTagSighn - 1);
           tempStr2 = wrapperPattern.slice(indexOfCloseTagSighn - 1);
         }
