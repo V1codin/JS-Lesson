@@ -25,18 +25,6 @@ function renderingNames(str) {
       }
       return wrapperPattern;
     }
-
-    // function wrapping(arr, tag) {
-    //   var wrappedStr = "";
-    //   if (arr.length > 0) {
-    //     for (item of arr) {
-    //       item = `<${tag}>${item}</${tag}>`;
-    //       wrappedStr += item;
-    //     }
-    //   }
-    //   return wrappedStr;
-    // }
-
     function renderingRes(names, wrapperPattern) {
       var tempAr = [];
       var tempStr1 = "";
