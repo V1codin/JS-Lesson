@@ -2,6 +2,15 @@ var list = document.getElementById("list");
 var userText = prompt("Enter your list of words and wrapper pattern");
 
 function renderingNames(str) {
+  function checkingIndex(str, sign) {
+    for (var i = 0; i < str.length; i++) {
+      if (str[i] === sign) {
+        indexOfSlash = i;
+        break;
+      }
+    }
+    return indexOfSlash;
+  }
   if (str) {
     var wrapperPattern = "";
     var namesStr = "";
@@ -11,12 +20,9 @@ function renderingNames(str) {
 
     function extractingPattern(str) {
       var indexOfSlash = "";
-      for (var i = 0; i < str.length; i++) {
-        if (str[i] === "/") {
-          indexOfSlash = i;
-          break;
-        }
-      }
+
+      indexOfSlash = checkingIndex(str, "/");
+
       for (item of str) {
         if (item === "/") {
           wrapperPattern += str.slice(indexOfSlash + 1);
@@ -38,12 +44,7 @@ function renderingNames(str) {
       var tempStr1 = "";
       var tempStr2 = "";
       var indexOfCloseTagSighn;
-      for (var i = 0; i < wrapperPattern.length; i++) {
-        if (wrapperPattern[i] === "/") {
-          indexOfCloseTagSighn = i;
-          break;
-        }
-      }
+      indexOfCloseTagSighn = checkingIndex(wrapperPattern, "/");
       for (char of wrapperPattern) {
         if (char === "/") {
           tempStr1 = wrapperPattern.slice(0, indexOfCloseTagSighn - 1);
