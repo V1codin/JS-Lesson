@@ -1,17 +1,17 @@
 var list = document.getElementById("list");
-// var userText = prompt("Enter your list of words and wrapper pattern");
-var userText = "Text. Valera. Check";
+var userText = prompt("Enter your list of words and wrapper pattern");
+// var userText = "Text. Valera. Check.";
 
 function wrapping(str, tag) {
   var wrappedStr = "";
 
   for (item of str) {
-    if (item < "a" && item !== " " && item !== ".") {
+    if (item < "a" && item !== "." && item !== " ") {
       wrappedStr += `<${tag}>`;
     }
     if (item !== ".") {
       wrappedStr += item;
-    } else {
+    } else if (item === ".") {
       wrappedStr += `.</${tag}>`;
     }
   }
