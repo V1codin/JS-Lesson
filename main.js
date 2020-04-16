@@ -1,5 +1,5 @@
 var out = document.getElementById("out");
-var userText = prompt("Enter your list of words and wrapper pattern");
+var userText = prompt("Enter text");
 
 function wrappingText(str) {
   if (str) {
