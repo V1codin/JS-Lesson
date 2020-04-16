@@ -1,16 +1,13 @@
 var out = document.getElementById("out");
-// var userText = prompt("Enter text");
-// var userWords = prompt("Enter words for check");
-
-var userText =
-  "Text text  text text text. Text word1 text text text text text text my word1 text. text text text text 32 word2 text text text ";
-var userWords = "text, 32, dsl;sd;l";
+var userText = prompt("Enter text");
+var userWords = prompt("Enter words for check");
 
 function checkingWOrds(strText, strWords) {
-  var dataTest = {};
+  var resultObj = {};
+
+  var result = "";
 
   var tempArrText = [];
-  var tempStrText = "";
 
   var tempArrWords = [];
 
@@ -19,14 +16,19 @@ function checkingWOrds(strText, strWords) {
     var arr = [];
     for (item of str) {
       if (item === ".") {
-        item = item.replace(".", "");
+        item = item.replace(".", " ");
       } else if (item === ",") {
-        item = item.replace(",", "");
+        item = item.replace(",", " ");
       }
       tempStrText += item;
       arr = tempStrText.split(" ");
     }
     return arr;
+  }
+  function addingDataInObj(obj, arr) {
+    for (item of arr) {
+      obj[item] = 0;
+    }
   }
 
   if (strText) {
@@ -39,7 +41,18 @@ function checkingWOrds(strText, strWords) {
   } else {
     alert("You missed to input data");
   }
-  console.log(tempArrWords);
-  console.log(tempArrText);
+  addingDataInObj(resultObj, tempArrWords);
+  for (item in resultObj) {
+    for (i of tempArrText) {
+      if (item === i) {
+        resultObj[item]++;
+      }
+    }
+  }
+  for (item in resultObj) {
+    result += `<p>${item}: ${resultObj[item]}</p>`;
+  }
+
+  out.innerHTML = result;
 }
 checkingWOrds(userText, userWords);
