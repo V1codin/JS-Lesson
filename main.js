@@ -12,8 +12,6 @@ function checkingChars(str) {
         item === "." ||
         item === " " ||
         item === "," ||
-        item === "!" ||
-        item === "?" ||
         isFinite(item)
       ) {
         checkedStr += item;
