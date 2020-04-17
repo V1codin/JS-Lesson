@@ -3,14 +3,14 @@ var userText = prompt("Enter your list of words and wrapper pattern");
 
 function renderingNames(str) {
   function checkingIndex(str, sign) {
-    var indexOfSighn;
+    var indexOfSign;
     for (var i = 0; i < str.length; i++) {
       if (str[i] === sign) {
         indexOfSighn = i;
         break;
       }
     }
-    return indexOfSighn;
+    return indexOfSign;
   }
   if (str) {
     var wrapperPattern = "";
