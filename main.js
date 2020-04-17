@@ -1,14 +1,14 @@
 var out = document.getElementById("out");
-// var userText = prompt("Enter text");
-// var userWords = prompt("Enter words for check");
-
-var testText = "8/10>2";
-
-var num = 111;
+var userText = prompt("Enter expression");
 
 function converting(str) {
   var userNum;
-  var userSystem;
+
+  var curSystem;
+
+  var resSystem;
+
+  var strRest = "";
 
   function checkingIndex(str, sign) {
     var indexOfSign;
@@ -21,13 +21,27 @@ function converting(str) {
     return indexOfSign;
   }
 
-  for (item of str) {
-    userNum = str.slice(0, checkingIndex(str, "/"));
+  function reverseString(nStr) {
+    var reverseArr = [];
+    var splitString = nStr.split("");
+
+    reverseArr = splitString.reverse();
+
+    var res = reverseArr.join("");
+
+    return res;
   }
-  console.log("userNum: ", userNum);
+
+  for (item of str) {
+    userNum = +str.slice(0, checkingIndex(str, "/"));
+    curSystem = +str.slice(
+      checkingIndex(str, "/") + 1,
+      checkingIndex(str, ">")
+    );
+    resSystem = +str.slice(checkingIndex(str, ">") + 1);
+  }
 
   function conDecToBin(userNum) {
-    var strRest = "";
     var num = userNum;
     for (i = num; i >= 0; i--) {
       if (num > 0) {
@@ -42,28 +56,22 @@ function converting(str) {
 
           strRest += "1";
         }
+      } else if (num === 0) {
+        strRest += "0";
       } else {
         break;
       }
     }
 
-    function reverseString(str) {
-      var reverseArr = [];
-      var splitString = str.split("");
-
-      reverseArr = splitString.reverse();
-
-      var res = reverseArr.join("");
-
-      return res;
-    }
     var resStr = reverseString(strRest);
 
     return alert(`Your result: ${resStr}`);
   }
-  if (userSystem === 2) {
+  if (resSystem === 2 && curSystem === 10) {
     conDecToBin(userNum);
+  } else {
+    alert("Your data is incorrect");
   }
 }
 
-converting(testText);
+converting(userText);
