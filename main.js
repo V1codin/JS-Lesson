@@ -6,7 +6,26 @@ var testText = "8/10>2";
 
 var num = 111;
 
-function converting(userNum, userSystem) {
+function converting(str) {
+  var userNum;
+  var userSystem;
+
+  function checkingIndex(str, sign) {
+    var indexOfSign;
+    for (var i = 0; i < str.length; i++) {
+      if (str[i] === sign) {
+        indexOfSign = i;
+        break;
+      }
+    }
+    return indexOfSign;
+  }
+
+  for (item of str) {
+    userNum = str.slice(0, checkingIndex(str, "/"));
+  }
+  console.log("userNum: ", userNum);
+
   function conDecToBin(userNum) {
     var strRest = "";
     var num = userNum;
@@ -46,3 +65,5 @@ function converting(userNum, userSystem) {
     conDecToBin(userNum);
   }
 }
+
+converting(testText);
