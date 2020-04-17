@@ -6,7 +6,7 @@ function renderingNames(str) {
     var indexOfSign;
     for (var i = 0; i < str.length; i++) {
       if (str[i] === sign) {
-        indexOfSighn = i;
+        indexOfSign = i;
         break;
       }
     }
