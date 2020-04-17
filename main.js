@@ -1,17 +1,17 @@
 var list = document.getElementById("list");
 var userText = prompt("Enter your list of words and wrapper pattern");
 
-function renderingNames(str) {
-  function checkingIndex(str, sign) {
-    var indexOfSign;
-    for (var i = 0; i < str.length; i++) {
-      if (str[i] === sign) {
-        indexOfSign = i;
-        break;
-      }
+function checkingIndex(str, sign) {
+  var indexOfSign;
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] === sign) {
+      indexOfSign = i;
+      break;
     }
-    return indexOfSign;
   }
+  return indexOfSign;
+}
+function renderingNames(str) {
   if (str) {
     var wrapperPattern = "";
     var namesStr = "";
