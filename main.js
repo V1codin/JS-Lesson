@@ -2,73 +2,100 @@ var out = document.getElementById("out");
 var userText = prompt("Enter expression");
 
 function converting(str) {
-  var userNum;
+  if (str) {
+    var userNum;
 
-  var curSystem;
+    var curSystem;
 
-  var resSystem;
+    var resSystem;
 
-  var strRest = "";
+    var strRest = "";
 
-  function checkingIndex(str, sign) {
-    var indexOfSign;
-    for (var i = 0; i < str.length; i++) {
-      if (str[i] === sign) {
-        indexOfSign = i;
-        break;
-      }
-    }
-    return indexOfSign;
-  }
-
-  function reverseString(nStr) {
-    var reverseArr = [];
-    var splitString = nStr.split("");
-
-    reverseArr = splitString.reverse();
-
-    var res = reverseArr.join("");
-
-    return res;
-  }
-
-  for (item of str) {
-    userNum = +str.slice(0, checkingIndex(str, "/"));
-    curSystem = +str.slice(
-      checkingIndex(str, "/") + 1,
-      checkingIndex(str, ">")
-    );
-    resSystem = +str.slice(checkingIndex(str, ">") + 1);
-  }
-
-  function conDecToBin(userNum) {
-    var num = userNum;
-    for (i = num; i >= 0; i--) {
-      if (num > 0) {
-        if (num % 2 === 0) {
-          num = num / 2;
-          strRest += "0";
-        } else if (num === 1) {
-          strRest += "1";
+    function checkingIndex(str, sign) {
+      var indexOfSign;
+      for (var i = 0; i < str.length; i++) {
+        if (str[i] === sign) {
+          indexOfSign = i;
           break;
-        } else if (num % 2 !== 0) {
-          num = Math.floor(num / 2);
-
-          strRest += "1";
         }
-      } else if (num === 0) {
-        strRest += "0";
-      } else {
-        break;
       }
+      return indexOfSign;
     }
 
-    var resStr = reverseString(strRest);
+    function reverseString(nStr) {
+      var reverseArr = [];
+      var splitString = nStr.split("");
 
-    return alert(`Your result: ${resStr}`);
-  }
-  if (resSystem === 2 && curSystem === 10) {
-    conDecToBin(userNum);
+      reverseArr = splitString.reverse();
+
+      var res = reverseArr.join("");
+
+      return res;
+    }
+
+    for (item of str) {
+      userNum = +str.slice(0, checkingIndex(str, "/"));
+      curSystem = +str.slice(
+        checkingIndex(str, "/") + 1,
+        checkingIndex(str, ">")
+      );
+      resSystem = +str.slice(checkingIndex(str, ">") + 1);
+    }
+    function conBinToDec(userNum) {
+      var tempStr = "";
+      tempStr += userNum;
+      var dataOb = {};
+
+      var res = 0;
+
+      var lMinusOne = tempStr.length - 1;
+
+      for (var i = 0; i <= lMinusOne; i++) {
+        if (tempStr[i] === "1") {
+          dataOb[i] = Math.pow(2, lMinusOne - i);
+        } else {
+          continue;
+        }
+      }
+      for (item in dataOb) {
+        res += dataOb[item];
+      }
+      return alert(`Your result: ${res}`);
+    }
+    function conDecToBin(userNum) {
+      var num = userNum;
+      for (i = num; i >= 0; i--) {
+        if (num > 0) {
+          if (num % 2 === 0) {
+            num = num / 2;
+            strRest += "0";
+          } else if (num === 1) {
+            strRest += "1";
+            break;
+          } else if (num % 2 !== 0) {
+            num = Math.floor(num / 2);
+
+            strRest += "1";
+          }
+        } else if (num === 0) {
+          strRest += "0";
+        } else {
+          break;
+        }
+      }
+
+      var resStr = reverseString(strRest);
+
+      return alert(`Your result: ${resStr}`);
+    }
+
+    if (resSystem === 2 && curSystem === 10) {
+      conDecToBin(userNum);
+    } else if (resSystem === 10 && curSystem === 2) {
+      conBinToDec(userNum);
+    } else {
+      alert("Your data is incorrect");
+    }
   } else {
     alert("Your data is incorrect");
   }
