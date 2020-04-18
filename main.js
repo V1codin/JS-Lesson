@@ -1,5 +1,5 @@
 var out = document.getElementById("out");
-// var userText = prompt("Enter expression");
+var userText = prompt("Enter expression");
 
 /**
  * Returning index of input sigh
@@ -33,6 +33,35 @@ function reverseString(nStr) {
 
   return res;
 }
+
+/**
+ * Output converting decimal num to octal system
+ * @param    {number}
+ * @return   {string}
+ */
+
+function conDecToOctal(userNum) {
+  var res = {};
+
+  while (userNum >= 0) {
+    res[userNum] = userNum % 8;
+    userNum = Math.floor(userNum / 8);
+    if (userNum === 0) {
+      res[userNum] = 0;
+      break;
+    }
+  }
+
+  var result = "";
+
+  for (item in res) {
+    if (item > 0) {
+      result += res[item];
+    }
+  }
+  return result;
+}
+
 /**
  * Output converting binary num to decimal
  * @param    {number}
@@ -116,6 +145,9 @@ function converting(str) {
     } else if (resSystem === 10 && curSystem === 2) {
       var resBinToDec = conBinToDec(userNum);
       alert(`Your result: ${resBinToDec}`);
+    } else if (resSystem === 8 && curSystem === 10) {
+      var resDecToOctal = conDecToOctal(userNum);
+      alert(`Your result: ${resDecToOctal}`);
     } else {
       alert("Your data is incorrect");
     }
