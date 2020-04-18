@@ -2,6 +2,22 @@ var out = document.getElementById("out");
 var userText = prompt("Enter expression");
 
 /**
+ * Output alert with result
+ * @param  {any variable}
+ * @return {alert with result}
+ */
+function rESULT(res) {
+  alert(`Your result: ${res}`);
+}
+/**
+ * Output alert with error
+ * @return {alert with error}
+ */
+function Error() {
+  alert("Your data is incorrect");
+}
+
+/**
  * Returning index of input sigh
  * @param  {string}
  * @param  {sign}
@@ -216,23 +232,23 @@ function converting(str) {
 
     if (resSystem === 2 && curSystem === 10) {
       var resDecToBin = conDecToBin(userNum);
-      alert(`Your result: ${resDecToBin}`);
+      rESULT(resDecToBin);
     } else if (resSystem === 10 && curSystem === 2) {
       var resBinToDec = conBinToDec(userNum);
-      alert(`Your result: ${resBinToDec}`);
+      rESULT(resBinToDec);
     } else if (resSystem === 8 && curSystem === 10) {
       var resDecToOctal = conDecToOctal(userNum);
-      alert(`Your result: ${resDecToOctal}`);
+      rESULT(resDecToOctal);
     } else if (resSystem === 16 && curSystem === 10 && userNum > 0) {
       var resDecToHex = conDecToHex(userNum);
-      alert(`Your result: ${resDecToHex}`);
+      rESULT(resDecToHex);
     } else if (resSystem === 16 && curSystem === 10 && userNum === 0) {
-      alert(`Your result: ${0}`);
+      rESULT(0);
     } else {
-      alert("Your data is incorrect");
+      Error();
     }
   } else {
-    alert("Your data is incorrect");
+    Error();
   }
 }
 
