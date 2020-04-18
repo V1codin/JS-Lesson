@@ -35,6 +35,81 @@ function reverseString(nStr) {
 }
 
 /**
+ * Output converting decimal num to hex system
+ * @param    {number}
+ * @return   {string}
+ */
+
+function conDecToHex(userNum) {
+  var res = {};
+
+  var resStr = "";
+
+  while (userNum >= 0) {
+    res[userNum] = userNum % 16;
+    userNum = Math.floor(userNum / 16);
+    if (userNum === 0) {
+      res[userNum] = 0;
+      break;
+    }
+  }
+
+  for (item in res) {
+    if (
+      res[item] !== 0 &&
+      item !== "0" &&
+      res[item] % 10 === 0 &&
+      item !== "16"
+    ) {
+      res[item] = "A";
+    } else if (
+      res[item] !== 0 &&
+      item !== "0" &&
+      res[item] % 11 === 0 &&
+      item !== "16"
+    ) {
+      res[item] = "B";
+    } else if (
+      res[item] !== 0 &&
+      item !== "0" &&
+      res[item] % 12 === 0 &&
+      item !== "16"
+    ) {
+      res[item] = "C";
+    } else if (
+      res[item] !== 0 &&
+      item !== "0" &&
+      res[item] % 13 === 0 &&
+      item !== "16"
+    ) {
+      res[item] = "D";
+    } else if (
+      res[item] !== 0 &&
+      item !== "0" &&
+      res[item] % 14 === 0 &&
+      item !== "16"
+    ) {
+      res[item] = "E";
+    } else if (
+      res[item] !== 0 &&
+      item !== "0" &&
+      res[item] % 15 === 0 &&
+      item !== "16"
+    ) {
+      res[item] = "F";
+    }
+  }
+
+  for (item in res) {
+    if (item === "0") {
+      continue;
+    }
+    resStr += res[item];
+  }
+  return resStr;
+}
+
+/**
  * Output converting decimal num to octal system
  * @param    {number}
  * @return   {string}
@@ -148,6 +223,11 @@ function converting(str) {
     } else if (resSystem === 8 && curSystem === 10) {
       var resDecToOctal = conDecToOctal(userNum);
       alert(`Your result: ${resDecToOctal}`);
+    } else if (resSystem === 16 && curSystem === 10 && userNum > 0) {
+      var resDecToHex = conDecToHex(userNum);
+      alert(`Your result: ${resDecToHex}`);
+    } else if (resSystem === 16 && curSystem === 10 && userNum === 0) {
+      alert(`Your result: ${0}`);
     } else {
       alert("Your data is incorrect");
     }
