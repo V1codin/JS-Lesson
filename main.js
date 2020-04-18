@@ -53,7 +53,7 @@ function renderingNames(str) {
         }
       }
       for (tempitem of names) {
-        tempAr.push(`<li>${tempStr1}${tempitem}${tempStr2}</li>`);
+        tempAr.push(`${tempStr1}${tempitem}${tempStr2}`);
       }
       for (item of tempAr) {
         result += item;
