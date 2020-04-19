@@ -52,7 +52,7 @@ function reverseString(nStr) {
 
 /**
  * Output converting decimal num to hex system
- * @param    {number}
+ * @param    {string}
  * @return   {string}
  */
 
@@ -126,8 +126,54 @@ function conDecToHex(userNum) {
 }
 
 /**
+ * Output converting hex num to decimal system
+ * @param    {string}
+ * @return   {alert with res}
+ */
+
+function conHexToDec(userNum) {
+  var str = "";
+  str += userNum;
+
+  var res = 0;
+
+  if (str === "0") {
+    return alert(`Your result: ${res}`);
+  } else {
+    var tempOb = {};
+
+    for (i = 0; i < str.length; i++) {
+      tempOb[i] = str[i];
+    }
+
+    for (item in tempOb) {
+      if (tempOb[item] === "A" || tempOb[item] === "a") {
+        tempOb[item] = "10";
+      } else if (tempOb[item] === "B" || tempOb[item] === "b") {
+        tempOb[item] = "11";
+      } else if (tempOb[item] === "C" || tempOb[item] === "c") {
+        tempOb[item] = "12";
+      } else if (tempOb[item] === "D" || tempOb[item] === "d") {
+        tempOb[item] = "13";
+      } else if (tempOb[item] === "E" || tempOb[item] === "e") {
+        tempOb[item] = "14";
+      } else if (tempOb[item] === "F" || tempOb[item] === "f") {
+        tempOb[item] = "15";
+      }
+    }
+
+    var lMinusOne = str.length - 1;
+
+    for (R in tempOb) {
+      res += Math.pow(16, R) * tempOb[lMinusOne - R];
+    }
+    return alert(`Your result: ${res}`);
+  }
+}
+
+/**
  * Output converting decimal num to octal system
- * @param    {number}
+ * @param    {string}
  * @return   {string}
  */
 
@@ -154,7 +200,7 @@ function conDecToOctal(userNum) {
 }
 /**
  * Output converting octal num to decimal system
- * @param    {number}
+ * @param    {string}
  * @return   {alert with res}
  */
 
@@ -189,7 +235,7 @@ function conOctalToDec(userNum) {
 
 /**
  * Output converting binary num to decimal
- * @param    {number}
+ * @param    {string}
  * @return   {number}
  */
 function conBinToDec(userNum) {
@@ -216,35 +262,44 @@ function conBinToDec(userNum) {
 
 /**
  * Output converting decimal num to binary
- *   @param  {number}
+ *   @param  {string}
  *   @return {string}
  */
 function conDecToBin(userNum) {
   var strRest = "";
   var num = userNum;
-  for (i = num; i >= 0; i--) {
-    if (num > 0) {
-      if (num % 2 === 0) {
-        num = num / 2;
+
+  var resStr;
+
+  if (num === "1") {
+    return (resStr = "1");
+  } else if (num === "0") {
+    return (resStr = "0");
+  } else {
+    for (i = num; i >= 0; i--) {
+      if (num > 0) {
+        if (num % 2 === 0) {
+          num = num / 2;
+          strRest += "0";
+        } else if (num === 1) {
+          strRest += "1";
+          break;
+        } else if (num % 2 !== 0) {
+          num = Math.floor(num / 2);
+
+          strRest += "1";
+        }
+      } else if (num === 0) {
         strRest += "0";
-      } else if (num === 1) {
-        strRest += "1";
+      } else {
         break;
-      } else if (num % 2 !== 0) {
-        num = Math.floor(num / 2);
-
-        strRest += "1";
       }
-    } else if (num === 0) {
-      strRest += "0";
-    } else {
-      break;
     }
+
+    resStr = reverseString(strRest);
+
+    return resStr;
   }
-
-  var resStr = reverseString(strRest);
-
-  return resStr;
 }
 
 function converting(str) {
@@ -256,7 +311,7 @@ function converting(str) {
     var resSystem;
 
     for (item of str) {
-      userNum = +str.slice(0, checkingIndex(str, "/"));
+      userNum = str.slice(0, checkingIndex(str, "/"));
       curSystem = +str.slice(
         checkingIndex(str, "/") + 1,
         checkingIndex(str, ">")
@@ -278,6 +333,8 @@ function converting(str) {
       rESULT(resDecToHex);
     } else if (resSystem === 16 && curSystem === 10 && userNum === 0) {
       rESULT(0);
+    } else if (resSystem === 10 && curSystem === 16) {
+      conHexToDec(userNum);
     } else if (resSystem === 10 && curSystem === 8) {
       conOctalToDec(userNum);
     } else {
