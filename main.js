@@ -152,6 +152,40 @@ function conDecToOctal(userNum) {
   }
   return result;
 }
+/**
+ * Output converting octal num to decimal system
+ * @param    {number}
+ * @return   {alert with res}
+ */
+
+function conOctalToDec(userNum) {
+  var str = "";
+  str += userNum;
+
+  var resO = {};
+
+  var res = 0;
+
+  var lMinusOne = str.length - 1;
+
+  if (userNum > 0) {
+    for (var i = lMinusOne; i >= 0; i--) {
+      resO[i] = Math.pow(8, i) * str[lMinusOne - i];
+    }
+    for (item in resO) {
+      res += resO[item];
+    }
+  } else if (userNum === 0) {
+    return alert(`Your result: ${res}`);
+  }
+
+  if (str.includes(8) || str.includes(9)) {
+    return alert("Number should consist only of 0-7 numbers");
+  } else if (str === 0) {
+    resO[0] = 0;
+  }
+  return alert(`Your result: ${res}`);
+}
 
 /**
  * Output converting binary num to decimal
@@ -244,6 +278,8 @@ function converting(str) {
       rESULT(resDecToHex);
     } else if (resSystem === 16 && curSystem === 10 && userNum === 0) {
       rESULT(0);
+    } else if (resSystem === 10 && curSystem === 8) {
+      conOctalToDec(userNum);
     } else {
       Error();
     }
