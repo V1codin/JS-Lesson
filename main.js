@@ -1,5 +1,5 @@
 var out = document.getElementById("out");
-var userText = prompt("Enter expression");
+var userExpression = prompt("Enter expression");
 
 /**
  * Output alert with result
@@ -167,7 +167,7 @@ function conHexToDec(userNum) {
     for (R in tempOb) {
       res += Math.pow(16, R) * tempOb[lMinusOne - R];
     }
-    return alert(`Your result: ${res}`);
+    return res;
   }
 }
 
@@ -222,7 +222,7 @@ function conOctalToDec(userNum) {
       res += resO[item];
     }
   } else if (userNum === 0) {
-    return alert(`Your result: ${res}`);
+    return res;
   }
 
   if (str.includes(8) || str.includes(9)) {
@@ -230,7 +230,7 @@ function conOctalToDec(userNum) {
   } else if (str === 0) {
     resO[0] = 0;
   }
-  return alert(`Your result: ${res}`);
+  return res;
 }
 
 /**
@@ -319,24 +319,61 @@ function converting(str) {
       resSystem = +str.slice(checkingIndex(str, ">") + 1);
     }
 
-    if (resSystem === 2 && curSystem === 10) {
-      var resDecToBin = conDecToBin(userNum);
-      rESULT(resDecToBin);
-    } else if (resSystem === 10 && curSystem === 2) {
-      var resBinToDec = conBinToDec(userNum);
-      rESULT(resBinToDec);
-    } else if (resSystem === 8 && curSystem === 10) {
-      var resDecToOctal = conDecToOctal(userNum);
-      rESULT(resDecToOctal);
-    } else if (resSystem === 16 && curSystem === 10 && userNum > 0) {
-      var resDecToHex = conDecToHex(userNum);
-      rESULT(resDecToHex);
-    } else if (resSystem === 16 && curSystem === 10 && userNum === 0) {
-      rESULT(0);
-    } else if (resSystem === 10 && curSystem === 16) {
-      conHexToDec(userNum);
-    } else if (resSystem === 10 && curSystem === 8) {
-      conOctalToDec(userNum);
+    var tempRes;
+    var outRes;
+
+    if (userNum && curSystem && resSystem) {
+      if (resSystem === 2 && curSystem === 10) {
+        var outRes = conDecToBin(userNum);
+        rESULT(outRes);
+      } else if (resSystem === 2 && curSystem === 8) {
+        tempRes = conOctalToDec(userNum);
+        outRes = conDecToBin(tempRes);
+        rESULT(outRes);
+      } else if (resSystem === 2 && curSystem === 16) {
+        tempRes = conHexToDec(userNum);
+        outRes = conDecToBin(tempRes);
+        rESULT(outRes);
+      }
+
+      if (resSystem === 10 && curSystem === 2) {
+        var resBinToDec = conBinToDec(userNum);
+        rESULT(resBinToDec);
+      } else if (resSystem === 10 && curSystem === 8) {
+        outRes = conOctalToDec(userNum);
+        rESULT(outRes);
+      } else if (resSystem === 10 && curSystem === 16) {
+        outRes = conHexToDec(userNum);
+        rESULT(outRes);
+      }
+
+      if (resSystem === 8 && curSystem === 2) {
+        tempRes = conBinToDec(userNum);
+        outRes = conDecToOctal(tempRes);
+        rESULT(outRes);
+      } else if (resSystem === 8 && curSystem === 10) {
+        outRes = conDecToOctal(userNum);
+        rESULT(outRes);
+      } else if (resSystem === 8 && curSystem === 16) {
+        tempRes = conHexToDec(userNum);
+        outRes = conDecToOctal(tempRes);
+        rESULT(outRes);
+      }
+
+      if (resSystem === 16 && userNum === "0") {
+        rESULT(0);
+      } else if (resSystem === 16 && curSystem === 2) {
+        tempRes = conBinToDec(userNum);
+        outRes = conDecToHex(tempRes);
+        rESULT(outRes);
+      } else if (resSystem === 16 && curSystem === 8) {
+        tempRes = conOctalToDec(userNum);
+        outRes = conDecToHex(tempRes);
+        rESULT(outRes);
+      } else if (resSystem === 16 && curSystem === 10) {
+        outRes = conDecToHex(userNum);
+        rESULT(outRes);
+      }
     } else {
       Error();
     }
@@ -345,4 +382,4 @@ function converting(str) {
   }
 }
 
-converting(userText);
+converting(userExpression);
