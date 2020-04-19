@@ -319,17 +319,20 @@ function converting(str) {
       resSystem = +str.slice(checkingIndex(str, ">") + 1);
     }
 
+    var resDecToBin = conDecToBin(userNum);
+    var resBinToDec = conBinToDec(userNum);
+    var resDecToOctal = conDecToOctal(userNum);
+    var resDecToHex = conDecToHex(userNum);
+    var resHexToDec = conHexToDec(userNum);
+    var resOctalToDec = conOctalToDec(userNum);
+
     if (resSystem === 2 && curSystem === 10) {
-      var resDecToBin = conDecToBin(userNum);
       rESULT(resDecToBin);
     } else if (resSystem === 10 && curSystem === 2) {
-      var resBinToDec = conBinToDec(userNum);
       rESULT(resBinToDec);
     } else if (resSystem === 8 && curSystem === 10) {
-      var resDecToOctal = conDecToOctal(userNum);
       rESULT(resDecToOctal);
     } else if (resSystem === 16 && curSystem === 10 && userNum > 0) {
-      var resDecToHex = conDecToHex(userNum);
       rESULT(resDecToHex);
     } else if (resSystem === 16 && curSystem === 10 && userNum === 0) {
       rESULT(0);
