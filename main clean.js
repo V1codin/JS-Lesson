@@ -72,7 +72,7 @@ function baseToDec(strNum, base) {
  * Returning index of input sigh
  * @param  {string}
  * @param  {string}
- * @return {converted number of dec system to base system}
+ * @return {obj}
  */
 
 function decToBase(strNum, base) {
