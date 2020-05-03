@@ -81,39 +81,41 @@ function baseToDec(strNum, base) {
  * Returning index of input sigh
  * @param  {string}
  * @param  {string}
- * @return {converted number of dec system to base system}
+ * @return {object}
  */
 
 function decToBase(strNum, base) {
-  var res = "";
+  var res = {};
 
   while (strNum) {
     if (strNum % base !== 0 && strNum >= 1) {
-      res += strNum % base;
+      res[strNum] = strNum % base;
       strNum = Math.floor(strNum / base);
     } else if (strNum !== base && strNum % base === 0) {
-      res += "0";
+      res[strNum] = "0";
       strNum = strNum / base;
     } else if (strNum < base) {
-      res += "0";
+      res[strNum] = "0";
       strNum = Math.floor(strNum / base);
     }
     if (strNum === 1 || strNum === base) {
-      res += Math.floor(strNum % base);
+      res[strNum] = Math.floor(strNum % base);
       strNum = Math.floor(strNum / base);
     } else if (strNum === 0) {
       break;
     }
   }
-  res = reverse(res);
   return res;
 }
 
 function init() {
   var num = extractNumsAndBases(userExpression);
-  out.innerHTML = decToBase(
-    baseToDec(num.number, num.curSystem),
-    num.resSystem
-  );
+  var resObj = decToBase(baseToDec(num.number, num.curSystem), num.resSystem);
+  var res = "";
+
+  for (item in resObj) {
+    res += resObj[item];
+  }
+  out.innerHTML = res;
 }
 init();
