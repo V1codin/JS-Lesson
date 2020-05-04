@@ -1,12 +1,6 @@
 var out = document.getElementById("out");
 var userExpression = prompt("Enter expression");
 
-/**
- * Returning string with replaced letters of HEX system
- * @param  {string}
- * @return {string}
- */
-
 function replaceHexLetters(str) {
   var tempArr = str.split("");
 
@@ -30,16 +24,14 @@ function replaceHexLetters(str) {
   var nStr = tempArr.join("");
   return nStr;
 }
-/**
- * Returning object
- * @param  {string}
- * @return {object of number and systems}
- */
+
 function extractNumsAndBases(str) {
   var numsAndBases = {};
 
+  var tempNum;
+
   for (item of str) {
-    numsAndBases.number = str.slice(0, checkingIndex(str, "/"));
+    tempNum = str.slice(0, checkingIndex(str, "/"));
     numsAndBases.curSystem = +str.slice(
       checkingIndex(str, "/") + 1,
       checkingIndex(str, ">")
@@ -47,15 +39,10 @@ function extractNumsAndBases(str) {
     numsAndBases.resSystem = +str.slice(checkingIndex(str, ">") + 1);
   }
 
+  numsAndBases.number = tempNum;
+
   return numsAndBases;
 }
-
-/**
- * Returning index of input sigh
- * @param  {string}
- * @param  {sign}
- * @return {index of sign}
- */
 
 function checkingIndex(str, sign) {
   var indexOfSign;
@@ -67,25 +54,13 @@ function checkingIndex(str, sign) {
   }
   return indexOfSign;
 }
-/*
 
-/**
- * Returning reversed string
- * @param  {string}
- * @return {reversed string}
- */
 function reverse(str) {
   var arr = str.split("");
   arr = arr.reverse();
   var nStr = arr.join("");
   return nStr;
 }
-/**
- * Returning number in dec system
- * @param  {string}
- * @param  {string}
- * @return {converted number of base system to dec system}
- */
 function baseToDec(strNum, base) {
   var res = 0;
 
@@ -104,13 +79,6 @@ function baseToDec(strNum, base) {
   }
   return res;
 }
-
-/**
- * Returning object in base system
- * @param  {string}
- * @param  {string}
- * @return {object}
- */
 
 function decToBase(strNum, base) {
   var res = {};
@@ -141,8 +109,6 @@ function init() {
 
   if (num.number === "0") {
     out.innerHTML = 0;
-  } else if (!userExpression) {
-    alert("You've missed to input data");
   } else {
     var replace = {
       "10": "A",
