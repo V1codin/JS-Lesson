@@ -1,28 +1,21 @@
 var out = document.getElementById("out");
 var newBlock = document.getElementById("newBlock");
 
-var btn = document.getElementById("btn");
-var clear = document.getElementById("btnClear");
-
-var inp = document.getElementById("inp");
+var select = document.getElementById("select");
 
 var blocks = {
-  nums: 0,
+  privat: document.getElementById("privat"),
+  mono: document.getElementById("mono"),
+  pump: document.getElementById("pumb"),
 };
+var textBlock = document.querySelector(".textBlock");
 
-clear.onclick = function clear() {
-  out.style = "display: none";
-  blocks.nums = 0;
-  out.innerHTML = null;
-};
-
-btn.onclick = function createBlock() {
-  out.style = "display: block";
-  blocks.nums++;
-
-  var newDiv = document.createElement("div");
-  newDiv.id = "newBlock";
-  newDiv.innerText = `${blocks.nums} ${inp.value}`;
-
-  out.insertBefore(newDiv, newBlock);
+select.onchange = function () {
+  if (select.value === "none") {
+    out.style = "display: none";
+    out.innerHTML = null;
+  } else {
+    out.style = "display: block";
+    out.innerHTML = blocks[select.value].innerHTML;
+  }
 };
