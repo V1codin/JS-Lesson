@@ -1,4 +1,3 @@
-var out = document.getElementById("out");
 var newBlock = document.getElementById("newBlock");
 
 var blocks = {
