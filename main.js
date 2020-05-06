@@ -1,9 +1,5 @@
 var newBlock = document.getElementById("newBlock");
 
-var blocks = {
-  nums: 0,
-};
-
 var blockArr = [];
 
 function renderControls() {
@@ -43,13 +39,11 @@ controls.clearBtn.onclick = function clear() {
   blockArr.length = 0;
   controls.input.value = null;
   controls.outBlock.style = "display: none";
-  blocks.nums = 0;
   controls.outBlock.innerHTML = null;
 };
 
 controls.pushBtn.onclick = function createBlock() {
   controls.outBlock.style = "display: block";
-  blocks.nums++;
 
   var inpValue = controls.input.value;
 
