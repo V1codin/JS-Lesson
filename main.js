@@ -56,11 +56,11 @@ controls.pushBtn.onclick = function createBlock() {
   var newDiv = document.createElement("div");
   newDiv.id = "newBlock";
 
-  newDiv.innerText = `${inpValue}`;
   newDiv.name = inpValue;
 
   if (blockArr.every((item) => item.name !== inpValue)) {
     blockArr.push(newDiv);
+    newDiv.innerText = `${inpValue}`;
     controls.outBlock.insertBefore(newDiv, newBlock);
     controls.input.value = null;
   } else {
