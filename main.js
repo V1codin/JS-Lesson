@@ -65,5 +65,6 @@ controls.pushBtn.onclick = function createBlock() {
     controls.input.value = null;
   } else {
     alert("The block exists");
+    controls.input.value = null;
   }
 };
