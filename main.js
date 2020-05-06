@@ -54,7 +54,9 @@ controls.pushBtn.onclick = function createBlock() {
 
   if (blockArr.every((item) => item.name !== inpValue)) {
     blockArr.push(newDiv);
-    newDiv.innerText = `${inpValue}`;
+    newDiv.innerText = `${inpValue}. Index of this block : ${blockArr.indexOf(
+      newDiv
+    )}`;
     controls.outBlock.insertBefore(newDiv, newBlock);
     controls.input.value = null;
   } else {
