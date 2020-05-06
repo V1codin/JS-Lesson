@@ -4,6 +4,8 @@ var blocks = {
   nums: 0,
 };
 
+var blockArr = [];
+
 function renderControls() {
   var box = document.createElement("div");
   box.className = "box";
@@ -38,6 +40,7 @@ function renderControls() {
 var controls = renderControls();
 
 controls.clearBtn.onclick = function clear() {
+  blockArr.length = 0;
   controls.input.value = null;
   controls.outBlock.style = "display: none";
   blocks.nums = 0;
@@ -48,10 +51,19 @@ controls.pushBtn.onclick = function createBlock() {
   controls.outBlock.style = "display: block";
   blocks.nums++;
 
+  var inpValue = controls.input.value;
+
   var newDiv = document.createElement("div");
   newDiv.id = "newBlock";
-  newDiv.innerText = `${blocks.nums} ${inp.value}`;
 
-  controls.outBlock.insertBefore(newDiv, newBlock);
-  controls.input.value = null;
+  newDiv.innerText = `${inpValue}`;
+  newDiv.name = inpValue;
+
+  if (blockArr.every((item) => item.name !== inpValue)) {
+    blockArr.push(newDiv);
+    controls.outBlock.insertBefore(newDiv, newBlock);
+    controls.input.value = null;
+  } else {
+    alert("The block exists");
+  }
 };
