@@ -33,7 +33,6 @@ function renderControls() {
   clearBtn = box.appendChild(clearBtn);
   return { pushBtn, clearBtn, input, outBlock };
 }
-
 var controls = renderControls();
 
 controls.clearBtn.onclick = function clear() {
@@ -50,8 +49,6 @@ controls.pushBtn.onclick = function createBlock() {
 
   var newDiv = document.createElement("div");
   newDiv.id = "newBlock";
-
-  console.log("newDiv: ", newDiv);
 
   newDiv.name = inpValue;
 
