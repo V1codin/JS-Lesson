@@ -3,7 +3,9 @@
   margin: 0;
   padding: 0;
 }
-
+label {
+  font-weight: bold;
+}
 body {
   display: flex;
   flex-direction: row;
