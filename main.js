@@ -1,48 +1,53 @@
 var controls = {
-  userInput: document.querySelector("#usertext"),
-  blockedInp: document.querySelector("#blockedInp"),
-  readOnly: document.querySelector("#read"),
-  numbers: document.querySelector("#numbers"),
-  pass: document.querySelector("#pass"),
-  checkers: document.querySelectorAll(".check"),
+  box: document.querySelector(".box"),
+  initBtn: document.querySelector("#initBtn"),
+  closeBtn: document.querySelector(".closeBtn"),
+  close: document.querySelector("#close"),
+  send: document.querySelector("#send"),
+  inps: document.querySelector(".inps"),
+  form: document.querySelector(".form"),
+
+  outInps: document.querySelectorAll(".outInps"),
 };
 
-controls.blockedInp.onchange = () => {
-  if (controls.blockedInp.checked) {
-    controls.checkers.forEach((item) => (item.checked = false));
-    controls.blockedInp.checked = true;
-    controls.userInput.disabled = true;
-  } else {
-    controls.userInput.disabled = false;
-  }
+controls.initBtn.onclick = () => {
+  controls.box.style = "background-color: #5a5a5a; transition: 2s;";
+
+  controls.form.id = "out";
+
+  controls.send.style = `animation-name: sendBtnAnimation;
+  animation-duration: 2.5s;`;
+
+  controls.close.style = `animation-name:closeBtnAnimation; animation-duration: 1s`;
+
+  controls.outInps.forEach(
+    (item) =>
+      (item.style = `animation-name: outInpsAnimation;
+    animation-duration: 1.5s;`)
+  );
+  controls.outInps.forEach((item) => (item.className = "inpOut"));
 };
 
-controls.readOnly.onchange = () => {
-  if (controls.readOnly.checked) {
-    controls.checkers.forEach((item) => (item.checked = false));
-    controls.readOnly.checked = true;
-    controls.userInput.readOnly = true;
-  } else {
-    controls.userInput.readOnly = false;
-  }
+controls.close.onclick = (event) => {
+  event.preventDefault();
+  controls.box.style = "background-color: #c1e3ff; transition: 2s;";
+  controls.form.id = "form";
+
+  controls.send.style = `animation-name: none;`;
+  controls.close.style = `animation-name: none;`;
+
+  controls.outInps.forEach((item) => (item.style = `animation-name: none`));
+  controls.outInps.forEach((item) => (item.value = null));
 };
 
-controls.numbers.onchange = () => {
-  if (controls.numbers.checked) {
-    controls.checkers.forEach((item) => (item.checked = false));
-    controls.numbers.checked = true;
-    controls.userInput.type = "number";
-  } else {
-    controls.userInput.type = "text";
-  }
-};
+controls.send.onclick = (event) => {
+  event.preventDefault();
+  controls.box.style = "background-color: #c1e3ff; transition: 2s;";
+  controls.form.id = "form";
 
-controls.pass.onchange = () => {
-  if (controls.pass.checked) {
-    controls.checkers.forEach((item) => (item.checked = false));
-    controls.pass.checked = true;
-    controls.userInput.type = "password";
-  } else {
-    controls.userInput.type = "text";
-  }
+  controls.send.style = `animation-name: none;`;
+  controls.close.style = `animation-name: none;`;
+
+  controls.outInps.forEach((item) => (item.style = `animation-name: none`));
+  controls.outInps.forEach((item) => (item.value = null));
 };
