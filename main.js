@@ -1,5 +1,4 @@
 var controls = {
-  box: document.querySelector(".box"),
   initBtn: document.querySelector("#initBtn"),
   popUpWindow: {},
 };
@@ -9,7 +8,6 @@ controls.initBtn.onclick = function popup(event) {
     "/popup.html",
     "Popup",
     `
-    scrollbars=no,
     width=420px, 
     height=300px,
     top=${event.screenY - 150}, 
