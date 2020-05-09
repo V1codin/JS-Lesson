@@ -1,26 +1,36 @@
 var controls = {
   box: document.querySelector(".box"),
   initBtn: document.querySelector("#initBtn"),
-  closeBtn: document.querySelector(".closeBtn"),
-  close: document.querySelector("#close"),
-  send: document.querySelector("#send"),
-  inps: document.querySelector(".inps"),
-  form: document.querySelector(".form"),
-
-  outInps: document.querySelectorAll(".outInps"),
+  popUpWindow: {},
 };
 
-controls.initBtn.onclick = (event) => {
-  var nWindow = window.open(
+controls.initBtn.onclick = function popup(event) {
+  controls.popUpWindow = window.open(
     "/popup.html",
     "Popup",
     `
-    width=400px, 
-    height=300px, 
+    scrollbars=no,
+    width=420px, 
+    height=300px,
     top=${event.screenY - 150}, 
-    left=${event.screenX - 195}
+    left=${event.screenX - 195},
     `
   );
+  document.body.style = "background-color: #333333";
 
-  controls.box.style = "background-color: #052afc";
+  controls.popUpWindow.onbeforeunload = function () {
+    document.body.style = "background-color: white";
+  };
+
+  controls.popUpWindow.onload = function () {
+    controls.popUpWindow.send = controls.popUpWindow.document.querySelector(
+      "#send"
+    );
+
+    controls.popUpWindow.send.onclick = function (event) {
+      event.preventDefault();
+      controls.popUpWindow.close();
+      document.body.style = "background-color: white";
+    };
+  };
 };

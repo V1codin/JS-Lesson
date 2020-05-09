@@ -4,8 +4,9 @@
   padding: 0;
 }
 body {
+  transition: 2s;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 button {
   cursor: pointer;
@@ -15,7 +16,8 @@ button {
 }
 
 #send,
-#initBtn {
+#initBtn,
+#test {
   width: 100px;
   height: 30px;
   margin-top: 20px;
@@ -29,7 +31,6 @@ button {
   flex-direction: column;
   align-items: center;
   margin: 50px auto;
-  background-color: #cec1ff;
 }
 
 input {
@@ -39,6 +40,7 @@ input {
 }
 
 #form {
+  animation: slide 1.5s;
   position: relative;
   padding: 20px;
   margin: 20px auto;
@@ -50,14 +52,12 @@ input {
   justify-content: center;
   align-items: center;
 }
-#close {
-  border: 1px solid;
-  margin: 0;
-  right: 1%;
-  top: 3%;
-  position: absolute;
-  background-color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+
+@keyframes slide {
+  0% {
+    top: 500px;
+  }
+  100% {
+    top: 0px;
+  }
 }
