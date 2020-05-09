@@ -10,44 +10,21 @@ var controls = {
   outInps: document.querySelectorAll(".outInps"),
 };
 
-controls.initBtn.onclick = () => {
-  controls.box.style = "background-color: #5a5a5a; transition: 2s;";
+console.log(controls.form);
 
-  controls.form.id = "out";
+controls.initBtn.onclick = (event) => {
+  console.log("event: ", event);
 
-  controls.send.style = `animation-name: sendBtnAnimation;
-  animation-duration: 2.5s;`;
-
-  controls.close.style = `animation-name:closeBtnAnimation; animation-duration: 1s`;
-
-  controls.outInps.forEach(
-    (item) =>
-      (item.style = `animation-name: outInpsAnimation;
-    animation-duration: 1.5s;`)
+  window.open(
+    "/popup.html",
+    "Popup",
+    `
+    width=400px, 
+    height=300px, 
+    top=${event.screenY - 150}, 
+    left=${event.screenX - 195}
+    `
   );
-  controls.outInps.forEach((item) => (item.className = "inpOut"));
-};
 
-controls.close.onclick = (event) => {
-  event.preventDefault();
-  controls.box.style = "background-color: #c1e3ff; transition: 2s;";
-  controls.form.id = "form";
-
-  controls.send.style = `animation-name: none;`;
-  controls.close.style = `animation-name: none;`;
-
-  controls.outInps.forEach((item) => (item.style = `animation-name: none`));
-  controls.outInps.forEach((item) => (item.value = null));
-};
-
-controls.send.onclick = (event) => {
-  event.preventDefault();
-  controls.box.style = "background-color: #c1e3ff; transition: 2s;";
-  controls.form.id = "form";
-
-  controls.send.style = `animation-name: none;`;
-  controls.close.style = `animation-name: none;`;
-
-  controls.outInps.forEach((item) => (item.style = `animation-name: none`));
-  controls.outInps.forEach((item) => (item.value = null));
+  controls.box.style = "background-color: #052afc";
 };
