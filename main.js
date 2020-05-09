@@ -10,12 +10,8 @@ var controls = {
   outInps: document.querySelectorAll(".outInps"),
 };
 
-console.log(controls.form);
-
 controls.initBtn.onclick = (event) => {
-  console.log("event: ", event);
-
-  window.open(
+  var nWindow = window.open(
     "/popup.html",
     "Popup",
     `
