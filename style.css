@@ -18,22 +18,15 @@
   border: 0.2px solid;
   background-color: #949494;
 }
-.left-part {
-  top: 14.6px;
+
+.turnedOn::after {
   position: absolute;
-  display: inline-block;
+  content: "";
+  left: 6px;
+  top: 0px;
   width: 10px;
-  height: 5px;
-  background-color: lawngreen;
+  height: 20px;
+  border: solid lawngreen;
+  border-width: 0 2px 2px 0;
   transform: rotate(45deg);
-}
-.right-part {
-  left: 4px;
-  top: 12px;
-  position: absolute;
-  display: inline-block;
-  width: 25px;
-  height: 5px;
-  background-color: lawngreen;
-  transform: rotate(135deg);
 }

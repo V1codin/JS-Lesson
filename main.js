@@ -7,17 +7,11 @@ controls.checkbox.forEach(
 );
 
 function init() {
-  var leftPart = document.createElement("div");
-  var rightPart = document.createElement("div");
   if (!this.check) {
+    this.classList.add("turnedOn");
     this.check = true;
-    leftPart.className = "left-part";
-    checkbox = this.appendChild(leftPart);
-
-    checkbox = this.appendChild(rightPart);
-    rightPart.className = "right-part";
   } else {
-    this.innerHTML = null;
+    this.classList.remove("turnedOn");
     this.check = false;
   }
 }
