@@ -4,7 +4,36 @@
   padding: 0;
 }
 
-body {
+.box {
+  margin: 50px auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+}
+.checkbox {
+  position: relative;
+  margin: 10px;
+  width: 25px;
+  height: 25px;
+  border: 0.2px solid;
+  background-color: #949494;
+}
+.left-part {
+  top: 14.6px;
+  position: absolute;
+  display: inline-block;
+  width: 10px;
+  height: 5px;
+  background-color: lawngreen;
+  transform: rotate(45deg);
+}
+.right-part {
+  left: 4px;
+  top: 12px;
+  position: absolute;
+  display: inline-block;
+  width: 25px;
+  height: 5px;
+  background-color: lawngreen;
+  transform: rotate(135deg);
 }
