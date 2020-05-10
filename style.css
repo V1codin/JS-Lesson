@@ -4,6 +4,7 @@
   padding: 0;
 }
 label {
+  font-size: 20px;
   font-weight: bold;
 }
 body {
@@ -33,9 +34,9 @@ body {
   flex-wrap: wrap;
 }
 
-#inp {
-  font-size: 15px;
+#usertext {
+  font-size: 25px;
   margin: 10px auto;
   height: 30px;
-  width: 150px;
+  width: 250px;
 }
