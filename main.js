@@ -4,7 +4,7 @@ var controls = {
 };
 
 /**
- * Function for onclick event changing background color of tag body
+ * Function for onbeforeunload event changing background color of tag body
  */
 function changeBodyColor() {
   document.body.style = "background-color: white";
