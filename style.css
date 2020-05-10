@@ -16,8 +16,7 @@ button {
 }
 
 #send,
-#initBtn,
-#test {
+#initBtn {
   width: 100px;
   height: 30px;
   margin-top: 20px;

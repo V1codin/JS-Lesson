@@ -3,7 +3,14 @@ var controls = {
   popUpWindow: {},
 };
 
-controls.initBtn.onclick = function popup(event) {
+/**
+ * Function for onclick event changing background color of tag body
+ */
+function changeBodyColor() {
+  document.body.style = "background-color: white";
+}
+
+controls.initBtn.onclick = function (event) {
   controls.popUpWindow = window.open(
     "/popup.html",
     "Popup",
@@ -16,9 +23,7 @@ controls.initBtn.onclick = function popup(event) {
   );
   document.body.style = "background-color: #333333";
 
-  controls.popUpWindow.onbeforeunload = function () {
-    document.body.style = "background-color: white";
-  };
+  controls.popUpWindow.onbeforeunload = changeBodyColor;
 
   controls.popUpWindow.onload = function () {
     controls.popUpWindow.send = controls.popUpWindow.document.querySelector(
