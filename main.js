@@ -2,6 +2,11 @@ var newBlock = document.getElementById("newBlock");
 
 var blockArr = [];
 
+/**
+ * Rendering html elements in document and returning object with access to them
+ * @return {object}
+ */
+
 function renderControls() {
   var box = document.createElement("div");
   box.className = "box";
@@ -35,14 +40,22 @@ function renderControls() {
 }
 var controls = renderControls();
 
-controls.clearBtn.onclick = function clear() {
+/**
+ * Deleting data and clearing outBlock and hiding it.
+ */
+
+function clear() {
   blockArr.length = 0;
   controls.input.value = null;
   controls.outBlock.style = "display: none";
   controls.outBlock.innerHTML = null;
-};
+}
 
-controls.pushBtn.onclick = function createBlock() {
+/**
+ * Creating a new block, assigning the block ID, and name, adding the block to HTML if the block is unique  .
+ */
+
+function createBlock() {
   controls.outBlock.style = "display: block";
 
   var inpValue = controls.input.value;
@@ -63,4 +76,8 @@ controls.pushBtn.onclick = function createBlock() {
     alert("The block exists");
     controls.input.value = null;
   }
-};
+}
+
+controls.clearBtn.onclick = clear;
+
+controls.pushBtn.onclick = createBlock;
