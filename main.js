@@ -12,7 +12,7 @@ function moving() {
   var windowH = window.innerHeight;
 
   if (this.id === "top") {
-    controls.box.style.top = `${0}px`;
+    controls.box.style.top = "0px";
   } else if (this.id === "bottom") {
     controls.box.style.top = `${windowH - controls.box.clientHeight}px`;
   } else if (this.id === "left") {
