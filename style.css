@@ -4,81 +4,52 @@
   padding: 0;
 }
 
-.box {
-  height: 340px;
-  position: relative;
-  overflow: hidden;
+body {
   display: flex;
-  justify-content: center;
-  margin: 20px auto;
-}
-#arrow {
-  --margin-top: 15px;
-  margin-top: var(--margin-top);
-  cursor: pointer;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid lawngreen;
-}
-
-.list {
-  width: 300px;
-  margin: 0 auto;
-  display: block;
-  border: 1px solid;
-}
-a {
-  display: block;
-  padding: 20px;
-  text-decoration: none;
-}
-.list-container {
-  margin: 10px auto;
-  position: absolute;
-  top: -270px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.list a:hover {
-  background-color: #e0e0e0;
+.box {
+  top: 0;
+  left: 0;
+  transition: 1s;
+  --width: 200px;
+  --height: 200px;
+  position: relative;
+  margin: 0 auto;
+  background-color: #9900ff;
+
+  width: var(--width);
+  height: var(--height);
+}
+.arrow {
+  left: 0;
+  position: absolute;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid lawngreen;
 }
 
-li {
-  list-style-type: none;
-}
-.animated {
-  animation: listAnimation 2.5s forwards;
-}
-.reverseAnimation {
-  animation: reverseAnimation 2.5s forwards;
-}
-.rotated {
-  transition: 2s;
-  transform: rotate(-180deg);
-}
-.rotatedBack {
-  transition: 2s;
-  transform: rotate(-360deg);
+#top {
+  left: calc(var(--width) / 2 - 10px);
+  transform: rotate(180deg);
 }
 
-@keyframes listAnimation {
-  0% {
-    top: -270px;
-  }
-  100% {
-    top: 0;
-  }
+#right {
+  transform: rotate(-90deg);
+  left: calc(var(--width) - 20px);
+  top: calc((var(--height) / 2) - 10px);
 }
-@keyframes reverseAnimation {
-  0% {
-    top: 0px;
-  }
-  100% {
-    top: -270px;
-  }
+
+#bottom {
+  left: calc(var(--width) / 2 - 10px);
+  top: calc(var(--height) - 20px);
+}
+#left {
+  transform: rotate(90deg);
+  top: calc((var(--height) / 2) - 10px);
 }

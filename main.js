@@ -1,23 +1,27 @@
 var controls = {
-  initBtn: document.querySelector("#arrow"),
-  ulContainer: document.querySelector(".list-container"),
-  checker: false,
+  box: document.querySelector(".box"),
+  arrow: document.querySelectorAll(".arrow"),
 };
 
-controls.initBtn.onclick = function () {
-  if (!controls.checker) {
-    controls.ulContainer.classList.remove("reverseAnimation");
-    controls.ulContainer.classList.add("animated");
-    this.classList.add("rotated");
-    this.classList.remove("rotatedBack");
-    this.style.marginTop = "calc(var(--margin-top) / 2)";
-    controls.checker = true;
-  } else {
-    controls.ulContainer.classList.remove("animated");
-    controls.ulContainer.classList.add("reverseAnimation");
-    controls.checker = false;
-    this.classList.remove("rotated");
-    this.classList.add("rotatedBack");
-    this.style.marginTop = "calc(var(--margin-top) * 2)";
+controls.arrow.forEach((item) => {
+  item.onclick = moving;
+});
+
+function moving() {
+  var windowW = window.innerWidth;
+  var windowH = window.innerHeight;
+
+  if (this.id === "top") {
+    controls.box.style.top = `${0}px`;
+  } else if (this.id === "bottom") {
+    controls.box.style.top = `${windowH - controls.box.clientHeight}px`;
+  } else if (this.id === "left") {
+    controls.box.style.left = `${
+      -(windowW / 2) + controls.box.clientHeight / 2
+    }px`;
+  } else if (this.id === "right") {
+    controls.box.style.left = `${
+      windowW / 2 - controls.box.clientHeight / 2
+    }px`;
   }
-};
+}
