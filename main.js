@@ -4,32 +4,11 @@ var controls = {
   input: document.querySelector(".inp"),
   invalidPoint: [],
   newDiv: document.createElement("p"),
-
-  // =============================
-  /*
-  comparing: function (str, arr) {
-    var check = 0;
-
-    for (char of str) {
-      for (item of arr) {
-        if (char === item) {
-          check++;
-        }
-      }
-    }
-    if (check > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  */
 };
 
-function renderWarning(parent, child, warningText) {
-  child.innerText = warningText;
-  child = parent.insertBefore(child, parent.firstElementChild);
-}
+// comparing every char of string with every element of array
+// {param} string;
+// {param} array;
 
 function comparing(str, arr) {
   var check = 0;
@@ -48,6 +27,32 @@ function comparing(str, arr) {
   }
 }
 
+// changing style of input of the object, erasing array with invalid chars and hidding warning notificaiton
+// {param} object;
+// {param} string;
+
+function checking(obj, value) {
+  var checker = comparing(value, obj.invalidPoint);
+  if (!checker) {
+    obj.input.classList.remove("error");
+    obj.invalidPoint.length = 0;
+    obj.newDiv.style = "display: none";
+  }
+}
+// creating new HTML element with warning notification
+// {param} object (HTML element);
+// {param} object (HTML element);
+// {param} string;
+
+function renderWarning(parent, child, warningText) {
+  child = parent.insertBefore(child, parent.firstElementChild);
+  child.innerText = warningText;
+  child.style = "display: inline-block";
+}
+
+// validation for numbers
+// {param} object;
+
 function onlyNums(event) {
   if (event.data !== null) {
     if (event.data.charCodeAt() < 48 || event.data.charCodeAt() > 57) {
@@ -60,15 +65,17 @@ function onlyNums(event) {
       controls.input.classList.add("error");
     }
     if (controls.invalidPoint.length) {
-      var checker = comparing(controls.input.value, controls.invalidPoint);
-      if (!checker) {
-        controls.input.classList.remove("error");
-        controls.invalidPoint.length = 0;
-        controls.box.removeChild(controls.newDiv);
-      }
+      this.onkeyup = (event) => {
+        if (event.key === "Backspace") {
+          checking(controls, this.value);
+        }
+      };
     }
   }
 }
+
+// validation for letters
+// {param} object;
 
 function onlyLetters(event) {
   if (event.data !== null) {
@@ -86,15 +93,17 @@ function onlyLetters(event) {
       controls.input.classList.add("error");
     }
     if (controls.invalidPoint.length) {
-      var checker = comparing(controls.input.value, controls.invalidPoint);
-      if (!checker) {
-        controls.input.classList.remove("error");
-        controls.invalidPoint.length = 0;
-        controls.box.removeChild(controls.newDiv);
-      }
+      this.onkeyup = (event) => {
+        if (event.key === "Backspace") {
+          checking(controls, this.value);
+        }
+      };
     }
   }
 }
+
+// validation for letters, numbers, comma, dot
+// {param} object;
 
 function every(event) {
   if (event.data !== null) {
@@ -115,12 +124,11 @@ function every(event) {
       controls.input.classList.add("error");
     }
     if (controls.invalidPoint.length) {
-      var checker = comparing(controls.input.value, controls.invalidPoint);
-      if (!checker) {
-        controls.input.classList.remove("error");
-        controls.invalidPoint.length = 0;
-        controls.box.removeChild(controls.newDiv);
-      }
+      this.onkeyup = (event) => {
+        if (event.key === "Backspace") {
+          checking(controls, this.value);
+        }
+      };
     }
   }
 }
