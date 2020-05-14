@@ -4,6 +4,9 @@ var controls = {
   input: document.querySelector(".inp"),
   invalidPoint: [],
   newDiv: document.createElement("p"),
+  every: `Разрешены только буквы, цифры, запятая и точка`,
+  letters: `Разрешены только буквы`,
+  numbers: `Разрешены только цифры`,
 };
 
 // comparing every char of string with every element of array
@@ -59,7 +62,7 @@ function onlyNums(event) {
       renderWarning(
         controls.box,
         controls.newDiv,
-        controls.select[controls.select.selectedIndex].innerText
+        controls[controls.select.value]
       );
       controls.invalidPoint.push(event.data);
       controls.input.classList.add("error");
@@ -87,7 +90,7 @@ function onlyLetters(event) {
       renderWarning(
         controls.box,
         controls.newDiv,
-        controls.select[controls.select.selectedIndex].innerText
+        controls[controls.select.value]
       );
       controls.invalidPoint.push(event.data);
       controls.input.classList.add("error");
@@ -118,7 +121,7 @@ function every(event) {
       renderWarning(
         controls.box,
         controls.newDiv,
-        controls.select[controls.select.selectedIndex].innerText
+        controls[controls.select.value]
       );
       controls.invalidPoint.push(event.data);
       controls.input.classList.add("error");
