@@ -126,8 +126,6 @@ function every(event) {
 }
 
 controls.select.onchange = () => {
-  console.log(controls.select.selectedIndex);
-
   switch (controls.select.selectedIndex) {
     case 1:
       controls.input.value = null;
