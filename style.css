@@ -5,7 +5,54 @@
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #3f3f3f;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.typing,
+label {
+  font-size: 20px;
+  height: 35px;
+  width: 100%;
+}
+.wrapper {
+  width: 100%;
+  margin-top: 10px;
+}
+span {
+  color: red;
+  margin-top: 10px;
+}
+
+.form {
+  box-shadow: 0 0 4px 3px #000000;
+  background-color: khaki;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 100px auto;
+  width: 350px;
+  height: auto;
+}
+.subscribe-wrapper,
+.pay-wrapper {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.submit {
+  margin: 10px auto;
+  cursor: pointer;
+  background-color: #23af00;
+  color: white;
+  border-radius: 50%;
+  width: 75px;
+  height: 50px;
+}
+.submit:hover {
+  background-color: #2ee600;
 }

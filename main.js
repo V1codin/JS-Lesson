@@ -1,27 +1,58 @@
-var controls = {
-  box: document.querySelector(".box"),
-  arrow: document.querySelectorAll(".arrow"),
+var ctr = {
+  form: document.querySelector(".form"),
+  inputTyping: document.querySelectorAll(".typing"),
+  wrappers: document.querySelectorAll(".wrapper"),
 };
 
-controls.arrow.forEach((item) => {
-  item.onclick = moving;
-});
+var warnings = {
+  name: `Имя должно содержать только Буквы нижнего и верхнего регистра. Обязательное поле`,
+  age: `Возраст должен быть от 7 до 99 лет`,
+  mail: `Почта должна содержать только латинские символы, собачку, точку, нижнее подчёркивание. Обязательное поле`,
+};
 
-function moving() {
-  var windowW = window.innerWidth;
-  var windowH = window.innerHeight;
+function renderWarning(parent, child, warningText) {
+  child = document.createElement("span");
+  child.name = "warning";
+  child.innerText = warningText;
+  parent.appendChild(child);
+  child.style = "display: inline-block";
+}
 
-  if (this.id === "top") {
-    controls.box.style.top = `${0}px`;
-  } else if (this.id === "bottom") {
-    controls.box.style.top = `${windowH - controls.box.clientHeight}px`;
-  } else if (this.id === "left") {
-    controls.box.style.left = `${
-      -(windowW / 2) + controls.box.clientHeight / 2
-    }px`;
-  } else if (this.id === "right") {
-    controls.box.style.left = `${
-      windowW / 2 - controls.box.clientHeight / 2
-    }px`;
+ctr.inputTyping.forEach((item) => (item.onfocus = focusFN));
+ctr.inputTyping.forEach((item) => (item.onblur = blurFN));
+
+function focusFN() {
+  var parent = this.parentElement;
+  renderWarning(parent, "warning", warnings[this.name]);
+}
+
+function blurFN() {
+  var parent = this.parentElement;
+  parent.lastElementChild.remove();
+}
+
+function onlyLetters(event) {
+  if (this.value) {
+    for (char of this.value) {
+      if (
+        char.charCodeAt() < 65 ||
+        (char.charCodeAt() > 122 && char.charCodeAt() < 1040) ||
+        char.charCodeAt() > 1111
+      ) {
+        alert("Введите корректные данные");
+      } else {
+        return true;
+      }
+    }
+  } else {
+    alert("Введите корректные данные");
+  }
+}
+
+function onlyNums(event) {
+  if (this.value >= 7) {
+    return true;
+  } else {
+    alert("Введите корректные данные");
   }
 }
