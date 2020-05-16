@@ -21,6 +21,7 @@
       </div>
       <div class="wrapper" id="2">
         <input
+          data-rules="required"
           type="number"
           name="age"
           placeholder="Введите возраст"
@@ -41,15 +42,23 @@
       </div>
       <div class="subscribe-wrapper">
         <label for="subscribe"
-          >Subscribe <input type="checkbox" id="subscribe" required
+          >Subscribe
+          <input type="checkbox" id="subscribe" value="subscribe" required
         /></label>
       </div>
       <div class="pay-wrapper">
         <label for="mono"
-          >Моно <input type="radio" name="pay" id="mono" required
+          >Моно
+          <input type="radio" name="pay" id="mono" value="monk-bank" required
         /></label>
         <label for="privat"
-          >Приват <input type="radio" name="pay" id="privat" required
+          >Приват
+          <input
+            type="radio"
+            name="pay"
+            id="privat"
+            value="privat-bank"
+            required
         /></label>
       </div>
       <button class="submit">Submit</button>
