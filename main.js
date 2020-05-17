@@ -30,6 +30,7 @@ ctr.submitBtn.onclick = (event) => {
       item.classList.remove("error");
       item.classList.add("successful");
     });
+    alert(`Данные успешно отправленны. Вы выбрали метод оплаты ${"check"}`);
   } else {
     ctr.inputTyping.forEach((item) => {
       item.classList.add("error");
@@ -46,12 +47,12 @@ function error() {
 function validation(valueObj, rulesObj) {
   var checkArr = [];
 
+  console.log(valueObj);
+
   for (item in valueObj) {
     for (prop in rulesObj) {
       if (item === prop && typeof rulesObj[prop] !== "boolean") {
         checkArr.push(rulesObj[prop].test(valueObj[item]));
-      } else if (item === prop && typeof rulesObj[prop] === "boolean") {
-        checkArr.push(rulesObj[prop] === valueObj[prop]);
       }
     }
   }
@@ -62,8 +63,6 @@ var rules = {
   age: /^\d{1,2}$/,
   name: /^[A-Z][A-z]+$/,
   mail: /^([a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})\@[a-z]+\.[a-z]{2,3}$/,
-  pay: true,
-  subscribe: true,
 };
 
 function gettingValues() {
@@ -80,6 +79,7 @@ function gettingValues() {
   if (valueObj.age < 7) {
     valueObj.age = false;
   }
+
   return valueObj;
 }
 
@@ -89,6 +89,7 @@ function renderWarning(parent, child, warningText) {
   child.innerText = warningText;
   parent.appendChild(child);
   child.style = "display: none";
+
   return child;
 }
 
