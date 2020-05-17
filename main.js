@@ -70,6 +70,17 @@ var ctr = {
     }
     return checkArr;
   },
+  clear: function () {
+    for (item of ctr.inputTyping) {
+      item.value = "";
+    }
+    for (item of ctr.inputNonTyping) {
+      item.checked = "";
+    }
+    ctr.inputTyping.forEach((item) => {
+      item.classList.remove("successful");
+    });
+  },
 };
 
 ctr.submitBtn.onclick = (e) => {
@@ -86,6 +97,7 @@ ctr.submitBtn.onclick = (e) => {
     alert(
       `Данные успешно отправленны. Вы выбрали метод оплаты ${valuesObj.pay}. Спасибо, что подписались на рассылку`
     );
+    setTimeout(ctr.clear, 3000);
   } else {
     ctr.inputTyping.forEach((item) => {
       item.classList.add("error");
