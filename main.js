@@ -7,8 +7,8 @@ var ctr = {
   wrappers: document.querySelectorAll(".wrapper"),
   submitBtn: document.querySelector(".submit"),
   warnings: {
-    name: `Имя должно содержать только Буквы нижнего и верхнего регистра. Обязательное поле`,
-    age: `Возраст должен быть от 7 до 99 лет`,
+    name: `Имя должно содержать только латинские буквы нижнего и верхнего регистра. Обязательное поле`,
+    age: `Ваш возраст должен быть от 7 до 99 лет. Обязательное поле`,
     mail: `Почта должна содержать только латинские символы, собачку, точку, нижнее подчёркивание. Обязательное поле`,
   },
 };
@@ -22,15 +22,16 @@ ctr.submitBtn.onclick = (event) => {
   event.preventDefault();
   var valuesObj = gettingValues();
   var validationArr = validation(valuesObj, rules);
-  // console.log(valuesObj);
-  console.log(validationArr);
+
   var checker = validationArr.every((item) => (item ? true : false));
   if (checker) {
     ctr.inputTyping.forEach((item) => {
       item.classList.remove("error");
       item.classList.add("successful");
     });
-    alert(`Данные успешно отправленны. Вы выбрали метод оплаты ${"check"}`);
+    alert(
+      `Данные успешно отправленны. Вы выбрали метод оплаты ${valuesObj.pay}. Спасибо, что подписались на рассылку`
+    );
   } else {
     ctr.inputTyping.forEach((item) => {
       item.classList.add("error");
@@ -47,7 +48,8 @@ function error() {
 function validation(valueObj, rulesObj) {
   var checkArr = [];
 
-  console.log(valueObj);
+  checkArr.push(valueObj.subscribe);
+  checkArr.push(valueObj.pay);
 
   for (item in valueObj) {
     for (prop in rulesObj) {
@@ -73,7 +75,11 @@ function gettingValues() {
   }
 
   for (item of ctr.inputNonTyping) {
-    valueObj[item.name] = item.checked;
+    if (item.checked && item.name !== "subscribe") {
+      valueObj[item.name] = item.value;
+    } else if (item.name === "subscribe") {
+      valueObj[item.name] = item.checked;
+    }
   }
 
   if (valueObj.age < 7) {
