@@ -20,7 +20,7 @@ ctr.submitBtn.onclick = (event) => {
   var check = gettingValues(ctr.form);
   var validationArr = validation(check, rules);
   // console.log(check);
-  // console.log(validationArr);
+  console.log(validationArr);
 };
 
 function error() {
@@ -48,7 +48,7 @@ function validation(valueObj, rulesObj) {
 
 var rules = {
   age: /^\d{1,2}$/,
-  name: /^[A-Z][a-z]+$/,
+  name: /^[A-Z][A-z]+$/,
   mail: /^([a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})\@[a-z]+\.[a-z]{2,3}$/,
 };
 
@@ -89,45 +89,3 @@ function hideWarning() {
   var warning = parent.lastElementChild;
   warning.style = "display: none";
 }
-
-/*
-
-function onlyLetters() {
-  if (this.value) {
-    for (char of this.value) {
-      if (
-        char.charCodeAt() < 65 ||
-        (char.charCodeAt() > 122 && char.charCodeAt() < 1040) ||
-        char.charCodeAt() > 1111
-      ) {
-        rules.checker.push(false);
-      } else {
-        rules.checker.push(true);
-      }
-    }
-  } else {
-    rules.checker.push(false);
-  }
-}
-
-function onlyNums(validation = rules.age) {
-  if (this.value) {
-    var validator = this.value.match(validation);
-    console.log(validator);
-
-    if (this.value >= 7 && this.value == validator) {
-      rules.checker.push(true);
-    } else {
-      rules.checker.push(false);
-    }
-  }
-}
-*/
-
-/*
-var validator = /^\w/;
-
-var test = "s";
-
-var test2 = test.match(validator);
-*/
