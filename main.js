@@ -11,16 +11,16 @@ var ctr = {
 };
 
 ctr.inputTyping.forEach((item) => {
-  item.onfocus = focusFN;
-  item.onblur = blurFN;
+  item.onfocus = displayWarning;
+  item.onblur = hideWarning;
 });
 
 ctr.submitBtn.onclick = (event) => {
   event.preventDefault();
   var check = gettingValues(ctr.form);
-  var test = validation(check, rules);
+  var validationArr = validation(check, rules);
   // console.log(check);
-  console.log(test);
+  // console.log(validationArr);
 };
 
 function error() {
@@ -33,18 +33,14 @@ function validation(valueObj, rulesObj) {
   for (item in valueObj) {
     for (prop in rulesObj) {
       if (item === prop) {
-        console.log(item);
         checkArr.push(rulesObj[prop].test(valueObj[item]));
       }
     }
   }
-  if (valueObj.age < 7) {
-    return error();
-  }
 
   for (check of checkArr) {
     if (!check) {
-      return error();
+      error();
     }
   }
   return checkArr;
@@ -53,10 +49,7 @@ function validation(valueObj, rulesObj) {
 var rules = {
   age: /^\d{1,2}$/,
   name: /^[A-Z][a-z]+$/,
-
-  mail: /^[a-z]+(\.{1}|\_|[a-z]+)[a-z]+(\.{1}|\_|[a-z]+)[a-z]+$/,
-  // mail: /^[a-z]{1,}(\.{1}|\_|[a-z]{1,})[a-z]{1,}(\.{1}|\_|[a-z]{1,})[a-z]+$/,
-  checker: [],
+  mail: /^([a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})\@[a-z]+\.[a-z]{2,3}$/,
 };
 
 function gettingValues(form) {
@@ -69,6 +62,9 @@ function gettingValues(form) {
       valueObj["subscribe-checkbox"] = form[i].checked;
     }
   }
+  if (valueObj.age < 7) {
+    valueObj.age = false;
+  }
   return valueObj;
 }
 
@@ -77,18 +73,21 @@ function renderWarning(parent, child, warningText) {
   child.name = "warning";
   child.innerText = warningText;
   parent.appendChild(child);
-  child.style = "display: inline-block";
+  child.style = "display: none";
+  return child;
 }
 
-function focusFN() {
+function displayWarning() {
   var parent = this.parentElement;
-  renderWarning(parent, "warning", ctr.warnings[this.name]);
+  var warning = parent.lastElementChild;
+  warning.innerText = ctr.warnings[this.name];
+  warning.style = "display: inline-block";
 }
 
-function blurFN(obj) {
-  obj[this.value] = this.value;
+function hideWarning() {
   var parent = this.parentElement;
-  parent.lastElementChild.remove();
+  var warning = parent.lastElementChild;
+  warning.style = "display: none";
 }
 
 /*
