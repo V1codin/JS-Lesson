@@ -1,6 +1,9 @@
 var ctr = {
   form: document.querySelector(".form"),
+
   inputTyping: document.querySelectorAll(".typing"),
+  inputNonTyping: document.querySelectorAll(".nonTyping"),
+
   wrappers: document.querySelectorAll(".wrapper"),
   submitBtn: document.querySelector(".submit"),
   warnings: {
@@ -11,16 +14,29 @@ var ctr = {
 };
 
 ctr.inputTyping.forEach((item) => {
-  item.onfocus = displayWarning;
+  item.oninput = displayWarning;
   item.onblur = hideWarning;
 });
 
 ctr.submitBtn.onclick = (event) => {
   event.preventDefault();
-  var check = gettingValues(ctr.form);
-  var validationArr = validation(check, rules);
-  // console.log(check);
+  var valuesObj = gettingValues();
+  var validationArr = validation(valuesObj, rules);
+  // console.log(valuesObj);
   console.log(validationArr);
+  var checker = validationArr.every((item) => (item ? true : false));
+  if (checker) {
+    ctr.inputTyping.forEach((item) => {
+      item.classList.remove("error");
+      item.classList.add("successful");
+    });
+  } else {
+    ctr.inputTyping.forEach((item) => {
+      item.classList.add("error");
+      item.classList.remove("successful");
+    });
+    error();
+  }
 };
 
 function error() {
@@ -32,15 +48,11 @@ function validation(valueObj, rulesObj) {
 
   for (item in valueObj) {
     for (prop in rulesObj) {
-      if (item === prop) {
+      if (item === prop && typeof rulesObj[prop] !== "boolean") {
         checkArr.push(rulesObj[prop].test(valueObj[item]));
+      } else if (item === prop && typeof rulesObj[prop] === "boolean") {
+        checkArr.push(rulesObj[prop] === valueObj[prop]);
       }
-    }
-  }
-
-  for (check of checkArr) {
-    if (!check) {
-      error();
     }
   }
   return checkArr;
@@ -50,18 +62,21 @@ var rules = {
   age: /^\d{1,2}$/,
   name: /^[A-Z][A-z]+$/,
   mail: /^([a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})\@[a-z]+\.[a-z]{2,3}$/,
+  pay: true,
+  subscribe: true,
 };
 
-function gettingValues(form) {
+function gettingValues() {
   var valueObj = {};
 
-  for (i = 0; i < form.length; i++) {
-    if (form[i].tagName !== "BUTTON" && form[i].value !== "subscribe") {
-      valueObj[form[i].name] = form[i].value;
-    } else if (form[i].value === "subscribe") {
-      valueObj["subscribe-checkbox"] = form[i].checked;
-    }
+  for (item of ctr.inputTyping) {
+    valueObj[item.name] = item.value;
   }
+
+  for (item of ctr.inputNonTyping) {
+    valueObj[item.name] = item.checked;
+  }
+
   if (valueObj.age < 7) {
     valueObj.age = false;
   }
@@ -78,10 +93,13 @@ function renderWarning(parent, child, warningText) {
 }
 
 function displayWarning() {
-  var parent = this.parentElement;
-  var warning = parent.lastElementChild;
-  warning.innerText = ctr.warnings[this.name];
-  warning.style = "display: inline-block";
+  if (this.value[1]) {
+    this.classList.add("error");
+    var parent = this.parentElement;
+    var warning = parent.lastElementChild;
+    warning.innerText = ctr.warnings[this.name];
+    warning.style = "display: inline-block";
+  }
 }
 
 function hideWarning() {

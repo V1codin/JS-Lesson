@@ -27,6 +27,18 @@ span {
   margin-top: 10px;
 }
 
+.typing:focus {
+  outline: none;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.successful {
+  border: 2px solid rgb(0, 162, 255);
+}
+
 .form {
   box-shadow: 0 0 4px 3px #000000;
   background-color: khaki;
