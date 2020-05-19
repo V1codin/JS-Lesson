@@ -1,6 +1,9 @@
 var controls = {
   box: document.querySelector(".box"),
   select: document.querySelector(".select"),
+  warning: document.querySelector(".warning"),
+  warningText: "Выберите тип ввода",
+
   input: document.querySelector(".inp"),
   invalidPoint: [],
   newDiv: document.createElement("p"),
@@ -135,6 +138,18 @@ function every(event) {
     }
   }
 }
+
+controls.input.onblur = () => {
+  controls.warning.style = "display: none";
+  controls.input.classList.remove("error");
+};
+controls.input.onfocus = () => {
+  if (controls.select.value === "disabled") {
+    controls.warning.innerText = controls.warningText;
+    controls.warning.style = "display: inline-block";
+    controls.input.classList.add("error");
+  }
+};
 
 controls.select.onchange = () => {
   switch (controls.select.selectedIndex) {
