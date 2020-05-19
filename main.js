@@ -42,7 +42,7 @@ function checking(obj, value) {
   if (!checker) {
     obj.input.classList.remove("error");
     obj.invalidPoint.length = 0;
-    obj.newDiv.style = "display: none";
+    controls.warning.style = "display: none";
   }
 }
 // creating new HTML element with warning notification
@@ -50,10 +50,9 @@ function checking(obj, value) {
 // {param} object (HTML element);
 // {param} string;
 
-function renderWarning(parent, child, warningText) {
-  child = parent.insertBefore(child, parent.firstElementChild);
-  child.innerText = warningText;
-  child.style = "display: inline-block";
+function renderWarning() {
+  controls.warning.style = "display: inline-block";
+  controls.warning.innerText = controls[controls.select.value];
 }
 
 // validation for numbers
@@ -62,11 +61,7 @@ function renderWarning(parent, child, warningText) {
 function onlyNums(event) {
   if (event.data !== null) {
     if (event.data.charCodeAt() < 48 || event.data.charCodeAt() > 57) {
-      renderWarning(
-        controls.box,
-        controls.newDiv,
-        controls[controls.select.value]
-      );
+      renderWarning();
       controls.invalidPoint.push(event.data);
       controls.input.classList.add("error");
     }
@@ -90,11 +85,7 @@ function onlyLetters(event) {
       (event.data.charCodeAt() > 122 && event.data.charCodeAt() < 1040) ||
       event.data.charCodeAt() > 1111
     ) {
-      renderWarning(
-        controls.box,
-        controls.newDiv,
-        controls[controls.select.value]
-      );
+      renderWarning();
       controls.invalidPoint.push(event.data);
       controls.input.classList.add("error");
     }
@@ -121,11 +112,7 @@ function every(event) {
       (event.data.charCodeAt() > 122 && event.data.charCodeAt() < 1040) ||
       event.data.charCodeAt() > 1111
     ) {
-      renderWarning(
-        controls.box,
-        controls.newDiv,
-        controls[controls.select.value]
-      );
+      renderWarning();
       controls.invalidPoint.push(event.data);
       controls.input.classList.add("error");
     }
