@@ -1,3 +1,5 @@
+var btnTest = document.querySelector(".promise");
+
 var xhr = new XMLHttpRequest();
 
 var btnSend = document.querySelector(".send");
@@ -7,6 +9,20 @@ var inp = document.querySelector("#inp");
 var url = "http://localhost:3000/posts/";
 
 btnGet.onclick = get;
+btnSend.onclick = post;
+
+/*
+var test = new Promise(function (resolve, reject) {
+  get();
+  if (xhr.response) {
+    resolve(console.log("works"));
+  }
+});
+
+test.then(function () {
+  console.log(xhr.response);
+});
+*/
 
 btnSend.onclick = post;
 

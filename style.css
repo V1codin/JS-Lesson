@@ -8,6 +8,7 @@ body {
   background-color: #272822;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -37,4 +38,11 @@ input {
 }
 .get {
   background-color: #00b6ad;
+}
+
+.wrapper {
+  width: 310px;
+}
+.promise {
+  background-color: #b63400;
 }
