@@ -12,6 +12,13 @@ body {
   justify-content: center;
   align-items: center;
 }
+.container {
+  display: block;
+  margin: 20px auto;
+  width: 200px;
+  height: 200px;
+  background-color: lawngreen;
+}
 
 .cont {
   display: flex;
