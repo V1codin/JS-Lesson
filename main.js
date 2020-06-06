@@ -1,23 +1,20 @@
-var ctr = {
-  form: document.querySelector(".form"),
+function ValidForm(formClass, typingInputs, nonTypingInputs, submitBtnClass) {
+  this.form = document.querySelector(`.${formClass}`);
 
-  inputTyping: document.querySelectorAll(".typing"),
-  inputNonTyping: document.querySelectorAll(".nonTyping"),
+  this.inputTyping = document.querySelectorAll(`.${typingInputs}`);
+  this.inputNonTyping = document.querySelectorAll(`.${nonTypingInputs}`);
 
-  submitBtn: document.querySelector(".submit"),
-  warnings: {
-    name: `Имя должно содержать только латинские буквы нижнего и верхнего регистра. Обязательное поле`,
-    age: `Ваш возраст должен быть от 7 до 99 лет. Обязательное поле`,
-    mail: `Почта должна содержать только латинские символы, собачку, точку, нижнее подчёркивание. Обязательное поле`,
-  },
+  this.submitBtn = document.querySelector(`.${submitBtnClass}`);
 
-  rules: {
+  this.rules = {
     age: /^\d{1,2}$/,
     name: /^[A-Z][A-z]+$/,
     mail: /^([a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})([a-z\.\_]{0,1}[a-z]{1,})\@[a-z]+\.[a-z]{2,3}$/,
-  },
+  };
 
-  gettingValues: function () {
+  // getting values of inputs of the form
+  // returning object
+  this.gettingValues = function () {
     var valueObj = {};
 
     for (item of this.inputTyping) {
@@ -35,27 +32,34 @@ var ctr = {
     if (valueObj.age < 7) {
       valueObj.age = false;
     }
-
     return valueObj;
-  },
-  displayWarning: function () {
+  };
+
+  // displaying a notification with data format
+  this.displayWarning = function () {
     if (this.value[1]) {
       this.classList.add("error");
       var parent = this.parentElement;
       var warning = parent.lastElementChild;
-      warning.innerText = ctr.warnings[this.name];
       warning.style = "display: inline-block";
     }
-  },
-  hideWarning: function () {
+  };
+
+  // hiding notification with data format
+  this.hideWarning = function () {
     var parent = this.parentElement;
     var warning = parent.lastElementChild;
     warning.style = "display: none";
-  },
-  error: function () {
+  };
+
+  // error notification
+  this.error = function () {
     alert("Введите корректные данные");
-  },
-  validation: function (valueObj, rulesObj) {
+  };
+
+  // validation values via regular expressions
+  // returning array with true/false results of the validation
+  this.validation = function (valueObj, rulesObj) {
     var checkArr = [];
 
     checkArr.push(valueObj.subscribe);
@@ -69,45 +73,49 @@ var ctr = {
       }
     }
     return checkArr;
-  },
-  clear: function () {
-    for (item of ctr.inputTyping) {
+  };
+
+  //clearing inputs of the form
+  this.clear = function () {
+    for (item of this.inputTyping) {
       item.value = "";
     }
-    for (item of ctr.inputNonTyping) {
+    for (item of this.inputNonTyping) {
       item.checked = "";
     }
-    ctr.inputTyping.forEach((item) => {
+    this.inputTyping.forEach((item) => {
       item.classList.remove("successful");
     });
-  },
-};
+  };
 
-ctr.submitBtn.onclick = (e) => {
-  e.preventDefault();
-  var valuesObj = ctr.gettingValues();
-  var validationArr = ctr.validation(valuesObj, ctr.rules);
+  this.inputTyping.forEach((item) => {
+    item.oninput = this.displayWarning.bind(item);
+    item.onblur = this.hideWarning.bind(item);
+  });
 
-  var checker = validationArr.every((item) => (item ? true : false));
-  if (checker) {
-    ctr.inputTyping.forEach((item) => {
-      item.classList.remove("error");
-      item.classList.add("successful");
-    });
-    alert(
-      `Данные успешно отправленны. Вы выбрали метод оплаты ${valuesObj.pay}. Спасибо, что подписались на рассылку`
-    );
-    setTimeout(ctr.clear, 3000);
-  } else {
-    ctr.inputTyping.forEach((item) => {
-      item.classList.add("error");
-      item.classList.remove("successful");
-    });
-    ctr.error();
-  }
-};
+  this.submitBtn.onclick = (e) => {
+    e.preventDefault();
+    var valuesObj = this.gettingValues();
+    var validationArr = this.validation(valuesObj, this.rules);
 
-ctr.inputTyping.forEach((item) => {
-  item.oninput = ctr.displayWarning;
-  item.onblur = ctr.hideWarning;
-});
+    // checking if every part of validation was succesful
+    var checker = validationArr.every((item) => (item ? true : false));
+    if (checker) {
+      this.inputTyping.forEach((item) => {
+        item.classList.remove("error");
+        item.classList.add("successful");
+      });
+      alert(
+        `Данные успешно отправленны. Вы выбрали метод оплаты ${valuesObj.pay}. Спасибо, что подписались на рассылку`
+      );
+      setTimeout(this.clear.bind(this), 3000);
+    } else {
+      this.inputTyping.forEach((item) => {
+        item.classList.add("error");
+        item.classList.remove("successful");
+      });
+      this.error();
+    }
+  };
+}
+new ValidForm("form", "typing", "nonTyping", "submit");

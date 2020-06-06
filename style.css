@@ -39,6 +39,10 @@ span {
   border: 2px solid #00a2ff;
 }
 
+.warning {
+  display: none;
+}
+
 .form {
   box-shadow: 0 0 4px 3px #000000;
   background-color: khaki;
