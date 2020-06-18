@@ -6,6 +6,22 @@ var btnSend = document.querySelector(".send");
 var btnGet = document.querySelector(".get");
 var inpName = document.querySelector("#inpName");
 var inpAge = document.querySelector("#inpAge");
+var inpDel = document.querySelector("#deletingId");
+
+var postId = 4;
+
+btnTest.onclick = function () {
+  if (inpDel.value) {
+    fetch(url + inpDel.value, {
+      method: "DELETE",
+    })
+      .then(() => console.log("Post with your id is deleted"))
+      .catch(() => console.log("Something went wrong"));
+  } else {
+    alert("Enter id of the post to delete");
+  }
+  inpDel.value = null;
+};
 
 // var xhr = new XMLHttpRequest();
 
@@ -13,22 +29,19 @@ const url = "http://localhost:3000/posts/";
 
 // btnGet.onclick = get;
 
-var delay = (ms) => {
-  console.log("Starting...");
+var promise = () => {
+  console.log("Getting data...");
   return new Promise((resolve) =>
-    setTimeout(
-      resolve(
-        fetch(url, {
-          method: "GET",
-        })
-      ),
-      ms
+    resolve(
+      fetch(url, {
+        method: "GET",
+      })
     )
   );
 };
 
 function getData() {
-  return delay(2000)
+  return promise()
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
