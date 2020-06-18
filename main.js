@@ -4,27 +4,83 @@ var cont = document.querySelector(".container");
 
 var btnSend = document.querySelector(".send");
 var btnGet = document.querySelector(".get");
-var inp = document.querySelector("#inp");
+var inpName = document.querySelector("#inpName");
+var inpAge = document.querySelector("#inpAge");
 
-/*
-var xhr = new XMLHttpRequest();
-var url = "http://localhost:3000/posts/";
-btnGet.onclick = get;
+// var xhr = new XMLHttpRequest();
+
+const url = "http://localhost:3000/posts/";
+
+// btnGet.onclick = get;
+
+var delay = (ms) => {
+  console.log("Starting...");
+  return new Promise((resolve) =>
+    setTimeout(
+      resolve(
+        fetch(url, {
+          method: "GET",
+        })
+      ),
+      ms
+    )
+  );
+};
+
+function getData() {
+  return delay(2000)
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+}
+
+function post(e) {
+  e.preventDefault();
+
+  if (inpName.value && inpAge.value) {
+    console.log("Sending data...");
+
+    var nameV = inpName.value;
+
+    var inpAgeV = inpAge.value;
+
+    var obj = {
+      name: nameV,
+      age: inpAgeV,
+      type: "user",
+    };
+
+    var toSend = JSON.stringify(obj);
+
+    fetch(
+      url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: toSend,
+      },
+      true
+    );
+    /*
+  xhr.open("POST", url, true);
+
+  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+  xhr.responseType = "json";
+
+  console.log(xhr.status);
+
+  xhr.send(toSend);
 */
-btnSend.onclick = post;
-
-/*
-var test = new Promise(function (resolve, reject) {
-  get();
-  if (xhr.response) {
-    resolve(console.log("works"));
+    inpName.value = null;
+    inpAge.value = null;
+  } else {
+    alert("Input correct data");
   }
-});
+}
 
-test.then(function () {
-  console.log(xhr.response);
-});
-*/
+btnGet.onclick = getData;
 
 btnSend.onclick = post;
 /*
@@ -44,9 +100,43 @@ function get() {
     }
   };
 }
-get();
 */
 
+/*
+const promise = new Promise((resolve, reject) => {
+  let xhr = new XMLHttpRequest();
+  let url = "http://localhost:3000/posts/";
+
+  xhr.open("GET", url);
+
+  xhr.responseType = "json";
+
+  xhr.send();
+
+  function checking() {
+    if (xhr.response) {
+      resolve(xhr.response);
+    } else {
+      reject(xhr.response);
+    }
+  }
+
+  xhr.onload = checking;
+  */
+/*
+  let test = fetch("http://localhost:3000/posts", {
+    method: "GET",
+  });
+
+  test.onload = resolve(test.response);
+});
+
+promise.then((data) => {
+  console.log(data);
+});
+*/
+
+/*
 var test = new Promise(function (resolve, reject) {
   var xhr = new XMLHttpRequest();
   var url = "http://localhost:3000/posts/";
@@ -79,6 +169,7 @@ test
     console.log(err);
   });
 
+  */
 /*
 +
 +
@@ -99,33 +190,3 @@ test
 +
 +
 */
-
-function post(e) {
-  e.preventDefault();
-
-  var nameV = inp.value;
-
-  var obj = {
-    name: nameV,
-  };
-
-  var toSend = JSON.stringify(obj);
-  /*
-  fetch(url, {
-    method: "POST",
-    body: toSend,
-  });
-
-  */
-  xhr.open("POST", url, true);
-
-  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-
-  xhr.responseType = "json";
-
-  console.log(xhr.status);
-
-  xhr.send(toSend);
-
-  inp.value = null;
-}

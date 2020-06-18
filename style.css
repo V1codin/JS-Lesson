@@ -32,6 +32,9 @@ input {
   height: 35px;
   font-size: 25px;
 }
+.typingInput {
+  margin-top: 10px;
+}
 
 #btn {
   color: #1000a0;
