@@ -1,3 +1,12 @@
+var api2_0 = "04ddf8bdb4d9138f496898f46480d4a2";
+
+var apiNew = "e0922b249ed537a7bd58d7b9ad06f827";
+
+var testAPI = `http://testapi.novaposhta.ua/v2.0/json/`;
+
+const testUrl = "http://localhost:3000/posts/";
+var url = "https://api.novaposhta.ua/v2.0/json/";
+
 var btnTest = document.querySelector(".promise");
 
 var cont = document.querySelector(".container");
@@ -10,24 +19,31 @@ var inpDel = document.querySelector("#deletingId");
 
 var postId = 4;
 
-btnTest.onclick = function () {
-  if (inpDel.value) {
-    fetch(url + inpDel.value, {
-      method: "DELETE",
-    })
-      .then(() => console.log("Post with your id is deleted"))
-      .catch(() => console.log("Something went wrong"));
-  } else {
-    alert("Enter id of the post to delete");
-  }
-  inpDel.value = null;
+btnGet.onclick = function () {
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: {
+      apiKey: "04ddf8bdb4d9138f496898f46480d4a2",
+      modelName: "Address",
+      calledMethod: "searchSettlements",
+      methodProperties: {
+        CityName: "київ",
+        Limit: 5,
+      },
+    },
+  }).then((res) => {
+    console.log(res);
+  });
 };
 
 // var xhr = new XMLHttpRequest();
 
-const url = "http://localhost:3000/posts/";
-
 // btnGet.onclick = get;
+
+/*
 
 var promise = () => {
   console.log("Getting data...");
@@ -85,17 +101,34 @@ function post(e) {
   console.log(xhr.status);
 
   xhr.send(toSend);
-*/
-    inpName.value = null;
-    inpAge.value = null;
-  } else {
-    alert("Input correct data");
-  }
+  inpName.value = null;
+  inpAge.value = null;
+} else {
+  alert("Input correct data");
+}
 }
 
 btnGet.onclick = getData;
 
 btnSend.onclick = post;
+*/
+/*
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+*/
 /*
 function get() {
   xhr.open("GET", url);
