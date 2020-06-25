@@ -8,37 +8,36 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="container"></div>
-    <form class="cont" action="#">
-      <input
-        type="text"
-        name=""
-        id="inpName"
-        autocomplete="off"
-        placeholder="Name"
-        class="typingInput"
-      />
-      <input
-        type="number"
-        name=""
-        id="inpAge"
-        autocomplete="off"
-        placeholder="Age"
-        class="typingInput"
-      />
-      <input
-        type="number"
-        name=""
-        id="deletingId"
-        autocomplete="off"
-        placeholder="Enter id to delete"
-        class="typingInput"
-      />
-      <button id="btn" class="send">Send</button>
-      <button id="btn" class="get">Get</button>
-    </form>
-    <div class="wrapper">
-      <button id="btn" class="promise">Delete</button>
+    <div class="container">
+      <div
+        id="np-tracking"
+        class="container_in container_block container_block_m-l"
+      >
+        <div id="wrapper_header">
+          <div id="header_tracking-logo"></div>
+          <div id="header_title">
+            <div class="title_h1">
+              <span class="h1_span1">ВІДСТЕЖЕННЯ</span> <br />
+              <span class="h1_span2">ПОСИЛОК</span>
+            </div>
+          </div>
+          <div id="wrapper_input-container_in">
+            <div id="input-container_clear"></div>
+            <input
+              id="input-container_user-input"
+              class="user_data"
+              type="text"
+              name="number"
+              placeholder="Номер посилки"
+            />
+          </div>
+          <div id="wrapper_warning-message"></div>
+          <button id="wrapper_submit-tracking">
+            <span id="submit-tracking_span">ВІДСТЕЖИТИ</span>
+          </button>
+        </div>
+      </div>
+      <div class="container_out container_block container_block_m-l"></div>
     </div>
   </body>
 </html>
