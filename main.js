@@ -1,5 +1,3 @@
-// supplyNumber: "59000527233015",
-
 const elemSettings = {
   inputId: "input-container_user-input",
   submitButtonId: "wrapper_submit-tracking",
@@ -57,7 +55,7 @@ class RequestData extends InitElements {
       if (this.dataInput.value && this.mask.test(this.dataInput.value)) {
         const userNumber = this.dataInput.value;
 
-        this.getTrackingData()
+        this.getTrackingData(userNumber)
           .then((r) => {
             this.updateHistory(userNumber);
 
@@ -76,16 +74,29 @@ class RequestData extends InitElements {
       }
     };
 
-    this.clearButton.onclick = () => {
-      this.historyData.links.length = 0;
-      this.historyData.linkNames.length = 0;
-      this.historyList.innerHTML = null;
-    };
+    this.clearButton.onclick = this.clearHistory.bind(this);
+  }
+
+  clearHistory() {
+    this.historyData.links.length = 0;
+    this.historyData.linkNames.length = 0;
+    this.historyList.innerHTML = null;
+    this.dataInput.value = null;
+    this.outDataContainer.innerHTML = null;
   }
 
   // adding links with number of invoice to history list
   updateHistory(userNumber) {
     const historyLink = document.createElement("a");
+
+    historyLink.onclick = () => {
+      this.getTrackingData(userNumber).then((r) => {
+        this.displayData(r);
+        this.dataInput.value = userNumber;
+        return r;
+      });
+    };
+
     historyLink.name = userNumber;
     this.historyData.linkNames.push(historyLink.name);
     this.historyCounter = this.historyData.linkNames.length;
@@ -106,7 +117,7 @@ class RequestData extends InitElements {
   }
 
   // getting data from server of user's invoice number
-  getTrackingData() {
+  getTrackingData(data) {
     return fetch(this.baseUrl, {
       method: "POST",
       dataType: "json",
@@ -120,7 +131,7 @@ class RequestData extends InitElements {
         methodProperties: {
           Documents: [
             {
-              DocumentNumber: this.dataInput.value,
+              DocumentNumber: data,
             },
           ],
         },
@@ -137,4 +148,4 @@ class RequestData extends InitElements {
   }
 }
 
-const elems = new RequestData();
+const init = new RequestData();
