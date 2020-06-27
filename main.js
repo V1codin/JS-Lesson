@@ -143,6 +143,15 @@ class RequestData extends InitElements {
 
   displayData(promiseRes) {
     let res = promiseRes.data[0];
+    let userNumber = res.Number;
+
+    this.historyData.links.forEach((item) => (item.parentElement.id = ""));
+
+    let activeLink = this.historyData.links.filter(
+      (item) => userNumber === item.name
+    );
+    activeLink[0].parentElement.id = "active";
+
     this.outDataContainer.innerHTML = `<p>Статус: ${res.Status}</p>`;
     this.outDataContainer.innerHTML += `<p>Статус код: ${res.StatusCode}</p>`;
   }
