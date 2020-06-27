@@ -1,7 +1,28 @@
-// 59000527233015
+// supplyNumber: "59000527233015",
+const projectSettings = {
+  inputId: "input-container_user-input",
+  buttonId: "wrapper_submit-tracking",
+  outDataClass: "container_out",
+  historyDataClass: "container_history",
 
-class DeliveryData {
-  constructor(inputId, buttonId, outDataClass, historyDataClass) {
+  apiKey: "04ddf8bdb4d9138f496898f46480d4a2",
+  baseUrl: "https://api.novaposhta.ua/v2.0/json/",
+};
+
+class RequestData {
+  constructor(set) {
+    const {
+      inputId,
+      buttonId,
+      outDataClass,
+      historyDataClass,
+      apiKey,
+      baseUrl,
+    } = set;
+
+    this.apiKey = apiKey;
+    this.baseUrl = baseUrl;
+
     this.dataInput = document.querySelector(`#${inputId}`);
     this.submitData = document.querySelector(`#${buttonId}`);
 
@@ -9,61 +30,44 @@ class DeliveryData {
     this.historyDataContainer = document.querySelector(`.${historyDataClass}`);
 
     this.submitData.onclick = () => {
-      console.log("url", this.myUrl);
-      console.log("api", this.myApi);
-      console.log("inp value", this.dataInput.value);
-
       if (this.dataInput.value) {
-        fetch(this.myUrl, {
-          method: "POST",
-          dataType: "json",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({
-            apiKey: this.myApi,
-            modelName: "TrackingDocument",
-            calledMethod: "getStatusDocuments",
-            methodProperties: {
-              Documents: [
-                {
-                  DocumentNumber: this.dataInput.value,
-                  Phone: "",
-                },
-                {
-                  DocumentNumber: this.dataInput.value,
-                  Phone: "",
-                },
-              ],
-            },
-          }),
-        })
-          .then((res) => {
-            return res.json();
-          })
-          .then((r) => console.log(r.data[0]));
-
+        this.getTrackingData().then((r) => console.log(r.data[0]));
         this.outDataContainer.style = "display: block";
         this.historyDataContainer.style = "display: block";
+      } else {
+        alert("Введіть номер ТТН");
       }
     };
   }
 
-  displayTracking() {
-    console.log("track");
-  }
-
-  get myApi() {
-    return "04ddf8bdb4d9138f496898f46480d4a2";
-  }
-  get myUrl() {
-    return "https://api.novaposhta.ua/v2.0/json/";
+  getTrackingData() {
+    return fetch(this.baseUrl, {
+      method: "POST",
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        apiKey: this.apiKey,
+        modelName: "TrackingDocument",
+        calledMethod: "getStatusDocuments",
+        methodProperties: {
+          Documents: [
+            {
+              DocumentNumber: this.dataInput.value,
+              Phone: "",
+            },
+            {
+              DocumentNumber: this.dataInput.value,
+              Phone: "",
+            },
+          ],
+        },
+      }),
+    }).then((res) => {
+      return res.json();
+    });
   }
 }
 
-const test = new DeliveryData(
-  "input-container_user-input",
-  "wrapper_submit-tracking",
-  "container_out",
-  "container_history"
-);
+const test = new RequestData(projectSettings);
