@@ -49,7 +49,8 @@ input {
   font-family: Muemo, sans-serif;
 }
 
-.container_out {
+.container_out,
+.container_history {
   display: none;
   height: auto;
 }
