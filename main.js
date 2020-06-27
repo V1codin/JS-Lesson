@@ -2,7 +2,8 @@
 
 const elemSettings = {
   inputId: "input-container_user-input",
-  buttonId: "wrapper_submit-tracking",
+  submitButtonId: "wrapper_submit-tracking",
+  clearButtonId: "wrapper_clear-history",
   outDataClass: "container_out",
   historyDataClass: "container_history",
   historyListClass: "history_list",
@@ -17,7 +18,8 @@ class InitElements {
   constructor(propObject, projSetts) {
     const {
       inputId,
-      buttonId,
+      submitButtonId,
+      clearButtonId,
       outDataClass,
       historyDataClass,
       historyListClass,
@@ -29,7 +31,8 @@ class InitElements {
     this.baseUrl = baseUrl;
 
     this.dataInput = document.querySelector(`#${inputId}`);
-    this.submitData = document.querySelector(`#${buttonId}`);
+    this.submitData = document.querySelector(`#${submitButtonId}`);
+    this.clearButton = document.querySelector(`#${clearButtonId}`);
 
     this.outDataContainer = document.querySelector(`.${outDataClass}`);
     this.historyDataContainer = document.querySelector(`.${historyDataClass}`);
@@ -38,8 +41,11 @@ class InitElements {
 
     this.historyCounter;
     this.historyData = {
+      links: [],
       linkNames: [],
     };
+
+    this.mask = /^\d{14}$/;
   }
 }
 
@@ -48,7 +54,7 @@ class RequestData extends InitElements {
     super(elemSettings, projectSettings);
 
     this.submitData.onclick = () => {
-      if (this.dataInput.value) {
+      if (this.dataInput.value && this.mask.test(this.dataInput.value)) {
         const userNumber = this.dataInput.value;
 
         this.getTrackingData()
@@ -59,15 +65,21 @@ class RequestData extends InitElements {
           })
           .then((q) => {
             this.displayData(q);
-
             return q;
           });
 
         this.outDataContainer.style = "display: block";
         this.historyDataContainer.style = "display: block";
       } else {
-        alert("Введіть номер ТТН");
+        alert("Введіть коректний номер ТТН");
+        this.dataInput.value = null;
       }
+    };
+
+    this.clearButton.onclick = () => {
+      this.historyData.links.length = 0;
+      this.historyData.linkNames.length = 0;
+      this.historyList.innerHTML = null;
     };
   }
 
@@ -79,16 +91,18 @@ class RequestData extends InitElements {
     this.historyCounter = this.historyData.linkNames.length;
 
     historyLink.classList.add(`history_link_${this.historyCounter}`);
-    historyLink.href = "#";
+    historyLink.href = "#out";
 
     const historyEl = document.createElement("li");
     historyEl.classList.add(`history_element_№_${this.historyCounter}`);
 
-    this.historyData.userNumber = historyLink;
+    this.historyData.links.push(historyLink);
 
     historyLink.innerHTML += `ЕН посилки ${userNumber}`;
 
-    this.historyList.appendChild(historyEl).appendChild(historyLink);
+    this.historyList
+      .insertBefore(historyEl, this.historyList.firstChild)
+      .appendChild(historyLink);
   }
 
   // getting data from server of user's invoice number
@@ -107,7 +121,6 @@ class RequestData extends InitElements {
           Documents: [
             {
               DocumentNumber: this.dataInput.value,
-              Phone: "",
             },
           ],
         },
@@ -118,11 +131,10 @@ class RequestData extends InitElements {
   }
 
   displayData(promiseRes) {
-    this.outDataContainer.innerHTML = `<p>${promiseRes.data[0].Status}</p>`;
-    console.log("check");
+    let res = promiseRes.data[0];
+    this.outDataContainer.innerHTML = `<p>Статус: ${res.Status}</p>`;
+    this.outDataContainer.innerHTML += `<p>Статус код: ${res.StatusCode}</p>`;
   }
 }
-
-// const request = new RequestData(projectSettings);
 
 const elems = new RequestData();
