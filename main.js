@@ -55,19 +55,23 @@ class RequestData extends InitElements {
       if (this.dataInput.value && this.mask.test(this.dataInput.value)) {
         const userNumber = this.dataInput.value;
 
-        this.getTrackingData(userNumber)
-          .then((r) => {
-            this.updateHistory(userNumber);
+        if (this.historyData.linkNames.every((item) => item !== userNumber)) {
+          this.getTrackingData(userNumber)
+            .then((r) => {
+              this.updateHistory(userNumber);
 
-            return r;
-          })
-          .then((q) => {
-            this.displayData(q);
-            return q;
-          });
+              return r;
+            })
+            .then((q) => {
+              this.displayData(q);
+              return q;
+            });
 
-        this.outDataContainer.style = "display: block";
-        this.historyDataContainer.style = "display: block";
+          this.outDataContainer.style = "display: block";
+          this.historyDataContainer.style = "display: block";
+        } else {
+          alert("Такий номер ТТН вже є в історії пошуку");
+        }
       } else {
         alert("Введіть коректний номер ТТН");
         this.dataInput.value = null;
