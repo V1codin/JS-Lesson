@@ -70,11 +70,11 @@ class RequestData extends InitElements {
           this.outDataContainer.style = "display: block";
           this.historyDataContainer.style = "display: block";
         } else {
-          alert("Такий номер ТТН вже є в історії пошуку");
+          return alert("Такий номер ТТН вже є в історії пошуку");
         }
       } else {
-        alert("Введіть коректний номер ТТН");
         this.dataInput.value = null;
+        return alert("Введіть коректний номер ТТН");
       }
     };
 
