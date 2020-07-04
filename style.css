@@ -17,7 +17,7 @@ p {
   font-weight: bold;
 }
 
-.history_list a {
+.list_link {
   display: block;
   padding: 10px;
   color: #7e1af0;
@@ -30,15 +30,15 @@ p {
   background-color: #65f76c;
 }
 
-.history_list li:hover {
+.list_element:hover {
   background-color: #b8f765;
 }
 
-.history_list li:first-child {
+.list_element:first-child {
   margin-top: 0;
 }
 
-.history_list li {
+.list_element {
   margin-top: 5px;
   width: fit-content;
 }
@@ -66,6 +66,7 @@ p {
 }
 
 .container_out_mod {
+  color: #222222;
   margin: 7px;
   width: 225px;
   padding: 10px;
@@ -169,4 +170,14 @@ input {
 
 .btns:hover {
   background: #006938;
+}
+
+@media (max-width: 740px) {
+  .container_wrapper {
+    flex-direction: column;
+  }
+
+  .container_out_mod {
+    text-align: center;
+  }
 }
