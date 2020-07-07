@@ -75,38 +75,31 @@ class InitElements {
     this.historyData = new HistoryData();
     this.localData = new StorageData(this);
     this.request = new RequestData(this);
+    this.renderer = new renderHtml();
 
     this.mask = /^\d{14}$/;
 
     this.submitData.onclick = () => {
-      if (this.dataInput.value && this.mask.test(this.dataInput.value)) {
-        const userNumber = this.dataInput.value;
+      const validation = this.validateNumber(this.dataInput.value);
+      if (validation) {
+        this.request
+          .getTrackingData(this)
+          .then((r, rej) => {
+            if (r.data[0].StatusCode != 3 && r.data[0].StatusCode != 2) {
+              this.historyData.updateHistory(this);
 
-        if (!this.historyData.dataObj.linkNames.hasOwnProperty(userNumber)) {
-          this.request
-            .getTrackingData(this)
-            .then((r, rej) => {
-              if (r.data[0].StatusCode != 3 && r.data[0].StatusCode != 2) {
-                this.historyData.updateHistory(this);
-
-                this.outDataContainer.style = "display: block";
-                this.historyDataContainer.style = "display: block";
-                return r;
-              } else {
-                throw new Error("Посилка з таким номером не знайдена");
-              }
-            })
-            .then((q) => {
-              this.displayData(q);
-              return q;
-            })
-            .catch(alert);
-        } else {
-          return alert("Такий номер ТТН вже є в історії пошуку");
-        }
-      } else {
-        this.dataInput.value = null;
-        return alert("Введіть коректний номер ТТН");
+              this.outDataContainer.style = "display: block";
+              this.historyDataContainer.style = "display: block";
+              return r;
+            } else {
+              throw new Error("Посилка з таким номером не знайдена");
+            }
+          })
+          .then((q) => {
+            this.displayData(q);
+            return q;
+          })
+          .catch(alert);
       }
     };
 
@@ -114,10 +107,26 @@ class InitElements {
       this.historyData.clearHistory(this);
     };
   }
-  displayData(promiseRes) {
-    let res = promiseRes.data[0];
 
-    let userNumber = res.Number;
+  validateNumber(number) {
+    if (number && this.mask.test(number)) {
+      const userNumber = this.dataInput.value;
+      if (!this.historyData.dataObj.linkNames.hasOwnProperty(userNumber)) {
+        return true;
+      } else {
+        return alert("Такий номер ТТН вже є в історії пошуку");
+      }
+    } else {
+      this.dataInput.value = null;
+      return alert("Введіть коректний номер ТТН");
+    }
+  }
+
+  displayData(promiseRes) {
+    const { data } = promiseRes;
+    const res = data[0];
+
+    const userNumber = res.Number;
 
     this.historyData.dataObj.links.forEach(
       (item) => (item.parentElement.id = "")
@@ -128,8 +137,25 @@ class InitElements {
     );
     activeLink[0].parentElement.id = "active";
 
-    this.outDataContainer.innerHTML = `<p>Статус: ${res.Status}</p>`;
-    this.outDataContainer.innerHTML += `<p>Маршрут: ${res.CitySender} - ${res.CityRecipient}</p>`;
+    this.renderer.renderResult(res, this.outDataContainer);
+  }
+}
+class renderHtml {
+  renderResult(obj, parentEl) {
+    parentEl.innerHTML = null;
+
+    const { Status, CitySender, CityRecipient } = obj;
+
+    const status = document.createElement("p");
+    status.innerHTML = `Статус: ${Status}`;
+
+    const citySender = document.createElement("p");
+    citySender.innerHTML = `Маршрут: ${CitySender} - ${CityRecipient}`;
+
+    parentEl.appendChild(status);
+    parentEl.appendChild(citySender);
+
+    parentEl.style = "display:block";
   }
 }
 
