@@ -4,7 +4,9 @@
   "description": "first npm app",
   "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "build:prod": "webpack --mode production",
+    "build:watch": "webpack --watch --mode production",
+    "start-server": "webpack-dev-server --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +20,11 @@
   },
   "homepage": "https://github.com/V1codin/JS-Lesson#readme",
   "devDependencies": {
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
