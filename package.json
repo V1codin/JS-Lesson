@@ -2,7 +2,7 @@
   "name": "testing_npm",
   "version": "1.0.0",
   "description": "first npm app",
-  "main": "main.js",
+  "main": "./src/main.js",
   "scripts": {
     "build:prod": "webpack --mode production",
     "build:watch": "webpack --watch --mode production",
@@ -20,11 +20,10 @@
   },
   "homepage": "https://github.com/V1codin/JS-Lesson#readme",
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {
-    "dotenv": "^8.2.0"
-  }
+  "dependencies": {}
 }

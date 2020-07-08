@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   // entry: "./src/index.js",
-  entry: "./dist/main.js",
+  entry: "./src/main.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -12,8 +12,9 @@ module.exports = {
     poll: 1000,
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, ""),
     compress: true,
     port: 9000,
   },
+  target: "node",
 };
