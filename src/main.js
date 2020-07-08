@@ -83,7 +83,7 @@ class InitElements {
     this.historyData = new HistoryData();
     this.localData = new StorageData(this);
     this.request = new RequestData(this);
-    this.renderer = new renderHtml();
+    this.renderer = new RenderHtml();
 
     this.mask = /^\d{14}$/;
 
@@ -148,7 +148,7 @@ class InitElements {
     this.renderer.renderResult(res, this.outDataContainer);
   }
 }
-class renderHtml {
+class RenderHtml {
   renderResult(obj, parentEl) {
     parentEl.innerHTML = null;
 
