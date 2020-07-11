@@ -64,6 +64,9 @@ p {
 .container_block_m-l {
   margin: 7px;
 }
+.container_history {
+  overflow: auto;
+}
 
 .container_out_mod {
   color: #222222;
@@ -75,6 +78,7 @@ p {
 }
 
 .container_block {
+  border-radius: 20px;
   position: relative;
   width: 225px;
   height: 370px;
@@ -89,7 +93,6 @@ p {
 .container_out,
 .container_history {
   display: none;
-  height: auto;
 }
 
 input {
@@ -111,7 +114,7 @@ input {
   position: relative;
   width: 100%;
   height: 25%;
-  background: url("/np-logo.svg") no-repeat center;
+  background: url("/img/np-logo.svg") no-repeat center;
   border-bottom: solid 1px #b1b9c180;
   margin-bottom: 13%;
 }
