@@ -1,4 +1,13 @@
+/**
+ * Creates HTML elements and adds them to HTML file.
+ * @class
+ */
 class RenderHtml {
+  /**
+   * Create P elements and add them to parent element.
+   * @param {object} - Object with properties.
+   * @param {object} y - Object of parent element for the elements to append.
+   */
   renderResult(obj, parentEl) {
     parentEl.innerHTML = null;
 

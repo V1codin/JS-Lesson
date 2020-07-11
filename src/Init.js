@@ -3,6 +3,10 @@ import RenderHtml from "./RenderHtml";
 import HistoryData from "./HistoryData";
 import RequestData from "./RequestData";
 
+/**
+ * Creates initial elements and objects from imported classes.
+ * @class
+ */
 class InitElements {
   constructor(propObject, projSetts) {
     const {
@@ -63,7 +67,10 @@ class InitElements {
       this.historyData.clearHistory(this);
     };
   }
-
+  /**
+   * Validate number of user's delivery via regular expression.
+   * @param {number} - Number of user's delivery.
+   */
   validateNumber(number) {
     if (number && this.mask.test(number)) {
       const userNumber = this.dataInput.value;
@@ -77,7 +84,10 @@ class InitElements {
       return alert("Введіть коректний номер ТТН");
     }
   }
-
+  /**
+   * Display result of sended HTTP request.
+   * @param {object} - Object with properties (result of promise).
+   */
   displayData(promiseRes) {
     const { data } = promiseRes;
     const res = data[0];

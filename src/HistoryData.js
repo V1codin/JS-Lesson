@@ -1,3 +1,8 @@
+/**
+ * Creates a storage for history and its elements.
+ * Also displays them.
+ * @class
+ */
 class HistoryData {
   constructor() {
     this.historyCounter = 0;
@@ -6,15 +11,18 @@ class HistoryData {
       linkNames: {},
     };
   }
+  /**
+     * creating HTML "a" element and adding: 
+      className, attribute "name", increasing history counter,
+      attribute "id", onclick function
+      and added the name to linkNames object
+     * @param {object} - Object with properties.
+     * @param {number} - Number of user's delivery.
+     */
   updateHistory(obj, index) {
     const { dataInput } = obj;
     const userNumber = dataInput.value;
 
-    /* creating HTML "a" element and adding: 
-      className, attribute "name", increasing history counter,
-      attribute "id", onclick function
-      and added the name to linkNames object
-      */
     const historyLink = document.createElement("a");
     historyLink.className = "list_link";
     historyLink.onclick = (e) => {
@@ -57,6 +65,10 @@ class HistoryData {
       obj.localData.addNumber(historyLink.name, this.historyCounter);
     }
   }
+  /**
+   *Clearing records of history
+   * @param {object} - Object with properties.
+   */
   clearHistory(obj) {
     this.historyCounter = 0;
     this.dataObj.links.length = 0;
