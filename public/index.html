@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="bundle.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container_wrapper">
+        <div
+          id="np-tracking"
+          class="container_in container_block container_block_m-l"
+        >
+          <div id="wrapper_header">
+            <div id="header_tracking-logo"></div>
+            <div id="header_title">
+              <div class="title_h1">
+                <span class="h1_span1">ВІДСТЕЖЕННЯ</span> <br />
+                <span class="h1_span2">ПОСИЛОК</span>
+              </div>
+            </div>
+            <div id="wrapper_input-container_in">
+              <input
+                id="input-container_user-input"
+                class="user_data"
+                type="text"
+                name="number"
+                autocomplete="off"
+                placeholder="Номер посилки"
+              />
+            </div>
+            <div id="wrapper_warning-message"></div>
+            <button id="wrapper_submit-tracking" class="btns">
+              <span id="submit-tracking_span">ВІДСТЕЖИТИ</span>
+            </button>
+            <button id="wrapper_clear-history" class="btns">
+              <span id="clear-history_span">Очистити історію</span>
+            </button>
+          </div>
+        </div>
+        <div class="container_out container_block container_out_mod"></div>
+        <div class="container_history container_block container_block_m-l">
+          <ul class="history_list"></ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
