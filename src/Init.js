@@ -58,8 +58,7 @@ class InitElements {
           .then((q) => {
             this.displayData(q);
             return q;
-          })
-          .catch(alert);
+          });
       }
     };
 
