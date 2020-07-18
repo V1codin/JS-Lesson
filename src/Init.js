@@ -2,6 +2,7 @@ import StorageData from "./StorageData";
 import RenderHtml from "./RenderHtml";
 import HistoryData from "./HistoryData";
 import RequestData from "./RequestData";
+import Warnings from "./Warnings";
 
 /**
  * Creates initial elements and objects from imported classes.
@@ -16,6 +17,7 @@ class InitElements {
       outDataClass,
       historyDataClass,
       historyListClass,
+      hiddenClass,
     } = propObject;
 
     const { apiKey, baseUrl } = projSetts;
@@ -30,12 +32,16 @@ class InitElements {
     this.outDataContainer = document.querySelector(`.${outDataClass}`);
     this.historyDataContainer = document.querySelector(`.${historyDataClass}`);
 
+    this.hiddenCont = document.querySelectorAll(`.${hiddenClass}`);
+
     this.historyList = document.querySelector(`.${historyListClass}`);
 
     this.historyData = new HistoryData();
     this.localData = new StorageData(this);
     this.request = new RequestData(this);
     this.renderer = new RenderHtml();
+
+    this.warnings = new Warnings(this.renderer);
 
     this.mask = /^\d{14}$/;
 
@@ -47,12 +53,12 @@ class InitElements {
           .then((r, rej) => {
             if (r.data[0].StatusCode != 3 && r.data[0].StatusCode != 2) {
               this.historyData.updateHistory(this);
-
-              this.outDataContainer.style = "display: block";
-              this.historyDataContainer.style = "display: block";
+              this.hiddenCont.forEach(
+                (item) => (item.style = "display: block")
+              );
               return r;
             } else {
-              throw new Error("Посилка з таким номером не знайдена");
+              throw this.warnings.checker(this.renderer, 1);
             }
           })
           .then((q) => {
@@ -63,6 +69,7 @@ class InitElements {
     };
 
     this.clearButton.onclick = () => {
+      this.warnings.clear();
       this.historyData.clearHistory(this);
     };
   }
@@ -76,11 +83,11 @@ class InitElements {
       if (!this.historyData.dataObj.linkNames.hasOwnProperty(userNumber)) {
         return true;
       } else {
-        return alert("Такий номер ТТН вже є в історії пошуку");
+        return this.warnings.checker(this.renderer, 2);
       }
     } else {
       this.dataInput.value = null;
-      return alert("Введіть коректний номер ТТН");
+      return this.warnings.checker(this.renderer, 3);
     }
   }
   /**

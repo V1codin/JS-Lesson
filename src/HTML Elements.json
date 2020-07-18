@@ -4,5 +4,6 @@
   "clearButtonId": "wrapper_clear-history",
   "outDataClass": "container_out",
   "historyDataClass": "container_history",
-  "historyListClass": "history_list"
+  "historyListClass": "history_list",
+  "hiddenClass": "container_none"
 }

@@ -12,9 +12,59 @@ body {
   justify-content: center;
   align-items: center;
 }
+.container_none {
+  display: none;
+}
 p {
   margin-top: 5px;
   font-weight: bold;
+}
+.article_font-mod {
+  font-size: 20px;
+}
+.warning_closeBtn {
+  background-color: #039752;
+  width: 115px;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.warning_closeBtn:hover {
+  background-color: #006938;
+}
+
+.warning {
+  padding: 10px;
+  position: absolute;
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  border: 3px solid #797979;
+  margin-top: 6%;
+  opacity: 0.9;
+  background-color: #ffffff;
+  width: 400px;
+  height: 160px;
+}
+.warning_header {
+  position: relative;
+  top: -11px;
+  color: #3c3c3c;
+  border: 3px solid #797979;
+  border-bottom: none;
+  width: inherit;
+  height: 25px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  background: linear-gradient(white, #a0a0a0);
+  background-color: #c2c2c2;
 }
 
 .list_link {
@@ -52,7 +102,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: top;
+  align-items: center;
   margin: 50px auto;
   max-width: 1200px;
 }
@@ -88,11 +138,6 @@ p {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   font-family: Muemo, sans-serif;
-}
-
-.container_out,
-.container_history {
-  display: none;
 }
 
 input {
@@ -163,12 +208,13 @@ input {
   height: 38px;
   padding: 2%;
   outline: none;
-  font-size: 12px;
+  font-size: 15px;
   color: #fff;
   background: #039752;
   border: 1px solid transparent;
   font-family: Muemo, sans-serif;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 .btns:hover {
@@ -179,8 +225,27 @@ input {
   .container_wrapper {
     flex-direction: column;
   }
-
+  .btns {
+    margin-top: 8px;
+    font-size: 18px;
+  }
+  #input-container_user-input {
+    margin-top: 5px;
+    font-size: 18px;
+  }
   .container_out_mod {
     text-align: center;
+  }
+  .warning {
+    top: 40%;
+    width: 300px;
+  }
+  .article_font-mod {
+    font-size: 18px;
+  }
+  .warning_closeBtn {
+    width: 250px;
+    height: 50px;
+    font-size: 18px;
   }
 }
