@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/main.js",
@@ -11,9 +12,10 @@ module.exports = {
     poll: 1000,
   },
   devServer: {
-    contentBase: path.join(__dirname, ""),
+    contentBase: path.join(__dirname, "public"),
     compress: true,
     port: 9000,
+    hot: true,
   },
-  target: "node",
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
