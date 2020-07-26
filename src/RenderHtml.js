@@ -5,8 +5,8 @@
 class RenderHtml {
   /**
    * Create P elements and add them to parent element.
-   * @param {object} - Object with properties.
-   * @param {object} - Object of parent element for the elements to append.
+   * @param {Object} - Object with properties.
+   * @param {Object} - Object of parent element for the elements to append.
    */
   renderResult(obj, parentEl) {
     parentEl.innerHTML = null;

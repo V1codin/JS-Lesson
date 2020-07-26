@@ -1,7 +1,7 @@
 import InitElements from "./Init";
 
-const projectSettings = require("./API Setts.json");
+import projectSettings from "./APISetts.json";
 
-const elemSettings = require("./HTML Elements.json");
+import elemSettings from "./HTMLElements.json";
 
-const initBlock = new InitElements(elemSettings, projectSettings);
+new InitElements(elemSettings, projectSettings);

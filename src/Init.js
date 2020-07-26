@@ -92,7 +92,7 @@ class InitElements {
   }
   /**
    * Display result of sended HTTP request.
-   * @param {object} - Object with properties (result of promise).
+   * @param {Object} - Object with properties (result of promise).
    */
   displayData(promiseRes) {
     const { data } = promiseRes;

@@ -17,6 +17,7 @@ class StorageData {
     this.localHistory.push(number);
     localStorage.setItem(`number ${index}`, number);
   }
+
   /**
    * Add number of user's delivery from LOCAL STORAGE to created array.
    */
@@ -27,20 +28,22 @@ class StorageData {
       }
     }
   }
+
   /**
    * Display history data.
-   * @param {object} - Object with properties.
+   * @param {Object} - Object with properties.
    */
   render(obj) {
-    for (let i = 0; i < this.localHistory.length; i++) {
-      obj.historyData.updateHistory(obj, this.localHistory[i]);
-    }
+    this.localHistory.forEach((item) => {
+      obj.historyData.updateHistory(obj, item);
+    });
     obj.outDataContainer.style = "display: block";
     obj.historyDataContainer.style = "display: block";
   }
+
   /**
    * Check for inputed data in local storage.
-   * @param {object} - Object with properties.
+   * @param {Object} - Object with properties.
    */
   checker(obj) {
     if (localStorage.length > 0) {
@@ -48,6 +51,7 @@ class StorageData {
       this.render(obj);
     }
   }
+
   /**
    * Clear history array and local storage.
    */

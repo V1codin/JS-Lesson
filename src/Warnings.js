@@ -5,8 +5,6 @@ class Warnings {
     this.noNumberWarning = "Посилка з таким номером не знайдена";
     this.numberIsAvailableWarning = "Такий номер ТТН вже є в історії пошуку";
     this.incorrectNumberWarning = "Введіть коректний номер ТТН";
-
-    return this.checker(renderObj);
   }
   checker(object, checker) {
     switch (checker) {

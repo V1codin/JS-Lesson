@@ -16,7 +16,7 @@ class HistoryData {
       className, attribute "name", increasing history counter,
       attribute "id", onclick function
       and added the name to linkNames object
-     * @param {object} - Object with properties.
+     * @param {Object} - Object with properties.
      * @param {number} - Number of user's delivery.
      */
   updateHistory(obj, index) {
@@ -67,7 +67,7 @@ class HistoryData {
   }
   /**
    *Clearing records of history
-   * @param {object} - Object with properties.
+   * @param {Object} - Object with properties.
    */
   clearHistory(obj) {
     this.historyCounter = 0;

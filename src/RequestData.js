@@ -5,9 +5,9 @@
 class RequestData {
   /**
    * Create and send HTTP request and process it.
-   * @param {object} - Object with properties.
+   * @param {Object} - Object with properties.
    * @param {number} - Number of user's delivery.
-   * @return {object} - Object with result of the request.
+   * @return {Object} - Object with result of the request.
    */
   getTrackingData(obj, userNubmer) {
     const { apiKey, baseUrl, dataInput } = obj;
