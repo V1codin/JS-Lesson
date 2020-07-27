@@ -1,7 +1,16 @@
-import InitElements from "./Init";
+import Select from "./select";
+import selectSetts from "./selectSetts.json";
 
-import projectSettings from "./APISetts.json";
+const btn = document.querySelector(".btn");
 
-import elemSettings from "./HTMLElements.json";
+const createSel = document.querySelector(".newSelect");
 
-new InitElements(elemSettings, projectSettings);
+const s = new Select(selectSetts);
+
+createSel.onclick = () => {
+  s.createSelect();
+};
+
+btn.onclick = () => {
+  console.log(s.selectedValue);
+};

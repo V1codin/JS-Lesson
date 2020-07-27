@@ -3,6 +3,29 @@
  * @class
  */
 class RenderHtml {
+  renderSelect(propObj, parentEl) {
+    const { selectClass, optionsText } = propObj;
+
+    const select = document.createElement("select");
+    select.className = selectClass;
+
+    for (let i = 0; i < optionsText.length; i++) {
+      let option = document.createElement("option");
+
+      option.value = i;
+      if (i === 0) {
+        option.disabled = true;
+        option.selected = true;
+      }
+
+      option.innerHTML = optionsText[i];
+
+      select.appendChild(option);
+    }
+    parentEl.insertBefore(select, parentEl.firstChild);
+
+    return select;
+  }
   /**
    * Create P elements and add them to parent element.
    * @param {Object} - Object with properties.
