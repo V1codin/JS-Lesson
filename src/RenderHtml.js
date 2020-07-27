@@ -29,7 +29,7 @@ class RenderHtml {
    * Add a function to the BUTTON to clear warning container and hide it.
    * @param {string} - Text of the warning to display.
    */
-  renderWarning(warningText, parentEl) {
+  renderWarning(warningText, parentEl, obj) {
     if (parentEl.innerHTML.includes("div")) {
       return false;
     } else {
@@ -50,6 +50,15 @@ class RenderHtml {
       };
 
       parentEl.append(warnHeader, warnArticle, okBtn);
+
+      if (obj.dataInput.value) {
+        const deliveryNumber = document.createElement("p");
+        deliveryNumber.style = "color:red";
+        deliveryNumber.innerHTML = obj.dataInput.value;
+
+        parentEl.insertBefore(deliveryNumber, warnArticle);
+      }
+
       parentEl.style = "display: flex";
     }
   }

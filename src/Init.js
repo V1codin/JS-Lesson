@@ -58,7 +58,7 @@ class InitElements {
               );
               return r;
             } else {
-              throw this.warnings.checker(this.renderer, 1);
+              throw this.warnings.checker(this.renderer, 1, this);
             }
           })
           .then((q) => {
@@ -83,11 +83,11 @@ class InitElements {
       if (!this.historyData.dataObj.linkNames.hasOwnProperty(userNumber)) {
         return true;
       } else {
-        return this.warnings.checker(this.renderer, 2);
+        return this.warnings.checker(this.renderer, 2, this);
       }
     } else {
       this.dataInput.value = null;
-      return this.warnings.checker(this.renderer, 3);
+      return this.warnings.checker(this.renderer, 3, this);
     }
   }
   /**

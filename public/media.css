@@ -1,0 +1,20 @@
+@media (max-width: 740px) {
+  .container_wrapper {
+    flex-direction: column;
+  }
+  .btns {
+    margin-top: 8px;
+    font-size: 18px;
+  }
+  #input-container_user-input {
+    margin-top: 5px;
+    font-size: 18px;
+  }
+  .container_out_mod {
+    text-align: center;
+  }
+
+  .article_font-mod {
+    font-size: 18px;
+  }
+}
