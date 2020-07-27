@@ -4,24 +4,34 @@
  */
 class RenderHtml {
   renderSelect(propObj, parentEl) {
-    const { selectClass, optionsText } = propObj;
+    const { selectClass, optionsText, articleText } = propObj;
 
-    const select = document.createElement("select");
+    const select = document.createElement("form");
     select.className = selectClass;
 
+    const article = document.createElement("h3");
+    article.className = "select__article";
+    article.innerHTML = articleText;
+    select.append(article);
+
     for (let i = 0; i < optionsText.length; i++) {
-      let option = document.createElement("option");
+      let option = document.createElement("div");
+      option.className = "selector__option";
 
-      option.value = i;
-      if (i === 0) {
-        option.disabled = true;
-        option.selected = true;
-      }
+      let checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "selector__checkbox";
+      checkbox.id = i;
 
-      option.innerHTML = optionsText[i];
+      let label = document.createElement("label");
+      label.className = "selector__label";
+      label.setAttribute("for", i);
+      label.innerHTML = optionsText[i];
 
+      option.append(label, checkbox);
       select.appendChild(option);
     }
+
     parentEl.insertBefore(select, parentEl.firstChild);
 
     return select;

@@ -1,4 +1,5 @@
 {
-  "selectClass": "option_selector",
-  "optionsText": ["Виберіть послугу", "Маршрут", "Дата прибуття"]
+  "selectClass": "selector",
+  "optionsText": ["Відстежити", "Знайти відділення"],
+  "articleText": "Виберіть послугу"
 }

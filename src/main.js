@@ -14,5 +14,5 @@ createSel.onclick = () => {
 };
 
 btn.onclick = () => {
-  console.log("btn");
+  console.log(s);
 };
