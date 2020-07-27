@@ -1,9 +1,0 @@
-{
-  "inputId": "input-container_user-input",
-  "submitButtonId": "wrapper_submit-tracking",
-  "clearButtonId": "wrapper_clear-history",
-  "outDataClass": "container_out",
-  "historyDataClass": "container_history",
-  "historyListClass": "history_list",
-  "hiddenClass": "container_none"
-}
