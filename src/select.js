@@ -1,5 +1,3 @@
-import Render from "./RenderHtml";
-
 class Select {
   constructor(settsObject) {
     const { selectClass, optionsText } = settsObject;
@@ -11,11 +9,9 @@ class Select {
     this.counter = 0;
     this.selectedValue = null;
   }
-  createSelect() {
-    const render = new Render();
-
+  createSelect(renderObj) {
     const parent = document.querySelector(".container");
-    this.select = render.renderSelect(this, parent);
+    this.select = renderObj.renderSelect(this, parent);
 
     this.setParams();
 
