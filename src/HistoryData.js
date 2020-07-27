@@ -78,6 +78,7 @@ class HistoryData {
 
     obj.historyList.innerHTML = null;
     obj.dataInput.value = null;
+    obj.userCity.value = null;
     obj.outDataContainer.innerHTML = null;
 
     obj.outDataContainer.style = "display: none";

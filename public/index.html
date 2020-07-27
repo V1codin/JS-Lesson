@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="media.css" />
     <link rel="stylesheet" href="warning.css" />
+    <link rel="stylesheet" href="select.css" />
     <script src="bundle.js" defer></script>
     <title>Document</title>
   </head>
@@ -20,25 +21,32 @@
             <div id="header_tracking-logo"></div>
             <div id="header_title">
               <div class="title_h1">
-                <span class="h1_span1">ВІДСТЕЖЕННЯ</span> <br />
-                <span class="h1_span2">ПОСИЛОК</span>
+                <span class="h1_span1">НОВА</span> <br />
+                <span class="h1_span2">ПОШТА</span>
               </div>
             </div>
             <div id="wrapper_input-container_in">
               <input
-                id="input-container_user-input"
+                id="input-container_user-number"
                 class="user_data"
                 type="text"
                 name="number"
                 autocomplete="off"
                 placeholder="Номер посилки"
               />
+              <input
+                id="input-container_user-city"
+                class="user_data"
+                type="text"
+                autocomplete="off"
+                placeholder="Місто"
+              />
             </div>
             <div id="wrapper_warning-message"></div>
-            <button id="wrapper_submit-tracking" class="btns">
-              <span id="submit-tracking_span">ВІДСТЕЖИТИ</span>
+            <button id="wrapper_init_btn" class="init_btn">
+              <span id="submit-tracking_span">РОЗПОЧАТИ</span>
             </button>
-            <button id="wrapper_clear-history" class="btns">
+            <button id="wrapper_clear-history" class="init_btn">
               <span id="clear-history_span">Очистити історію</span>
             </button>
           </div>

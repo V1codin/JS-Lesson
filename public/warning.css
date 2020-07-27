@@ -1,5 +1,4 @@
 .warning_closeBtn {
-  background-color: #039752;
   width: 115px;
   height: 35px;
   margin-top: 10px;
@@ -8,11 +7,43 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
+  outline: none;
+  border: 1px solid #7c8a93;
+  border-top: 1px solid #a1aeb7;
+  border-bottom: 1px solid #5d6b75;
+  box-shadow: inset 0 1px #d8e0e6, inset 1px 0 #b7c6d1, inset -1px 0 #b7c6d1,
+    inset 0 -1px #a1b5c4, 0 2px #62727e, 0 3px #5d6b75,
+    0 4px 2px rgba(0, 0, 0, 0.4);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #039752),
+    color-stop(100%, #000000)
+  );
 }
 .warning_closeBtn:hover {
-  background-color: #006938;
+  border-top: 1px solid #96a2ab;
+  box-shadow: inset 0 1px #c0ced7, inset 1px 0 #b7c6d1, inset -1px 0 #b7c6d1,
+    inset 0 -1px #b9c8d3, 0 2px #62727e, 0 3px #5d6b75,
+    0 4px 2px rgba(0, 0, 0, 0.4);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #000000),
+    color-stop(100%, #1b4a34)
+  );
+  background-color: #5ada9e;
 }
-
+.warning_closeBtn:active {
+  top: 3px;
+  border: 1px solid #778998;
+  border-top: 1px solid #606f7a;
+  border-bottom: 1px solid #8296a6;
+  background: #00ab1f;
+  box-shadow: inset 0 1px 2px #5f7281;
+}
 .warning {
   padding: 10px;
   position: absolute;

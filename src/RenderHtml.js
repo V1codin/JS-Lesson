@@ -3,6 +3,40 @@
  * @class
  */
 class RenderHtml {
+  renderSelect(propObj, parentEl) {
+    const { selectClass, optionsText, articleText, requestName } = propObj;
+
+    const select = document.createElement("form");
+    select.className = selectClass;
+
+    const article = document.createElement("h3");
+    article.className = "select__article";
+    article.innerHTML = articleText;
+    select.append(article);
+
+    for (let i = 0; i < optionsText.length; i++) {
+      let option = document.createElement("div");
+      option.className = "selector__option";
+
+      let checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "selector__checkbox";
+      checkbox.id = i;
+
+      let label = document.createElement("label");
+      label.className = "selector__label";
+      label.setAttribute("for", i);
+      label.innerHTML = optionsText[i];
+      label.requestValue = requestName[i];
+
+      option.append(label, checkbox);
+      select.appendChild(option);
+    }
+
+    parentEl.insertBefore(select, parentEl.firstChild);
+
+    return select;
+  }
   /**
    * Create P elements and add them to parent element.
    * @param {Object} - Object with properties.
@@ -29,7 +63,7 @@ class RenderHtml {
    * Add a function to the BUTTON to clear warning container and hide it.
    * @param {string} - Text of the warning to display.
    */
-  renderWarning(warningText, parentEl, obj) {
+  renderWarning(warningText, parentEl, obj, isCity) {
     if (parentEl.innerHTML.includes("div")) {
       return false;
     } else {
@@ -51,7 +85,7 @@ class RenderHtml {
 
       parentEl.append(warnHeader, warnArticle, okBtn);
 
-      if (obj.dataInput.value) {
+      if (obj.dataInput.value && !isCity) {
         const deliveryNumber = document.createElement("p");
         deliveryNumber.style = "color:red";
         deliveryNumber.innerHTML = obj.dataInput.value;

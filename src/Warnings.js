@@ -7,6 +7,8 @@ class Warnings {
     this.noNumberWarning = "Посилка з таким номером не знайдена";
     this.numberIsAvailableWarning = "Такий номер ТТН вже є в історії пошуку";
     this.incorrectNumberWarning = "Введіть коректний номер ТТН";
+    this.incorrectCity = "Введіть коректну назву міста";
+    this.incorrectSelectedData = "Виберіть послугу";
   }
   createWarningContainer() {
     this.warnContainer = document.createElement("div");
@@ -39,10 +41,26 @@ class Warnings {
           this.warnContainer,
           initObj
         );
+      case 4:
+        return this.warning(
+          object,
+          this.incorrectSelectedData,
+          this.warnContainer,
+          initObj,
+          true
+        );
+      case 5:
+        return this.warning(
+          object,
+          this.incorrectCity,
+          this.warnContainer,
+          initObj,
+          true
+        );
     }
   }
-  warning(object, warnText, warnContainer, initObj) {
-    return object.renderWarning(warnText, warnContainer, initObj);
+  warning(object, warnText, warnContainer, initObj, isCity) {
+    return object.renderWarning(warnText, warnContainer, initObj, isCity);
   }
   clear() {
     this.warnContainer.style = "display: none";

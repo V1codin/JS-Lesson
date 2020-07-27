@@ -39,6 +39,26 @@ class RequestData {
       return res.json();
     });
   }
+  getBranchLoc(obj, city) {
+    const { apiKey, baseUrl } = obj;
+    return fetch(baseUrl, {
+      method: "POST",
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        apiKey: apiKey,
+        modelName: "AddressGeneral",
+        calledMethod: "getWarehouses",
+        methodProperties: {
+          CityName: city,
+          Limit: 5,
+          Language: "ru",
+        },
+      }),
+    }).then((r) => r.json());
+  }
 }
 
 export default RequestData;

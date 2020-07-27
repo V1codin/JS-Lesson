@@ -1,6 +1,7 @@
 {
-  "inputId": "input-container_user-input",
-  "submitButtonId": "wrapper_submit-tracking",
+  "userNumberId": "input-container_user-number",
+  "userCityId": "input-container_user-city",
+  "initButtonId": "wrapper_init_btn",
   "clearButtonId": "wrapper_clear-history",
   "outDataClass": "container_out",
   "historyDataClass": "container_history",

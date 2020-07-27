@@ -1,0 +1,6 @@
+{
+  "selectClass": "selector",
+  "optionsText": ["Відстежити", "Знайти відділення"],
+  "articleText": "Виберіть послугу",
+  "requestName": ["getTrackingData", "getBranchLoc"]
+}
