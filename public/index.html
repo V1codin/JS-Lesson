@@ -34,6 +34,9 @@
                 autocomplete="off"
                 placeholder="Номер посилки"
               />
+              <span id="user-number__notification" class="notifications"
+                >Номер посилки</span
+              >
               <input
                 id="input-container_user-city"
                 class="user_data"
@@ -41,10 +44,22 @@
                 autocomplete="off"
                 placeholder="Місто"
               />
+              <span id="user-city__notification" class="notifications"
+                >Місто</span
+              >
+              <input
+                id="input-container_user-branch-number"
+                class="user_data"
+                type="text"
+                autocomplete="off"
+                placeholder="№ відділення"
+              />
+              <span id="user-branch-number__notification" class="notifications"
+                >№ відділення</span
+              >
             </div>
-            <div id="wrapper_warning-message"></div>
             <button id="wrapper_init_btn" class="init_btn">
-              <span id="submit-tracking_span">РОЗПОЧАТИ</span>
+              <span id="submit-tracking_span">ПОШУК</span>
             </button>
             <button id="wrapper_clear-history" class="init_btn">
               <span id="clear-history_span">Очистити історію</span>

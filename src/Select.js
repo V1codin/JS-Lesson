@@ -38,7 +38,11 @@ class Select {
         this.selectValues.push(selectForm[item].previousSibling.requestValue);
       }
     }
-    this.deleteSelect();
+    if (this.selectValues.length > 0) {
+      this.deleteSelect();
+    } else {
+      return false;
+    }
   }
 
   deleteSelect() {

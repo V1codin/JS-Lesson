@@ -27,7 +27,7 @@ class HistoryData {
     historyLink.className = "list_link";
     historyLink.onclick = (e) => {
       obj.request.getTrackingData(obj, e.target.name).then((r) => {
-        obj.displayData(r);
+        obj.displayTrackingData(r);
         obj.dataInput.value = e.target.name;
         return r;
       });
@@ -79,6 +79,7 @@ class HistoryData {
     obj.historyList.innerHTML = null;
     obj.dataInput.value = null;
     obj.userCity.value = null;
+    obj.userBranchNumber.value = null;
     obj.outDataContainer.innerHTML = null;
 
     obj.outDataContainer.style = "display: none";

@@ -7,8 +7,11 @@ class Warnings {
     this.noNumberWarning = "Посилка з таким номером не знайдена";
     this.numberIsAvailableWarning = "Такий номер ТТН вже є в історії пошуку";
     this.incorrectNumberWarning = "Введіть коректний номер ТТН";
-    this.incorrectCity = "Введіть коректну назву міста";
-    this.incorrectSelectedData = "Виберіть послугу";
+    this.incorrectCityWarning = "Введіть коректну назву міста";
+    this.incorrectSelectedDataWarning = "Виберіть послугу";
+    this.incorrectCityBranchWarning =
+      "Введіть коректну назву міста та номер відділення";
+    this.incorrectBranchWarning = "Введіть коректний номер відділення";
   }
   createWarningContainer() {
     this.warnContainer = document.createElement("div");
@@ -44,7 +47,7 @@ class Warnings {
       case 4:
         return this.warning(
           object,
-          this.incorrectSelectedData,
+          this.incorrectSelectedDataWarning,
           this.warnContainer,
           initObj,
           true
@@ -52,7 +55,23 @@ class Warnings {
       case 5:
         return this.warning(
           object,
-          this.incorrectCity,
+          this.incorrectCityWarning,
+          this.warnContainer,
+          initObj,
+          true
+        );
+      case 6:
+        return this.warning(
+          object,
+          this.incorrectCityBranchWarning,
+          this.warnContainer,
+          initObj,
+          true
+        );
+      case 7:
+        return this.warning(
+          object,
+          this.incorrectBranchWarning,
           this.warnContainer,
           initObj,
           true

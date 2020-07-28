@@ -1,10 +1,18 @@
 {
   "userNumberId": "input-container_user-number",
   "userCityId": "input-container_user-city",
+  "userBranchNumberId": "input-container_user-branch-number",
+
   "initButtonId": "wrapper_init_btn",
   "clearButtonId": "wrapper_clear-history",
+
   "outDataClass": "container_out",
+
   "historyDataClass": "container_history",
   "historyListClass": "history_list",
-  "hiddenClass": "container_none"
+  "hiddenClass": "container_none",
+
+  "numberNotificationId": "user-number__notification",
+  "cityNotificationId": "user-city__notification",
+  "branchNumberNotificationId": "user-branch-number__notification"
 }

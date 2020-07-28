@@ -37,15 +37,102 @@ class RenderHtml {
 
     return select;
   }
+
   /**
    * Create P elements and add them to parent element.
    * @param {Object} - Object with properties.
    * @param {Object} - Object of parent element for the elements to append.
    */
-  renderResult(obj, parentEl) {
-    parentEl.innerHTML = null;
+  renderBranchLoc(obj, parentEl) {
+    const branchData = obj[0];
 
+    const {
+      Monday,
+      Tuesday,
+      Wednesday,
+      Thursday,
+      Friday,
+      Saturday,
+      Sunday,
+    } = branchData.Schedule;
+
+    let scheduleDays = {
+      Понеділок: Monday,
+      Вівторок: Tuesday,
+      Середа: Wednesday,
+      Четверг: Thursday,
+      "П'ятниця": Friday,
+      Субота: Saturday,
+      Неділя: Sunday,
+    };
+
+    let outBranchLoc = document.querySelector(".out__branch-loc");
+
+    if (!outBranchLoc) {
+      outBranchLoc = document.createElement("div");
+      outBranchLoc.className = "out__branch-loc";
+    }
+    outBranchLoc.innerHTML = null;
+
+    const article = document.createElement("h3");
+    article.className = "out__article";
+    article.innerHTML = `Відділення №${branchData.Number}`;
+
+    const description = document.createElement("p");
+    description.innerHTML = `Опис: ${branchData.Description}`;
+
+    const status = document.createElement("p");
+    if (branchData.WarehouseStatus === "Working") {
+      status.style = "color: #03f703";
+      status.innerHTML = "Працює";
+    } else {
+      status.style = "color: #ff1818";
+      status.innerHTML = "Не працює";
+    }
+
+    const schedule = document.createElement("p");
+    schedule.innerHTML = `Графік роботи`;
+
+    const scheduleList = document.createElement("ul");
+    scheduleList.className = "branch-loc__list";
+
+    for (let item in scheduleDays) {
+      let listEl = document.createElement("li");
+      listEl.innerHTML = `${item}: ${scheduleDays[item]}`;
+
+      scheduleList.appendChild(listEl);
+    }
+
+    outBranchLoc.appendChild(article);
+    outBranchLoc.appendChild(description);
+    outBranchLoc.appendChild(status);
+    outBranchLoc.appendChild(schedule);
+    outBranchLoc.appendChild(scheduleList);
+
+    parentEl.insertBefore(outBranchLoc, parentEl.firstChild);
+
+    parentEl.style = "display:block";
+  }
+
+  /**
+   * Create P elements and add them to parent element.
+   * @param {Object} - Object with properties.
+   * @param {Object} - Object of parent element for the elements to append.
+   */
+  renderTracking(obj, parentEl) {
     const { Status, CitySender, CityRecipient } = obj;
+
+    let outTracking = document.querySelector(".out__tracking");
+
+    if (!outTracking) {
+      outTracking = document.createElement("div");
+      outTracking.className = "out__tracking";
+    }
+    outTracking.innerHTML = null;
+
+    const article = document.createElement("h3");
+    article.className = "out__article";
+    article.innerHTML = "Відстеження";
 
     const status = document.createElement("p");
     status.innerHTML = `Статус: ${Status}`;
@@ -53,8 +140,10 @@ class RenderHtml {
     const citySender = document.createElement("p");
     citySender.innerHTML = `Маршрут: ${CitySender} - ${CityRecipient}`;
 
-    parentEl.appendChild(status);
-    parentEl.appendChild(citySender);
+    outTracking.appendChild(article);
+    outTracking.appendChild(status);
+    outTracking.appendChild(citySender);
+    parentEl.appendChild(outTracking);
 
     parentEl.style = "display:block";
   }

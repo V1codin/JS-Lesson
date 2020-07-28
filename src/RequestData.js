@@ -7,7 +7,6 @@ class RequestData {
    * Create and send HTTP request and process it.
    * @param {Object} - Object with properties.
    * @param {number} - Number of user's delivery.
-   * @return {Object} - Object with result of the request.
    */
   getTrackingData(obj, userNubmer) {
     const { apiKey, baseUrl, dataInput } = obj;
@@ -39,6 +38,11 @@ class RequestData {
       return res.json();
     });
   }
+  /**
+   * Create and send HTTP request and process it.
+   * @param {Object} - Object with properties.
+   * @param {string} - City the requested branches are in.
+   */
   getBranchLoc(obj, city) {
     const { apiKey, baseUrl } = obj;
     return fetch(baseUrl, {
@@ -53,11 +57,14 @@ class RequestData {
         calledMethod: "getWarehouses",
         methodProperties: {
           CityName: city,
-          Limit: 5,
           Language: "ru",
         },
       }),
-    }).then((r) => r.json());
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .catch((r) => console.log(r));
   }
 }
 
