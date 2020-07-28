@@ -64,7 +64,6 @@ class InitElements {
     this.initNotifications();
 
     this.initBtn.onclick = () => {
-      console.dir(this.dataInput.title);
       this.initiateSelect();
     };
 
@@ -129,8 +128,22 @@ class InitElements {
                 }
               })
               .then((q) => {
-                this.displayTrackingData(q);
-                return q;
+                if (!city) {
+                  this.request
+                    .getBranchLoc(this, q.data[0].CityRecipient)
+                    .then((r) => {
+                      this.userCity.value = q.data[0].CityRecipient;
+                      this.userBranchNumber.value =
+                        q.data[0].WarehouseRecipientNumber;
+                      this.displayBranchLocationData(r);
+                      return r;
+                    });
+                  this.displayTrackingData(q);
+                  return q;
+                } else {
+                  this.displayTrackingData(q);
+                  return q;
+                }
               });
           }
         }

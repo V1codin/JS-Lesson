@@ -109,7 +109,7 @@ class RenderHtml {
     outBranchLoc.appendChild(schedule);
     outBranchLoc.appendChild(scheduleList);
 
-    parentEl.insertBefore(outBranchLoc, parentEl.firstChild);
+    parentEl.appendChild(outBranchLoc);
 
     parentEl.style = "display:block";
   }
@@ -143,7 +143,7 @@ class RenderHtml {
     outTracking.appendChild(article);
     outTracking.appendChild(status);
     outTracking.appendChild(citySender);
-    parentEl.appendChild(outTracking);
+    parentEl.insertBefore(outTracking, parentEl.firstChild);
 
     parentEl.style = "display:block";
   }

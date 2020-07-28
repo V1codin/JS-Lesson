@@ -20,11 +20,18 @@ p {
   font-weight: bold;
 }
 .notifications {
+  width: 125px;
+  top: -20%;
+  left: 2.6vw;
+  z-index: 5000;
+  position: absolute;
   display: none;
+  border-radius: 25px;
+
   margin-top: 5px;
   font-size: 15px;
   font-weight: 700;
-  color: #ff2f2f;
+  color: #e42020;
 }
 .article_font-mod {
   font-size: 20px;
@@ -62,7 +69,7 @@ p {
   padding: 10px;
 }
 .branch-loc__list {
-  text-align: left;
+  text-align: right;
 }
 
 .container {
@@ -103,7 +110,7 @@ p {
   border-radius: 20px;
   position: relative;
   overflow-y: auto;
-  width: 235px;
+  width: 250px;
   height: 435px;
   text-align: center;
   background: #edf765;
