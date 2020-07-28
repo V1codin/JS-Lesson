@@ -1,7 +1,7 @@
 .selector {
   font-family: Roboto;
   padding: 17px;
-  max-width: 250px;
+  width: 250px;
   max-height: 300px;
   overflow-y: auto;
   position: absolute;
@@ -87,6 +87,7 @@
 }
 @media (max-width: 780px) {
   .selector {
-    left: 20vw;
+    top: 50vh;
+    left: 2vw;
   }
 }
