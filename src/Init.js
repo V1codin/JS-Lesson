@@ -56,7 +56,7 @@ class InitElements {
     this.renderer = new RenderHtml();
     this.select = new Select(selectSetts);
 
-    this.warnings = new Warnings(this.renderer);
+    this.warnings = new Warnings();
 
     this.maskNumber = /^\d{14}$/;
     this.maskCity = /^([а-яА-ЯёЁії]+[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*)$/i;

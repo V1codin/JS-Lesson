@@ -1,5 +1,5 @@
 class Warnings {
-  constructor(renderObj) {
+  constructor() {
     this.warnContainer = null;
 
     this.createWarningContainer();
