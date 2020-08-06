@@ -15,6 +15,7 @@ module.exports = {
     contentBase: path.join(__dirname, "public"),
     compress: true,
     port: 9000,
+    open: true,
     // hot: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
