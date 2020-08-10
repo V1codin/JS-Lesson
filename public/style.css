@@ -21,14 +21,14 @@ p {
 }
 .notifications {
   width: 125px;
-  top: -20%;
-  left: 2.6vw;
+  top: -17%;
+  left: 3.1vw;
   z-index: 5000;
   position: absolute;
   display: none;
   border-radius: 25px;
-
-  margin-top: 5px;
+  margin: 5px auto;
+  text-align: center;
   font-size: 15px;
   font-weight: 700;
   color: #e42020;
@@ -74,7 +74,7 @@ p {
 
 .container {
   position: relative;
-  margin: 50px auto;
+  margin: 30px auto;
   max-width: 1200px;
 }
 .container_wrapper {
@@ -111,7 +111,7 @@ p {
   position: relative;
   overflow-y: auto;
   width: 250px;
-  height: 435px;
+  height: 540px;
   text-align: center;
   background: #edf765;
   padding: 10px;
@@ -133,10 +133,10 @@ p {
 #header_tracking-logo {
   position: relative;
   width: 100%;
-  height: 15%;
+  height: 11%;
   background: url("./img/np-logo.svg") no-repeat center;
   border-bottom: solid 1px #b1b9c180;
-  margin-bottom: 13%;
+  margin-bottom: 4%;
 }
 
 #header_title {
@@ -160,7 +160,7 @@ p {
 
 #wrapper_input-container_in {
   position: relative;
-  height: 35%;
+  height: 50%;
 }
 
 .user_data {

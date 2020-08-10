@@ -3,6 +3,60 @@
  * @class
  */
 class RequestData {
+  getCityRef(obj) {
+    const { apiKey, baseUrl, city } = obj;
+    return fetch(baseUrl, {
+      method: "POST",
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        apiKey: apiKey,
+        modelName: "Address",
+        calledMethod: "getCities",
+        methodProperties: {
+          Language: "ru",
+          FindByString: city,
+        },
+      }),
+    })
+      .then((r) => r.json())
+      .catch((r) => console.log(r));
+  }
+
+  getDeliveryCost(obj) {
+    const { apiKey, baseUrl, refCityFrom, refCityTo, deliveryWeight } = obj;
+    return fetch(baseUrl, {
+      method: "POST",
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        MarketplacePartnerToken: "005056b2fc3d-ab8b-11e7-7857-d4f086bf",
+        apiKey: apiKey,
+        calledMethod: "getDocumentPrice",
+        language: "ua",
+        methodProperties: {
+          CityRecipient: refCityTo,
+          CitySender: refCityFrom,
+          Cost: "200",
+          Weight: Number(deliveryWeight),
+        },
+        modelName: "InternetDocument",
+      }),
+    });
+    /*
+      .then((res) => {
+        return res.json();
+      })
+      .then(({ data }) => {
+        console.log("delivery cost data", data);
+      });
+      */
+  }
+
   /**
    * Create and send HTTP request and process it.
    * @param {Object} - Object with properties.
@@ -34,9 +88,11 @@ class RequestData {
           ],
         },
       }),
-    }).then((res) => {
-      return res.json();
-    });
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .catch((r) => console.log(r));
   }
   /**
    * Create and send HTTP request and process it.

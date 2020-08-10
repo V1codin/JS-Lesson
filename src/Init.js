@@ -5,6 +5,9 @@ import RequestData from "./RequestData";
 import Warnings from "./Warnings";
 import Select from "./Select";
 import selectSetts from "./SelectSetts.json";
+import Notifs from "./Notifications";
+
+import RequestFacade from "./RequestFacade";
 
 /**
  * Creates initial elements and objects from imported classes.
@@ -22,9 +25,9 @@ class InitElements {
       hiddenClass,
       userCityId,
       userBranchNumberId,
-      numberNotificationId,
-      cityNotificationId,
-      branchNumberNotificationId,
+      userCitySenderId,
+      userCityRecipientId,
+      userDeliveryWeightId,
     } = propObject;
 
     const { apiKey, baseUrl } = projSetts;
@@ -33,15 +36,18 @@ class InitElements {
     this.baseUrl = baseUrl;
 
     this.dataInput = document.querySelector(`#${userNumberId}`);
+
     this.userCity = document.querySelector(`#${userCityId}`);
     this.userBranchNumber = document.querySelector(`#${userBranchNumberId}`);
 
+    this.userCitySender = document.querySelector(`#${userCitySenderId}`);
+    this.userCityRecipient = document.querySelector(`#${userCityRecipientId}`);
+    this.userDeliveryWeight = document.querySelector(
+      `#${userDeliveryWeightId}`
+    );
+
     this.initBtn = document.querySelector(`#${initButtonId}`);
     this.clearButton = document.querySelector(`#${clearButtonId}`);
-
-    this.numberNot = document.querySelector(`#${numberNotificationId}`);
-    this.cityNot = document.querySelector(`#${cityNotificationId}`);
-    this.branchNot = document.querySelector(`#${branchNumberNotificationId}`);
 
     this.outDataContainer = document.querySelector(`.${outDataClass}`);
     this.historyDataContainer = document.querySelector(`.${historyDataClass}`);
@@ -55,13 +61,12 @@ class InitElements {
     this.request = new RequestData();
     this.renderer = new RenderHtml();
     this.select = new Select(selectSetts);
+    this.Notifs = new Notifs(propObject, this);
 
     this.warnings = new Warnings();
 
     this.maskNumber = /^\d{14}$/;
     this.maskCity = /^([а-яА-ЯёЁії]+[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*)$/i;
-
-    this.initNotifications();
 
     this.initBtn.onclick = () => {
       this.initiateSelect();
@@ -72,115 +77,15 @@ class InitElements {
       this.historyData.clearHistory(this);
     };
   }
-
-  initNotifications() {
-    this.dataInput.onfocus = () => {
-      this.numberNot.style = "display:block";
-    };
-    this.dataInput.onblur = () => {
-      this.numberNot.style = "display:none";
-    };
-    this.userCity.onfocus = () => {
-      this.cityNot.style = "display:block";
-    };
-    this.userCity.onblur = () => {
-      this.cityNot.style = "display:none";
-    };
-    this.userBranchNumber.onfocus = () => {
-      this.branchNot.style = "display:block";
-    };
-    this.userBranchNumber.onblur = () => {
-      this.branchNot.style = "display:none";
-    };
-  }
-
   initiateSelect() {
     this.select.createSelect(this.renderer);
     this.select.btn.onclick = (e) => {
       e.preventDefault();
+
       this.outDataContainer.innerHTML = null;
       this.select.extractValues();
-      this.initiateRequest();
+      new RequestFacade().init(this);
     };
-  }
-  initiateRequest() {
-    const selectValues = this.select.selectValues;
-    const city = this.userCity.value;
-
-    if (selectValues.length > 0) {
-      selectValues.forEach((item) => {
-        if (item === "getTrackingData") {
-          const validationNumber = this.validateNumber(this.dataInput.value);
-          if (validationNumber) {
-            this.request
-              .getTrackingData(this)
-              .then((r) => {
-                if (
-                  r.data[0].StatusCode !== "3" &&
-                  r.data[0].StatusCode !== "2"
-                ) {
-                  this.historyData.updateHistory(this);
-                  this.hiddenCont.forEach(
-                    (item) => (item.style = "display: block")
-                  );
-                  return r;
-                } else {
-                  throw this.warnings.checker(this.renderer, 1, this);
-                }
-              })
-              .then((q) => {
-                if (!city && selectValues.includes("getBranchLoc")) {
-                  this.request
-                    .getBranchLoc(this, q.data[0].CityRecipient)
-                    .then((r) => {
-                      this.userCity.value = q.data[0].CityRecipient;
-                      this.userBranchNumber.value =
-                        q.data[0].WarehouseRecipientNumber;
-                      this.displayBranchLocationData(r);
-                      return r;
-                    });
-                  this.displayTrackingData(q);
-                  return q;
-                } else {
-                  this.displayTrackingData(q);
-                  return q;
-                }
-              });
-          }
-        }
-        if (item === "getBranchLoc" && !city) {
-          const validationNumber = this.validateNumber(this.dataInput.value);
-          if (validationNumber) {
-            this.request.getTrackingData(this).then((q) => {
-              this.request
-                .getBranchLoc(this, q.data[0].CityRecipient)
-                .then((r) => {
-                  this.userCity.value = q.data[0].CityRecipient;
-                  this.userBranchNumber.value =
-                    q.data[0].WarehouseRecipientNumber;
-                  this.displayBranchLocationData(r);
-                  return r;
-                });
-            });
-          }
-        } else if (item === "getBranchLoc" && city) {
-          const validation = this.validationBranch(
-            this.userCity.value,
-            this.userBranchNumber.value
-          );
-          if (validation) {
-            this.request.getBranchLoc(this, city).then((r) => {
-              this.displayBranchLocationData(r);
-              return r;
-            });
-          } else {
-            return this.warnings.checker(this.renderer, 6, this);
-          }
-        }
-      });
-    } else {
-      return this.warnings.checker(this.renderer, 4, this);
-    }
   }
 
   /**

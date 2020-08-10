@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="warning.css" />
     <link rel="stylesheet" href="select.css" />
     <script src="bundle.js" defer></script>
+
     <title>Document</title>
   </head>
   <body>
@@ -42,10 +43,10 @@
                 class="user_data"
                 type="text"
                 autocomplete="off"
-                placeholder="Місто"
+                placeholder="Місто відділення"
               />
               <span id="user-city__notification" class="notifications"
-                >Місто</span
+                >Місто відділення</span
               >
               <input
                 id="input-container_user-branch-number"
@@ -57,6 +58,38 @@
               <span id="user-branch-number__notification" class="notifications"
                 >№ відділення</span
               >
+              <!-- -------------------------------------- -->
+              <input
+                id="input-container_user-citySender"
+                class="user_data"
+                type="text"
+                autocomplete="off"
+                placeholder="Місто відправлення"
+              />
+              <span id="user-cityFrom__notification" class="notifications"
+                >Місто відправлення</span
+              >
+              <input
+                id="input-container_user-cityRecipient"
+                class="user_data"
+                type="text"
+                autocomplete="off"
+                placeholder="Місто отримування"
+              />
+              <span id="user-cityTo__notification" class="notifications"
+                >Місто отримування</span
+              >
+              <input
+                id="input-container_user-deliveryWeight"
+                class="user_data"
+                type="number"
+                autocomplete="off"
+                placeholder="кг"
+              />
+              <span id="user-deliveryWeight__notification" class="notifications"
+                >Вага посилки</span
+              >
+              <!-- -------------------------------------- -->
             </div>
             <button id="wrapper_init_btn" class="init_btn">
               <span id="submit-tracking_span">ПОШУК</span>
