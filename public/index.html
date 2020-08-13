@@ -28,7 +28,7 @@
             </div>
             <div id="wrapper_input-container_in">
               <input
-                id="input-container_user-number"
+                id="input__user-number"
                 class="user_data"
                 type="text"
                 name="number"
@@ -39,7 +39,7 @@
                 >Номер посилки</span
               >
               <input
-                id="input-container_user-city"
+                id="input__user-city"
                 class="user_data"
                 type="text"
                 autocomplete="off"
@@ -49,7 +49,7 @@
                 >Місто відділення</span
               >
               <input
-                id="input-container_user-branch-number"
+                id="input__user-branch-number"
                 class="user_data"
                 type="text"
                 autocomplete="off"
@@ -59,36 +59,35 @@
                 >№ відділення</span
               >
               <!-- -------------------------------------- -->
-              <input
-                id="input-container_user-citySender"
-                class="user_data"
-                type="text"
-                autocomplete="off"
-                placeholder="Місто відправлення"
-              />
-              <span id="user-cityFrom__notification" class="notifications"
-                >Місто відправлення</span
-              >
-              <input
-                id="input-container_user-cityRecipient"
-                class="user_data"
-                type="text"
-                autocomplete="off"
-                placeholder="Місто отримування"
-              />
-              <span id="user-cityTo__notification" class="notifications"
-                >Місто отримування</span
-              >
-              <input
-                id="input-container_user-deliveryWeight"
-                class="user_data"
-                type="number"
-                autocomplete="off"
-                placeholder="кг"
-              />
-              <span id="user-deliveryWeight__notification" class="notifications"
-                >Вага посилки</span
-              >
+              <div class="cost-option">
+                <div class="city-sender">
+                  <select
+                    class="cost-option__select_textCl user_data"
+                    id="CitySender"
+                  >
+                  <option disabled selected >Місто відправлення</option></select
+                  ></select>
+                </div>
+                <div class="city-recipient">
+                  <select
+                    class="cost-option__select_textCl user_data"
+                    id="CityRecipient"
+                  >
+                    <option disabled selected >Місто отримування</option></select
+                  >
+                </div>
+                <div class="wrapper__user-deliveryWeight">
+
+                
+                <input
+                  id="input__user-deliveryWeight"
+                  class="user_data"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="кг"
+                />
+              </div>
+              </div>
               <!-- -------------------------------------- -->
             </div>
             <button id="wrapper_init_btn" class="init_btn">

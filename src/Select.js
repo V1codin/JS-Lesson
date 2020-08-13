@@ -11,8 +11,6 @@ class Select {
     this.requestName = requestName;
 
     this.btn = null;
-
-    this.counter = 0;
   }
   createSelect(renderObj) {
     this.clear();
@@ -27,8 +25,6 @@ class Select {
 
     this.select = renderObj.renderSelect(this, parent);
     this.select.appendChild(selectBtn);
-
-    this.counter++;
   }
   extractValues() {
     const selectForm = this.select.elements;

@@ -4,9 +4,6 @@ export default class Notifications {
       numberNotificationId,
       cityNotificationId,
       branchNumberNotificationId,
-      citySenderNotificationId,
-      cityRecipientotificationId,
-      deliveryWeightId,
     } = htmlSetts;
 
     const {
@@ -28,11 +25,6 @@ export default class Notifications {
     this.numberNot = document.querySelector(`#${numberNotificationId}`);
     this.cityNot = document.querySelector(`#${cityNotificationId}`);
     this.branchNot = document.querySelector(`#${branchNumberNotificationId}`);
-    this.citySenderNot = document.querySelector(`#${citySenderNotificationId}`);
-    this.cityRecipientNot = document.querySelector(
-      `#${cityRecipientotificationId}`
-    );
-    this.deliveryWeightNot = document.querySelector(`#${deliveryWeightId}`);
 
     this.initNotifications();
   }
@@ -54,24 +46,6 @@ export default class Notifications {
     };
     this.userBranchNumber.onblur = () => {
       this.branchNot.style = "display:none";
-    };
-    this.userCitySender.onfocus = () => {
-      this.citySenderNot.style = "display:block";
-    };
-    this.userCitySender.onblur = () => {
-      this.citySenderNot.style = "display:none";
-    };
-    this.userCityRecipient.onfocus = () => {
-      this.cityRecipientNot.style = "display:block";
-    };
-    this.userCityRecipient.onblur = () => {
-      this.cityRecipientNot.style = "display:none";
-    };
-    this.userDeliveryWeight.onfocus = () => {
-      this.deliveryWeightNot.style = "display:block";
-    };
-    this.userDeliveryWeight.onblur = () => {
-      this.deliveryWeightNot.style = "display:none";
     };
   }
 }

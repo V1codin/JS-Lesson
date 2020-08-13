@@ -1,10 +1,10 @@
 {
-  "userNumberId": "input-container_user-number",
-  "userCityId": "input-container_user-city",
-  "userBranchNumberId": "input-container_user-branch-number",
-  "userCitySenderId": "input-container_user-citySender",
-  "userCityRecipientId": "input-container_user-cityRecipient",
-  "userDeliveryWeightId": "input-container_user-deliveryWeight",
+  "userNumberId": "input__user-number",
+  "userCityId": "input__user-city",
+  "userBranchNumberId": "input__user-branch-number",
+  "userDeliveryWeightId": "input__user-deliveryWeight",
+  "costSenderId": "CitySender",
+  "costRecipientId": "CityRecipient",
 
   "initButtonId": "wrapper_init_btn",
   "clearButtonId": "wrapper_clear-history",
@@ -17,8 +17,5 @@
 
   "numberNotificationId": "user-number__notification",
   "cityNotificationId": "user-city__notification",
-  "branchNumberNotificationId": "user-branch-number__notification",
-  "citySenderNotificationId": "user-cityFrom__notification",
-  "cityRecipientotificationId": "user-cityTo__notification",
-  "deliveryWeightId": "user-deliveryWeight__notification"
+  "branchNumberNotificationId": "user-branch-number__notification"
 }

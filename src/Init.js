@@ -25,9 +25,9 @@ class InitElements {
       hiddenClass,
       userCityId,
       userBranchNumberId,
-      userCitySenderId,
-      userCityRecipientId,
       userDeliveryWeightId,
+      costSenderId,
+      costRecipientId,
     } = propObject;
 
     const { apiKey, baseUrl } = projSetts;
@@ -40,8 +40,8 @@ class InitElements {
     this.userCity = document.querySelector(`#${userCityId}`);
     this.userBranchNumber = document.querySelector(`#${userBranchNumberId}`);
 
-    this.userCitySender = document.querySelector(`#${userCitySenderId}`);
-    this.userCityRecipient = document.querySelector(`#${userCityRecipientId}`);
+    this.costCitySender = document.querySelector(`#${costSenderId}`);
+    this.costCityRecipient = document.querySelector(`#${costRecipientId}`);
     this.userDeliveryWeight = document.querySelector(
       `#${userDeliveryWeightId}`
     );
@@ -68,6 +68,8 @@ class InitElements {
     this.maskNumber = /^\d{14}$/;
     this.maskCity = /^([а-яА-ЯёЁії]+[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*)$/i;
 
+    this.initiateCitiesReques();
+
     this.initBtn.onclick = () => {
       this.initiateSelect();
     };
@@ -77,6 +79,19 @@ class InitElements {
       this.historyData.clearHistory(this);
     };
   }
+  initiateCitiesReques() {
+    this.request.getCityRef(this).then(({ data }) => {
+      data.forEach((item) => {
+        this.renderer.renderCities(
+          item,
+          this.costCitySender,
+          this.costCityRecipient
+        );
+      });
+
+      return data;
+    });
+  }
   initiateSelect() {
     this.select.createSelect(this.renderer);
     this.select.btn.onclick = (e) => {
@@ -84,17 +99,40 @@ class InitElements {
 
       this.outDataContainer.innerHTML = null;
       this.select.extractValues();
-      new RequestFacade().init(this);
+      if (this.select.selectValues.length > 0) {
+        new RequestFacade(this).init();
+      } else {
+        return this.warnings.checker(this.renderer, 4, this);
+      }
     };
   }
 
+  validationWeight(weight) {
+    if (weight && isFinite(weight)) {
+      return true;
+    } else {
+      return this.warnings.checker(this.renderer, 9, this);
+    }
+  }
+
+  /**
+   * Validate city.
+   * @param {string} - Name of user's city.
+   */
+  validationCity(city) {
+    if (this.maskCity.test(city)) {
+      return true;
+    } else {
+      return this.warnings.checker(this.renderer, 8, this, city);
+    }
+  }
   /**
    * Validate city and branch number of a user.
    * @param {string} - Name of user's city.
    * @param {sting} - Number of user's branch.
    */
   validationBranch(city, branchNum) {
-    if (this.maskCity.test(city)) {
+    if (this.validationCity(city)) {
       if (city && branchNum && isFinite(branchNum)) {
         return true;
       } else if (!city && !branchNum) {
@@ -106,8 +144,6 @@ class InitElements {
       } else if (city && !isFinite(branchNum)) {
         return this.warnings.checker(this.renderer, 7, this);
       }
-    } else {
-      return this.warnings.checker(this.renderer, 5, this);
     }
   }
   /**
@@ -166,6 +202,22 @@ class InitElements {
       }
     } else {
       return this.warnings.checker(this.renderer, 6, this);
+    }
+  }
+  /**
+   * Display result of sended HTTP delivaery cost request.
+   * @param {Object} - Object with properties (result of promise).
+   */
+  displayDeliveryCost(promiseRes) {
+    const { data } = promiseRes;
+    if (data.length > 0) {
+      const res = {
+        cost: data[0].CostWarehouseWarehouse,
+        sender: this.userCitySender.value,
+        reciver: this.userCityRecipient.value,
+        weight: this.userDeliveryWeight.value,
+      };
+      this.renderer.renderDeliveryCost(res, this.outDataContainer);
     }
   }
 }

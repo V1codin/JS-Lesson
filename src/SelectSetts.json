@@ -2,5 +2,5 @@
   "selectClass": "selector",
   "optionsText": ["Відстежити", "Знайти відділення", "Розрахувати доставку"],
   "articleText": "Виберіть послугу",
-  "requestName": ["getTrackingData", "getBranchLoc", "getDeliveryCost"]
+  "requestName": ["tracking", "branchLoc", "cost"]
 }

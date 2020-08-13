@@ -3,6 +3,47 @@
  * @class
  */
 class RenderHtml {
+  renderCities(data, parent1, parent2) {
+    const selectItem = document.createElement("option");
+    selectItem.className = "cost-options-list-item";
+    selectItem.value = data.Ref;
+    selectItem.innerText = data.Description;
+
+    let clone = selectItem.cloneNode(true);
+
+    parent1.appendChild(selectItem);
+    parent2.appendChild(clone);
+  }
+  renderDeliveryCost(propObj, parentEl) {
+    const { cost, sender, reciver, weight } = propObj;
+
+    let outCost = document.querySelector(".out_cost");
+
+    if (!outCost) {
+      outCost = document.createElement("div");
+      outCost.className = "out_cost";
+    }
+    outCost.innerHTML = null;
+
+    const article = document.createElement("h3");
+    article.className = "out__article";
+    article.innerHTML = `Розрахунок доставки`;
+
+    const description = document.createElement("p");
+    description.innerHTML = `Доставка ${weight}кг: ${sender} - ${reciver} буде коштувати ${cost}`;
+
+    outCost.appendChild(article);
+    outCost.appendChild(description);
+
+    parentEl.appendChild(outCost);
+
+    parentEl.style = "display:block";
+  }
+  /**
+   * Create select form with options (h3, div, input, label).
+   * @param {Object} - Object with properties.
+   * @param {Object} - Object of parent element for the elements to append.
+   */
   renderSelect(propObj, parentEl) {
     const { selectClass, optionsText, articleText, requestName } = propObj;
 

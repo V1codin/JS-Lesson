@@ -4,7 +4,7 @@
  */
 class RequestData {
   getCityRef(obj) {
-    const { apiKey, baseUrl, city } = obj;
+    const { apiKey, baseUrl } = obj;
     return fetch(baseUrl, {
       method: "POST",
       dataType: "json",
@@ -17,7 +17,6 @@ class RequestData {
         calledMethod: "getCities",
         methodProperties: {
           Language: "ru",
-          FindByString: city,
         },
       }),
     })
@@ -25,8 +24,15 @@ class RequestData {
       .catch((r) => console.log(r));
   }
 
-  getDeliveryCost(obj) {
-    const { apiKey, baseUrl, refCityFrom, refCityTo, deliveryWeight } = obj;
+  getDeliveryCost(initObj) {
+    const {
+      apiKey,
+      baseUrl,
+      costCitySender,
+      costCityRecipient,
+      userDeliveryWeight,
+    } = initObj;
+
     return fetch(baseUrl, {
       method: "POST",
       dataType: "json",
@@ -39,22 +45,17 @@ class RequestData {
         calledMethod: "getDocumentPrice",
         language: "ua",
         methodProperties: {
-          CityRecipient: refCityTo,
-          CitySender: refCityFrom,
+          CargoType: "Parcel",
+          CityRecipient: costCityRecipient.value,
+          CitySender: costCitySender.value,
           Cost: "200",
-          Weight: Number(deliveryWeight),
+          Weight: parseInt(userDeliveryWeight.value),
         },
         modelName: "InternetDocument",
       }),
+    }).then((res) => {
+      return res.json();
     });
-    /*
-      .then((res) => {
-        return res.json();
-      })
-      .then(({ data }) => {
-        console.log("delivery cost data", data);
-      });
-      */
   }
 
   /**

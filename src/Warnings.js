@@ -12,6 +12,8 @@ class Warnings {
     this.incorrectCityBranchWarning =
       "Введіть коректну назву міста та номер відділення";
     this.incorrectBranchWarning = "Введіть коректний номер відділення";
+    this.incorrectCity = `  - некоректна назва міста`;
+    this.incorretWeight = "Введіть коректну вагу посилки";
   }
   createWarningContainer() {
     this.warnContainer = document.createElement("div");
@@ -20,18 +22,18 @@ class Warnings {
     const parent = document.querySelector("body");
     parent.insertBefore(this.warnContainer, parent.firstChild);
   }
-  checker(object, checker, initObj) {
+  checker(renderObj, checker, initObj, cityName) {
     switch (checker) {
       case 1:
         return this.warning(
-          object,
+          renderObj,
           this.noNumberWarning,
           this.warnContainer,
           initObj
         );
       case 2:
         return this.warning(
-          object,
+          renderObj,
           this.numberIsAvailableWarning,
           this.warnContainer,
           initObj
@@ -39,14 +41,14 @@ class Warnings {
 
       case 3:
         return this.warning(
-          object,
+          renderObj,
           this.incorrectNumberWarning,
           this.warnContainer,
           initObj
         );
       case 4:
         return this.warning(
-          object,
+          renderObj,
           this.incorrectSelectedDataWarning,
           this.warnContainer,
           initObj,
@@ -54,7 +56,7 @@ class Warnings {
         );
       case 5:
         return this.warning(
-          object,
+          renderObj,
           this.incorrectCityWarning,
           this.warnContainer,
           initObj,
@@ -62,7 +64,7 @@ class Warnings {
         );
       case 6:
         return this.warning(
-          object,
+          renderObj,
           this.incorrectCityBranchWarning,
           this.warnContainer,
           initObj,
@@ -70,16 +72,30 @@ class Warnings {
         );
       case 7:
         return this.warning(
-          object,
+          renderObj,
           this.incorrectBranchWarning,
           this.warnContainer,
           initObj,
           true
         );
+      case 8:
+        return this.warning(
+          renderObj,
+          cityName + this.incorrectCity,
+          this.warnContainer,
+          initObj
+        );
+      case 9:
+        return this.warning(
+          renderObj,
+          this.incorretWeight,
+          this.warnContainer,
+          initObj
+        );
     }
   }
-  warning(object, warnText, warnContainer, initObj, isCity) {
-    return object.renderWarning(warnText, warnContainer, initObj, isCity);
+  warning(renderObj, warnText, warnContainer, initObj, isCity) {
+    return renderObj.renderWarning(warnText, warnContainer, initObj, isCity);
   }
   clear() {
     this.warnContainer.style = "display: none";

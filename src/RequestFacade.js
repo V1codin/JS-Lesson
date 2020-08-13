@@ -1,5 +1,9 @@
 class RequestFacade {
-  getTrackingData(obj) {
+  constructor(initObj) {
+    this.props = initObj;
+  }
+
+  tracking(obj) {
     const city = obj.userCity.value;
     const selectValues = obj.select.selectValues;
 
@@ -17,8 +21,8 @@ class RequestFacade {
           }
         })
         .then((q) => {
-          if (!city && !selectValues.includes("getBranchLoc")) {
-            this.getBranchLoc(obj, q.data[0].CityRecipient).then((r) => {
+          if (!city && !selectValues.includes("branchLoc")) {
+            this.branchLoc(obj, q.data[0].CityRecipient).then((r) => {
               obj.userCity.value = q.data[0].CityRecipient;
               obj.userBranchNumber.value = q.data[0].WarehouseRecipientNumber;
               obj.displayBranchLocationData(r);
@@ -35,8 +39,7 @@ class RequestFacade {
     }
   }
 
-  // 59000527233015
-  getBranchLoc(obj, trackedCity) {
+  branchLoc(obj, trackedCity) {
     if (trackedCity) {
       return obj.request.getBranchLoc(obj, trackedCity);
     } else {
@@ -57,105 +60,32 @@ class RequestFacade {
       }
     }
   }
-  getDeliveryCost() {
-    console.log("getDeliveryCost");
+  cost(obj) {
+    obj.request
+      .getDeliveryCost(obj)
+      .then((r) => {
+        console.log(r);
+
+        // obj.displayDeliveryCost(r);
+      })
+      .catch((e) => {
+        throw Error(e);
+      });
+  }
+  reducer() {
+    for (let item of arguments) {
+      this[item](this.props);
+    }
   }
 
-  init(obj) {
-    const selectValues = obj.select.selectValues;
+  init() {
+    const { selectValues } = this.props.select;
 
     if (selectValues.length) {
-      selectValues.forEach((item) => {
-        this[item](obj);
-      });
+      this.reducer.apply(this, selectValues);
     } else {
       return obj.warnings.checker(obj.renderer, 4, obj);
     }
-
-    /*
-                this.request.getCityRef(this).then(({ data }) => {
-                  const res = data.filter(
-                    (item) =>
-                      item.DescriptionRu === firstCity.value ||
-                      item.DescriptionRu === secondCity.value
-                  );
-                  console.log("ttttttttt", res);
-                });
-          */
-    /*
-    if (selectValues.length > 0) {
-      selectValues.forEach((item) => {
-        if (item === "getTrackingData") {
-          const validationNumber = this.validateNumber(this.dataInput.value);
-          if (validationNumber) {
-            this.request
-              .getTrackingData(this)
-              .then((r) => {
-                if (
-                  r.data[0].StatusCode !== "3" &&
-                  r.data[0].StatusCode !== "2"
-                ) {
-                  this.historyData.updateHistory(this);
-                  this.hiddenCont.forEach(
-                    (item) => (item.style = "display: block")
-                  );
-                  return r;
-                } else {
-                  throw this.warnings.checker(this.renderer, 1, this);
-                }
-              })
-              .then((q) => {
-                if (!city && selectValues.includes("getBranchLoc")) {
-                  this.request
-                    .getBranchLoc(this, q.data[0].CityRecipient)
-                    .then((r) => {
-                      this.userCity.value = q.data[0].CityRecipient;
-                      this.userBranchNumber.value =
-                        q.data[0].WarehouseRecipientNumber;
-                      this.displayBranchLocationData(r);
-                      return r;
-                    });
-                  this.displayTrackingData(q);
-                  return q;
-                } else {
-                  this.displayTrackingData(q);
-                  return q;
-                }
-              });
-          }
-        }
-        if (item === "getBranchLoc" && !city) {
-          const validationNumber = this.validateNumber(this.dataInput.value);
-          if (validationNumber) {
-            this.request.getTrackingData(this).then((q) => {
-              this.request
-                .getBranchLoc(this, q.data[0].CityRecipient)
-                .then((r) => {
-                  this.userCity.value = q.data[0].CityRecipient;
-                  this.userBranchNumber.value =
-                    q.data[0].WarehouseRecipientNumber;
-                  this.displayBranchLocationData(r);
-                  return r;
-                });
-            });
-          }
-        } else if (item === "getBranchLoc" && city) {
-          const validation = this.validationBranch(
-            this.userCity.value,
-            this.userBranchNumber.value
-          );
-          if (validation) {
-            this.request.getBranchLoc(this, city).then((r) => {
-              this.displayBranchLocationData(r);
-              return r;
-            });
-          } else {
-            return this.warnings.checker(this.renderer, 6, this);
-          }
-        }
-      });
-    }
-    */
   }
 }
 
