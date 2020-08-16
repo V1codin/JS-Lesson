@@ -30,7 +30,7 @@ class RenderHtml {
     article.innerHTML = `Розрахунок доставки`;
 
     const description = document.createElement("p");
-    description.innerHTML = `Доставка ${weight}кг: ${sender} - ${reciver} буде коштувати ${cost}`;
+    description.innerHTML = `Доставка ${weight}кг: ${sender} - ${reciver} буде коштувати ${cost} грн.`;
 
     outCost.appendChild(article);
     outCost.appendChild(description);

@@ -81,6 +81,16 @@ class InitElements {
   }
   initiateCitiesReques() {
     this.request.getCityRef(this).then(({ data }) => {
+      const test = data.filter((item, index) => index < 50);
+
+      test.forEach((item) => {
+        this.renderer.renderCities(
+          item,
+          this.costCitySender,
+          this.costCityRecipient
+        );
+      });
+      /*
       data.forEach((item) => {
         this.renderer.renderCities(
           item,
@@ -88,8 +98,7 @@ class InitElements {
           this.costCityRecipient
         );
       });
-
-      return data;
+      */
     });
   }
   initiateSelect() {
@@ -209,12 +218,15 @@ class InitElements {
    * @param {Object} - Object with properties (result of promise).
    */
   displayDeliveryCost(promiseRes) {
+    const sender = this.costCitySender.selectedOptions[0].innerText;
+    const recipient = this.costCityRecipient.selectedOptions[0].innerText;
+
     const { data } = promiseRes;
     if (data.length > 0) {
       const res = {
         cost: data[0].CostWarehouseWarehouse,
-        sender: this.userCitySender.value,
-        reciver: this.userCityRecipient.value,
+        sender: sender,
+        reciver: recipient,
         weight: this.userDeliveryWeight.value,
       };
       this.renderer.renderDeliveryCost(res, this.outDataContainer);

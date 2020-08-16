@@ -66,7 +66,7 @@ class RequestFacade {
       .then((r) => {
         console.log(r);
 
-        // obj.displayDeliveryCost(r);
+        obj.displayDeliveryCost(r);
       })
       .catch((e) => {
         throw Error(e);
