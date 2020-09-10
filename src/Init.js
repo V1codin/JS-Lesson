@@ -84,9 +84,7 @@ class InitElements {
    */
   initiateCitiesRequest() {
     this.request.getCityRef(this).then(({ data }) => {
-      const test = data.filter((item, index) => index < 50);
-
-      test.forEach((item) => {
+      data.forEach((item) => {
         this.renderer.renderCities(
           item,
           this.costCitySender,
