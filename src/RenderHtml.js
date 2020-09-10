@@ -3,6 +3,12 @@
  * @class
  */
 class RenderHtml {
+  /**
+   * Create select's options with available cities names (options).
+   * @param {Object} - Object from server with cities data.
+   * @param {Object} - Object of parent element for the elements to append (first select).
+   * @param {Object} - Object of parent element for the elements to append (second select).
+   */
   renderCities(data, parent1, parent2) {
     const selectItem = document.createElement("option");
     selectItem.className = "cost-options-list-item";
@@ -14,6 +20,12 @@ class RenderHtml {
     parent1.appendChild(selectItem);
     parent2.appendChild(clone);
   }
+
+  /**
+   * Create block with delivery cost information (div, h3, p).
+   * @param {Object} - Object with properties.
+   * @param {Object} - Object of parent element for the elements to append.
+   */
   renderDeliveryCost(propObj, parentEl) {
     const { cost, sender, reciver, weight } = propObj;
 
@@ -80,7 +92,7 @@ class RenderHtml {
   }
 
   /**
-   * Create P elements and add them to parent element.
+   * Create block with location of user's branch data (div, h3, p{3}, ul, li).
    * @param {Object} - Object with properties.
    * @param {Object} - Object of parent element for the elements to append.
    */
@@ -156,7 +168,7 @@ class RenderHtml {
   }
 
   /**
-   * Create P elements and add them to parent element.
+   * Create block with tracking of user's delivery data (div, h3, p{2}).
    * @param {Object} - Object with properties.
    * @param {Object} - Object of parent element for the elements to append.
    */
@@ -189,9 +201,12 @@ class RenderHtml {
     parentEl.style = "display:block";
   }
   /**
-   * Create DIV P and BUTTON and appent those to warning container.
+   * Create block with warning data and to warning container (div, p, button).
    * Add a function to the BUTTON to clear warning container and hide it.
    * @param {string} - Text of the warning to display.
+   * @param {Object} - Object of parent element for the elements to append.
+   * @param {Object} - Object with properties.
+   * @param {boolean} - Is city warning needed.
    */
   renderWarning(warningText, parentEl, obj, isCity) {
     if (parentEl.innerHTML.includes("div")) {

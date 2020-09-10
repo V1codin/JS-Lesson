@@ -68,7 +68,7 @@ class InitElements {
     this.maskNumber = /^\d{14}$/;
     this.maskCity = /^([а-яА-ЯёЁії]+[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*[-]?[а-яА-ЯёЁії]*)$/i;
 
-    this.initiateCitiesReques();
+    this.initiateCitiesRequest();
 
     this.initBtn.onclick = () => {
       this.initiateSelect();
@@ -79,7 +79,10 @@ class InitElements {
       this.historyData.clearHistory(this);
     };
   }
-  initiateCitiesReques() {
+  /**
+   * Initiating HTTP request to get information from server about referral codes of cities where Nova Poshta has branches.
+   */
+  initiateCitiesRequest() {
     this.request.getCityRef(this).then(({ data }) => {
       const test = data.filter((item, index) => index < 50);
 
@@ -90,17 +93,11 @@ class InitElements {
           this.costCityRecipient
         );
       });
-      /*
-      data.forEach((item) => {
-        this.renderer.renderCities(
-          item,
-          this.costCitySender,
-          this.costCityRecipient
-        );
-      });
-      */
     });
   }
+  /**
+   * Initiating rendering a selector with application options.
+   */
   initiateSelect() {
     this.select.createSelect(this.renderer);
     this.select.btn.onclick = (e) => {
@@ -116,6 +113,10 @@ class InitElements {
     };
   }
 
+  /**
+   * Validate weight.
+   * @param {number} - Weight of user's delivery.
+   */
   validationWeight(weight) {
     if (weight && isFinite(weight)) {
       return true;

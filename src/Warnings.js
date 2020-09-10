@@ -15,6 +15,10 @@ class Warnings {
     this.incorrectCity = `  - некоректна назва міста`;
     this.incorretWeight = "Введіть коректну вагу посилки";
   }
+
+  /**
+   * Create container for warnings and insert it to "body" element (div).
+   */
   createWarningContainer() {
     this.warnContainer = document.createElement("div");
     this.warnContainer.className = "warning";
@@ -22,6 +26,14 @@ class Warnings {
     const parent = document.querySelector("body");
     parent.insertBefore(this.warnContainer, parent.firstChild);
   }
+
+  /**
+   * Initiating warning.
+   * @param {Object} - Object with render methods.
+   * @param {number} - Number for identification which warning to render.
+   * @param {Object} - Object with properties.
+   * @param {string} - Name of incorrect city (on demand).
+   */
   checker(renderObj, checker, initObj, cityName) {
     switch (checker) {
       case 1:
@@ -94,9 +106,23 @@ class Warnings {
         );
     }
   }
+
+  /**
+   * Render warning.
+   * @param {Object} - Object with render methods.
+   * @param {string} - Text of the warning to render.
+   * @param {Object} - Object of parent element for the warning to append.
+   * @param {Object} - Object with properties.
+   * @param {string} - Name of incorrect city (on demand).
+   * @param {boolean} - Is city warning needed.
+   */
   warning(renderObj, warnText, warnContainer, initObj, isCity) {
     return renderObj.renderWarning(warnText, warnContainer, initObj, isCity);
   }
+
+  /**
+   * Hide warning block and clear its text.
+   */
   clear() {
     this.warnContainer.style = "display: none";
     this.warnContainer.innerHTML = null;

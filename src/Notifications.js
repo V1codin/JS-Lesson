@@ -28,6 +28,9 @@ export default class Notifications {
 
     this.initNotifications();
   }
+  /**
+   * Display or hide notifications of incorrect data by focus and unfocus.
+   */
   initNotifications() {
     this.userNumber.onfocus = () => {
       this.numberNot.style = "display:block";

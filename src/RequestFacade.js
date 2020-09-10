@@ -3,6 +3,10 @@ class RequestFacade {
     this.props = initObj;
   }
 
+  /**
+   * Create and send HTTP request, get response, validate response and display tracking data.
+   * @param {Object} - Object with properties.
+   */
   tracking(obj) {
     const city = obj.userCity.value;
     const selectValues = obj.select.selectValues;
@@ -38,7 +42,11 @@ class RequestFacade {
         .catch((e) => console.log("Error", e));
     }
   }
-
+  /**
+   * Create and send HTTP request, get response, validate response and display location of user's branch data.
+   * @param {Object} - Object with properties.
+   * @param {string} - Name of the branch city.
+   */
   branchLoc(obj, trackedCity) {
     if (trackedCity) {
       return obj.request.getBranchLoc(obj, trackedCity);
@@ -60,6 +68,11 @@ class RequestFacade {
       }
     }
   }
+
+  /**
+   * Create and send HTTP request, get response display warehouse to warehouse cost.
+   * @param {Object} - Object with properties.
+   */
   cost(obj) {
     obj.request
       .getDeliveryCost(obj)
@@ -72,12 +85,20 @@ class RequestFacade {
         throw Error(e);
       });
   }
+
+  /**
+   * Launch methods of this object which names were placed in arguments.
+   * @param {Object} - Object with properties.
+   */
   reducer() {
     for (let item of arguments) {
       this[item](this.props);
     }
   }
 
+  /**
+   * Initiating launch methods of this object with options recived from selector.
+   */
   init() {
     const { selectValues } = this.props.select;
 

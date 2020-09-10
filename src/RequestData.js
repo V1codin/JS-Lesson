@@ -3,6 +3,10 @@
  * @class
  */
 class RequestData {
+  /**
+   * Create and send HTTP request and process it.
+   * @param {Object} - Object with properties.
+   */
   getCityRef(obj) {
     const { apiKey, baseUrl } = obj;
     return fetch(baseUrl, {
@@ -24,6 +28,10 @@ class RequestData {
       .catch((r) => console.log(r));
   }
 
+   /**
+   * Create and send HTTP request and process it.
+   * @param {Object} - Object with properties.
+   */
   getDeliveryCost(initObj) {
     const {
       apiKey,
